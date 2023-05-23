@@ -11,7 +11,7 @@ class StoreResultRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,16 @@ class StoreResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'subject' => ['required'],
+            'score' => ['required', 'integer'],
+            'userId' => ['numeric', 'nullable']
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'user_id' => $this->userId
+        ]);
     }
 }
