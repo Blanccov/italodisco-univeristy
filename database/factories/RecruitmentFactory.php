@@ -16,8 +16,15 @@ class RecruitmentFactory extends Factory
      */
     public function definition(): array
     {
+        $departament = $this->faker->randomElement(['Kolegium Nauk Humanistycznych', 'Kolegium Nauk Medycznych', 'Kolegium Nauk Przyrodniczych', 'Kolegium Nauk Społecznych']);
+
         return [
-            //
+            'name' => $this->faker->name(),
+            'departament' => $departament,
+            'description' => $this->faker->text(),
+            'places' => $this->faker->numberBetween(50,150),
+            'start_date' => $this->faker->date(),
+            'end_date'=> $this->faker->date(),
         ];
     }
 }

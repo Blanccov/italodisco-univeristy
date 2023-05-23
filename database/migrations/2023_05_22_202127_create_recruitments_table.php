@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('departament');
             $table->string('description')->nullable();
+            $table->integer('places');
             $table->date('start_date');
             $table->date('end_date');
             // $table->timestamps();

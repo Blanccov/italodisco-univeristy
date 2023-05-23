@@ -44,7 +44,11 @@ class User extends Authenticatable
     ];
 
     public function recruitments(){
-        return $this->belongsToMany(User::class, 'applications', 'status', 'recruitments', 'users');
+        return $this->belongsToMany(User::class, 'applications', 'statuses', 'recruitments', 'users');
+    }
+
+    public function results(){
+        return $this->belongsTo(Result::class);
     }
 
     public $timestamps = false;

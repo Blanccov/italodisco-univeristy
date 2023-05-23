@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Recruitment;
+use App\Models\Status;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,10 @@ class ApplicationFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'recruitment_id' => $this->faker->randomElement([1,2,3,4]),
+            'user_id' => User::factory(),
+            'status_id' => Status::factory(),
+            'submission_date' => $this->faker->date()
         ];
     }
 }

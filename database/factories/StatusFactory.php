@@ -16,8 +16,10 @@ class StatusFactory extends Factory
      */
     public function definition(): array
     {
+        $status = $this->faker->randomElement(['accepted', 'rejected', 'in progress']);
+
         return [
-            //
+            'status' => $status
         ];
     }
 }

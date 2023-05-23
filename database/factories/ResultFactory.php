@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,12 @@ class ResultFactory extends Factory
      */
     public function definition(): array
     {
+        $subject = $this->faker->randomElement(['matematyka', 'angielski', 'polski', 'niemiecki', 'informatyka']);
+
         return [
-            //
+            'subject' => $subject,
+            'score' => $this->faker->numberBetween(0,100),
+            'user_id' => $this->faker->numberBetween(1,25)
         ];
     }
 }

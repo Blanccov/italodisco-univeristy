@@ -10,7 +10,7 @@ class Recruitment extends Model
     use HasFactory;
 
     public function users(){
-        return $this->belongsToMany(User::class, 'applications', 'status', 'recruitments', 'users');
+        return $this->belongsToMany(User::class, 'applications', 'statuses', 'recruitments', 'users');
     }
 
     public $timestamps = false;

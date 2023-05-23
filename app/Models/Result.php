@@ -9,5 +9,9 @@ class Result extends Model
 {
     use HasFactory;
 
+    public function users(){
+        return $this->hasMany(User::class);
+    }
+
     public $timestamps = false;
 }

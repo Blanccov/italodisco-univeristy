@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('pesel')->unique();
             $table->string('phone')->unique();
-            $table->string('adres');
+            $table->string('address');
             // $table->rememberToken();
             // $table->timestamps();
         });
