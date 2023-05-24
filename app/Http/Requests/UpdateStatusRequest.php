@@ -11,7 +11,7 @@ class UpdateStatusRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,16 @@ class UpdateStatusRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if($method == 'PUT'){
+            return [
+                'status' => ['required']
+            ];
+        }else{
+            return [
+                'status' => ['sometimes', 'required']
+            ];
+        }
     }
 }

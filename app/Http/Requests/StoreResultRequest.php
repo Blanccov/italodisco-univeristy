@@ -24,7 +24,7 @@ class StoreResultRequest extends FormRequest
         return [
             'subject' => ['required'],
             'score' => ['required', 'integer'],
-            'userId' => ['numeric', 'nullable']
+            'userId' => ['numeric', 'required']
         ];
     }
 

@@ -11,7 +11,7 @@ class UpdateApplicationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,47 @@ class UpdateApplicationRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if($method == 'PUT'){
+            return [
+                'recrutimentId' => ['required', 'numeric'],
+                'userId' => ['required', 'numeric'],
+                'statusId' => ['required', 'numeric'],
+                'submissionDate' => ['required', 'date']
+
+            ];
+        }else{
+            return [
+                'recrutimentId' => ['sometimes', 'required', 'numeric'],
+                'userId' => ['sometimes', 'required', 'numeric'],
+                'statusId' => ['sometimes', 'required', 'numeric'],
+                'submissionDate' => ['sometimes', 'required', 'date']
+
+            ];
+        }
+    }
+    protected function prepareForValidation()
+    {
+        if($this->recruitmentId){
+            $this->merge([
+                'recrutiment_id' => $this->recrutimentId
+            ]);
+        }
+        if($this->userId){
+            $this->merge([
+                'user_id' => $this->userId
+            ]);
+        }
+        if($this->statusId){
+            $this->merge([
+                'status_id' => $this->statusId
+            ]);
+        }
+        if($this->submissionDate){
+            $this->merge([
+                'submission_date' => $this->submissionDate
+            ]);
+        }
     }
 }

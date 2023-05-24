@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('recruitment_id')->nullable();
+            $table->unsignedBigInteger('recruitment_id');
             $table->foreign('recruitment_id')->references('id')->on('recruitments')->onDelete('cascade');
-            $table->unsignedBigInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('status_id')->nullable();
+            $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
             $table->date('submission_date');
             // $table->timestamps();

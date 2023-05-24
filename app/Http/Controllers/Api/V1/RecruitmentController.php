@@ -6,6 +6,8 @@ use App\Models\Recruitment;
 use App\Http\Requests\StoreRecruitmentRequest;
 use App\Http\Requests\UpdateRecruitmentRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RecruitmentCollection;
+use App\Http\Resources\RecruitmentResource;
 
 class RecruitmentController extends Controller
 {
@@ -14,7 +16,7 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        //
+        return new RecruitmentCollection(Recruitment::filter()->get());
     }
 
     /**
@@ -30,7 +32,7 @@ class RecruitmentController extends Controller
      */
     public function store(StoreRecruitmentRequest $request)
     {
-        //
+        return new RecruitmentResource(Recruitment::create($request->all()));
     }
 
     /**
@@ -38,7 +40,7 @@ class RecruitmentController extends Controller
      */
     public function show(Recruitment $recruitment)
     {
-        //
+        return new RecruitmentResource($recruitment);
     }
 
     /**
@@ -54,7 +56,7 @@ class RecruitmentController extends Controller
      */
     public function update(UpdateRecruitmentRequest $request, Recruitment $recruitment)
     {
-        //
+        $recruitment->update($request->all());
     }
 
     /**

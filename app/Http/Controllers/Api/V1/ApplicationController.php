@@ -6,6 +6,8 @@ use App\Models\Application;
 use App\Http\Requests\StoreApplicationRequest;
 use App\Http\Requests\UpdateApplicationRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ApplicationCollection;
+use App\Http\Resources\ApplicationResource;
 
 class ApplicationController extends Controller
 {
@@ -14,7 +16,7 @@ class ApplicationController extends Controller
      */
     public function index()
     {
-        //
+        return new ApplicationCollection(Application::filter()->get());
     }
 
     /**
@@ -30,7 +32,7 @@ class ApplicationController extends Controller
      */
     public function store(StoreApplicationRequest $request)
     {
-        //
+        return new ApplicationResource(Application::create($request->all()));
     }
 
     /**
@@ -38,7 +40,7 @@ class ApplicationController extends Controller
      */
     public function show(Application $application)
     {
-        //
+        return new ApplicationResource($application);
     }
 
     /**
@@ -54,7 +56,7 @@ class ApplicationController extends Controller
      */
     public function update(UpdateApplicationRequest $request, Application $application)
     {
-        //
+        $application->update($request->all());
     }
 
     /**

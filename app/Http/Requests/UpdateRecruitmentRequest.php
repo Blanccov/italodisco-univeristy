@@ -21,8 +21,39 @@ class UpdateRecruitmentRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if($method == 'PUT'){
+            return [
+                'name' => ['required'],
+                'departament' => ['required'],
+                'description' => ['required'],
+                'places' => ['required', 'numeric'],
+                'startDate' => ['required', 'date'],
+                'endDate' => ['required', 'date']
+            ];
+        }else{
+            return [
+                'name' => ['sometimes', 'required'],
+                'departament' => ['sometimes', 'required'],
+                'description' => ['sometimes', 'required'],
+                'places' => ['sometimes', 'required', 'numeric'],
+                'startDate' => ['sometimes', 'required', 'date'],
+                'endDate' => ['sometimes', 'required', 'date']
+            ];
+        }
     }
-}
+    protected function prepareForValidation()
+    {
+        if($this->startDate){
+            $this->merge([
+                'start_date' => $this->startDate
+            ]);
+        }
+
+        if($this->endDate){
+            $this->merge([
+                'end_date' => $this->endDate
+            ]);
+        }
+}}

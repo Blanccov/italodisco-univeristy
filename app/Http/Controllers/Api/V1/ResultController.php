@@ -57,7 +57,7 @@ class ResultController extends Controller
      */
     public function update(UpdateResultRequest $request, Result $result)
     {
-        //
+        $result->update($request->all());
     }
 
     /**

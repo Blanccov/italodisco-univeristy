@@ -11,7 +11,7 @@ class StoreApplicationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,21 @@ class StoreApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'recrutimentId' => ['required', 'numeric'],
+            'userId' => ['required', 'numeric'],
+            'statusId' => ['required', 'numeric'],
+            'submissionDate' => ['required', 'date']
+
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'recruitment_id' => $this->recrutimentId,
+            'user_id' => $this->userId,
+            'status_id' => $this->statusId,
+            'submission_date' => $this->submissionDate
+        ]);
     }
 }

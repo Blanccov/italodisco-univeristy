@@ -11,7 +11,7 @@ class UpdateResultRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -21,8 +21,29 @@ class UpdateResultRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+            if($method == 'PUT'){
+                return [
+                    'subject' => ['required'],
+                    'score' => ['required', 'integer'],
+                    'userId' => ['numeric', 'required']
+                ];
+            }else{
+                return [
+                    'subject' => ['sometimes','required'],
+                    'score' => ['sometimes','required', 'integer'],
+                    'userId' => ['sometimes','numeric', 'required']
+                ];
+            }
+    }
+
+    protected function prepareForValidation()
+    {
+        if($this->userId){
+            $this->merge([
+                'user_id' => $this->userId
+            ]);
+        }
     }
 }
