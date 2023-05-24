@@ -6,6 +6,8 @@ use App\Models\Role;
 use App\Http\Requests\StoreRoleRequest;
 use App\Http\Requests\UpdateRoleRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\RoleCollection;
+use App\Http\Resources\RoleResource;
 
 class RoleController extends Controller
 {
@@ -14,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-
+        return new RoleCollection(Role::filter()->get());
     }
 
     /**
@@ -30,7 +32,7 @@ class RoleController extends Controller
      */
     public function store(StoreRoleRequest $request)
     {
-        //
+        return new RoleResource(Role::create($request->all()));
     }
 
     /**
@@ -38,7 +40,7 @@ class RoleController extends Controller
      */
     public function show(Role $role)
     {
-        //
+        return new RoleResource($role);
     }
 
     /**
@@ -54,7 +56,7 @@ class RoleController extends Controller
      */
     public function update(UpdateRoleRequest $request, Role $role)
     {
-        //
+        $role->update($request->all());
     }
 
     /**

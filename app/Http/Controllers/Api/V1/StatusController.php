@@ -6,6 +6,8 @@ use App\Models\Status;
 use App\Http\Requests\StoreStatusRequest;
 use App\Http\Requests\UpdateStatusRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\StatusCollection;
+use App\Http\Resources\StatusResource;
 
 class StatusController extends Controller
 {
@@ -14,7 +16,7 @@ class StatusController extends Controller
      */
     public function index()
     {
-        //
+        return new StatusCollection(Status::filter()->get());
     }
 
     /**
@@ -30,7 +32,7 @@ class StatusController extends Controller
      */
     public function store(StoreStatusRequest $request)
     {
-        //
+        return new StatusResource(Status::create($request->all()));
     }
 
     /**
@@ -38,7 +40,7 @@ class StatusController extends Controller
      */
     public function show(Status $status)
     {
-        //
+        return new StatusResource($status);
     }
 
     /**
@@ -54,7 +56,7 @@ class StatusController extends Controller
      */
     public function update(UpdateStatusRequest $request, Status $status)
     {
-        //
+        $status->update($request->all());
     }
 
     /**
