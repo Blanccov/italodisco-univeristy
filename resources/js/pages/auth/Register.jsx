@@ -1,12 +1,135 @@
 import React from "react";
-import styles from "./Register.module.css";
+import styles from "./Register.module.scss";
 
 function Register() {
     return (
         <div>
-            {/* <img src="images/loginphoto.jpg" alt="product-img" /> */}
-            {/* <div className={styles["bg-image"]}>elo</div> */}
+            <div className={styles["bg-image"]}>
+                <div className="my-form">
+                    <form>
+                        <fieldset>
+                            <legend className="text-white ">Register</legend>
 
+                            <div className="d-flex ">
+                                <div class="form-group me-2">
+                                    <label
+                                        class="col-form-label mt-4 text-white"
+                                        for="inputDefault"
+                                    >
+                                        Name
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Enter Name"
+                                        id="inputDefault"
+                                    />
+                                </div>
+                                <div class="form-group ms-2">
+                                    <label
+                                        class="col-form-label mt-4 text-white"
+                                        for="inputDefault"
+                                    >
+                                        Surname
+                                    </label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        placeholder="Enter Surname"
+                                        id="inputDefault"
+                                    />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    class="col-form-label mt-4 text-white"
+                                    for="inputDefault"
+                                >
+                                    Pesel
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Enter pesel"
+                                    id="inputDefault"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    class="col-form-label mt-4 text-white"
+                                    for="inputDefault"
+                                >
+                                    Phone
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Enter phone"
+                                    id="inputDefault"
+                                />
+                            </div>
+                            <div class="form-group">
+                                <label
+                                    class="col-form-label mt-4 text-white"
+                                    for="inputDefault"
+                                >
+                                    Address
+                                </label>
+                                <textarea
+                                    type="text"
+                                    class="form-control"
+                                    placeholder="Enter address"
+                                    id="inputDefault"
+                                    rows={4}
+                                />
+                            </div>
+
+                            <div className="form-group">
+                                <label
+                                    for="exampleInputEmail1"
+                                    className="form-label mt-4 text-white "
+                                >
+                                    Email address
+                                </label>
+                                <input
+                                    type="email"
+                                    className="form-control"
+                                    id="exampleInputEmail1"
+                                    aria-describedby="emailHelp"
+                                    placeholder="Enter email"
+                                />
+                                <small
+                                    id="emailHelp"
+                                    className="form-text text-muted"
+                                >
+                                    We'll never share your email with anyone
+                                    else.
+                                </small>
+                            </div>
+                            <div className="form-group">
+                                <label
+                                    for="exampleInputPassword1"
+                                    className="form-label mt-4 text-white"
+                                >
+                                    Password
+                                </label>
+                                <input
+                                    type="password"
+                                    className="form-control "
+                                    id="exampleInputPassword1"
+                                    placeholder="Password"
+                                />
+                            </div>
+                            <button
+                                className="btn btn-secondary mt-5 w-100"
+                                type="submit"
+                            >
+                                Register
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
         </div>
     );
 }

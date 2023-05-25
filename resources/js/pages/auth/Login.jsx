@@ -9,7 +9,7 @@ function Login() {
                 <div className="my-form">
                     <form>
                         <fieldset>
-                            <legend className="text-white ">Legend</legend>
+                            <legend className="text-white ">Login</legend>
 
                             <div className="form-group">
                                 <label
