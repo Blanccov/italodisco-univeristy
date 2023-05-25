@@ -3,10 +3,10 @@ import styles from './Header.module.scss'
 
 function Header() {
     return (
-        <nav className={"navbar navbar-expand-lg navbar-dark bg-primary " + styles["bg-image"]}>
+        <nav className={"navbar navbar-expand-lg navbar-dark bg-transparent " + styles["bg-image"]}>
                 <div className="container-fluid">
-                    <a className="navbar-brand ms-3" href="#">
-                        Italodisco Univeristy
+                    <a className="navbar-brand ">
+                        Italodisco
                     </a>
                     <button
                         className="navbar-toggler"
@@ -72,19 +72,6 @@ function Header() {
                                 </div>
                             </li>
                         </ul>
-                        <form className="d-flex">
-                            <input
-                                className="form-control me-sm-2"
-                                type="search"
-                                placeholder="Search"
-                            />
-                            <button
-                                className="btn btn-secondary my-2 my-sm-0"
-                                type="submit"
-                            >
-                                Search
-                            </button>
-                        </form>
                     </div>
                 </div>
             </nav>

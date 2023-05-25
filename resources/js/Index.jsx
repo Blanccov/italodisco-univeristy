@@ -22,9 +22,11 @@ const router = createBrowserRouter(routeDefinitions);
 
 function Index() {
     return (
+        <>
         <Header>
-            <RouterProvider router={router} />
         </Header>
+        <RouterProvider router={router} />
+        </>
     );
 }
 
