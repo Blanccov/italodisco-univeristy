@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +16,11 @@ use App\Models\User;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::view('{path?}', 'welcome');
 
 Route::get('/setup', function(){
     $credientials = [
@@ -55,6 +58,8 @@ Route::get('/setup', function(){
         }
     }
 });
+
+
 
 // Route::get('/setup', function(){
 //     $credientials = [
