@@ -33,8 +33,8 @@ function Header() {
                             </a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                Features
+                            <a className="nav-link" href="/application">
+                                Application
                             </a>
                         </li>
                         <li className="nav-item">
