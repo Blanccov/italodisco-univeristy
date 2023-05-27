@@ -28,4 +28,10 @@
 }
 .accordion-body {
     background-color: #443735;
+    overflow-x:scroll;
+    max-height: 60vh;
+}
+
+.accordion{
+    max-height: 80vh;
 }

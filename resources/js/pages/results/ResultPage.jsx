@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect} from "react";
-import styles from "./Result.module.scss";
+import styles from "./ResultPage.module.scss";
 import ResultList from "./ResultList";
 
 function ResultPage() {
