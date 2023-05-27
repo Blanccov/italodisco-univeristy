@@ -14,7 +14,7 @@ function Register() {
                                 <div className="form-group me-2">
                                     <label
                                         className="col-form-label mt-4 text-white"
-                                        for="inputDefault"
+                                        htmlFor="inputDefault"
                                     >
                                         Name
                                     </label>
@@ -28,7 +28,7 @@ function Register() {
                                 <div className="form-group ms-2">
                                     <label
                                         className="col-form-label mt-4 text-white"
-                                        for="inputDefault"
+                                        htmlFor="inputDefault"
                                     >
                                         Surname
                                     </label>
@@ -44,7 +44,7 @@ function Register() {
                                 <div className="form-group me-2">
                                     <label
                                         className="col-form-label mt-4 text-white"
-                                        for="inputDefault"
+                                        htmlFor="inputDefault"
                                     >
                                         Pesel
                                     </label>
@@ -58,7 +58,7 @@ function Register() {
                                 <div className="form-group ms-2">
                                     <label
                                         className="col-form-label mt-4 text-white"
-                                        for="inputDefault"
+                                        htmlFor="inputDefault"
                                     >
                                         Phone
                                     </label>
@@ -73,7 +73,7 @@ function Register() {
                             <div className="form-group">
                                 <label
                                     className="col-form-label mt-4 text-white"
-                                    for="inputDefault"
+                                    htmlFor="inputDefault"
                                 >
                                     Address
                                 </label>
@@ -88,7 +88,7 @@ function Register() {
 
                             <div className="form-group">
                                 <label
-                                    for="exampleInputEmail1"
+                                    htmlFor="exampleInputEmail1"
                                     className="form-label mt-4 text-white "
                                 >
                                     Email address
@@ -110,7 +110,7 @@ function Register() {
                             </div>
                             <div className="form-group">
                                 <label
-                                    for="exampleInputPassword1"
+                                    htmlFor="exampleInputPassword1"
                                     className="form-label mt-4 text-white"
                                 >
                                     Password
