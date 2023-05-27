@@ -10,77 +10,79 @@ function Register() {
                         <fieldset>
                             <legend className="text-white ">Register</legend>
 
-                            <div className="d-flex ">
-                                <div class="form-group me-2">
+                            <div className="d-flex">
+                                <div className="form-group me-2">
                                     <label
-                                        class="col-form-label mt-4 text-white"
+                                        className="col-form-label mt-4 text-white"
                                         for="inputDefault"
                                     >
                                         Name
                                     </label>
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        className="form-control"
                                         placeholder="Enter Name"
                                         id="inputDefault"
                                     />
                                 </div>
-                                <div class="form-group ms-2">
+                                <div className="form-group ms-2">
                                     <label
-                                        class="col-form-label mt-4 text-white"
+                                        className="col-form-label mt-4 text-white"
                                         for="inputDefault"
                                     >
                                         Surname
                                     </label>
                                     <input
                                         type="text"
-                                        class="form-control"
+                                        className="form-control"
                                         placeholder="Enter Surname"
                                         id="inputDefault"
                                     />
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label
-                                    class="col-form-label mt-4 text-white"
-                                    for="inputDefault"
-                                >
-                                    Pesel
-                                </label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Enter pesel"
-                                    id="inputDefault"
-                                />
+                            <div className="d-flex">
+                                <div className="form-group me-2">
+                                    <label
+                                        className="col-form-label mt-4 text-white"
+                                        for="inputDefault"
+                                    >
+                                        Pesel
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter pesel"
+                                        id="inputDefault"
+                                    />
+                                </div>
+                                <div className="form-group ms-2">
+                                    <label
+                                        className="col-form-label mt-4 text-white"
+                                        for="inputDefault"
+                                    >
+                                        Phone
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        placeholder="Enter phone"
+                                        id="inputDefault"
+                                    />
+                                </div>
                             </div>
-                            <div class="form-group">
+                            <div className="form-group">
                                 <label
-                                    class="col-form-label mt-4 text-white"
-                                    for="inputDefault"
-                                >
-                                    Phone
-                                </label>
-                                <input
-                                    type="text"
-                                    class="form-control"
-                                    placeholder="Enter phone"
-                                    id="inputDefault"
-                                />
-                            </div>
-                            <div class="form-group">
-                                <label
-                                    class="col-form-label mt-4 text-white"
+                                    className="col-form-label mt-4 text-white"
                                     for="inputDefault"
                                 >
                                     Address
                                 </label>
                                 <textarea
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     placeholder="Enter address"
                                     id="inputDefault"
-                                    rows={4}
+                                    rows={2}
                                 />
                             </div>
 
