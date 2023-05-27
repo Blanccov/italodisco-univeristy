@@ -9,7 +9,9 @@
     flex-direction: column;
   }
   .container .card {
-    position: relative;
+    position:relative;
+    // min-width: 485px;
+    // max-width: 500px;
     width: 500px;
     height: 200px;
     background-color: #fff;

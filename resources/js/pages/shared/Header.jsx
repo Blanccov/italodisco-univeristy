@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "./Header.module.scss";
+import { Outlet } from "react-router-dom";
 
 function Header() {
     return (
+        <>
         <nav
             className={
                 "navbar navbar-expand-lg navbar-dark bg-transparent " +
@@ -92,6 +94,8 @@ function Header() {
                 </div>
             </div>
         </nav>
+        <Outlet />
+        </>
     );
 }
 

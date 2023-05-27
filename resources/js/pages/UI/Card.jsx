@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Card.module.scss";
+import { Link } from "react-router-dom";
 
 export default function Card(props) {
     return (

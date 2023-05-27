@@ -4,7 +4,7 @@ import Card from "../UI/Card";
 function Application() {
     return (
         <div className={style["bg-image"]}>
-            <div class="d-flex align-content-center flex-wrap w-75">
+            <div class="d-flex align-content-center flex-wrap w-100">
                 <Card
                     style={{
                         backgroundImage: `url("images/bookphoto.jpg")`,
