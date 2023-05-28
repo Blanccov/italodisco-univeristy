@@ -9,6 +9,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\ApplicationCollection;
 use App\Http\Resources\ApplicationResource;
 use Symfony\Component\HttpFoundation\Response;
+use App\Services\ApplicationService;
+use Illuminate\Http\Request;
 
 class ApplicationController extends Controller
 {
@@ -68,5 +70,9 @@ class ApplicationController extends Controller
         $application->delete();
 
         return response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public function apply(Request $request){
+        return (new ApplicationService())->apply($request);
     }
 }

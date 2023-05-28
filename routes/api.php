@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::get('logout', [AuthController::class, 'logout']);
 
+    Route::post('applications/apply', [ApplicationController::class, 'apply']);
+
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
