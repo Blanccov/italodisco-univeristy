@@ -72,7 +72,11 @@ class ApplicationController extends Controller
         return response('', Response::HTTP_NO_CONTENT);
     }
 
-    public function apply(Request $request){
-        return (new ApplicationService())->apply($request);
+    public function applyForRecruitment(Request $request){
+        return (new ApplicationService())->applyForRecruitment($request);
     }
+    public function processRecruitmentResults(Request $request){
+        return (new ApplicationService())->processRecruitmentResults($request);
+    }
+
 }

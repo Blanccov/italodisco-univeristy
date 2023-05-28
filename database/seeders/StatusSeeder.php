@@ -13,8 +13,18 @@ class StatusSeeder extends Seeder
      */
     public function run(): void
     {
-        Status::factory()
-            ->count(25)
-            ->create();
+        Status::insert(
+            [
+                [
+                    'status' => "In progress...",
+                ],
+                [
+                    'status' => "accepted",
+                ],
+                [
+                    'status' => "unaccepted",
+                ],
+            ]
+        );
     }
 }

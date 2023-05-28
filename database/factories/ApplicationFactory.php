@@ -22,7 +22,7 @@ class ApplicationFactory extends Factory
         return [
             'recruitment_id' => $this->faker->randomElement([1,2,3,4]),
             'user_id' => User::factory(),
-            'status_id' => Status::factory(),
+            'status_id' => $this->faker->randomElement([1]),
             'submission_date' => $this->faker->date()
         ];
     }

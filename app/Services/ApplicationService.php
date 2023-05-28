@@ -6,44 +6,109 @@ use Illuminate\Http\Request;
 use App\Models\Application;
 use Carbon\Carbon;
 use App\Models\Recruitment;
+use Illuminate\Support\Facades\DB;
+use App\Models\Result;
+use App\Models\User;
 
 class ApplicationService
 {
-    public function apply(Request $request)
-    {
-        $user = $request->user();
+    public function applyForRecruitment(Request $request)
+{
+    $user = $request->user();
 
-        $recruitmentId = $request->input('recruitment_id');
+    $recruitmentId = $request->input('recruitment_id');
 
-        $recruitment = Recruitment::find($recruitmentId);
+    $recruitment = Recruitment::find($recruitmentId);
 
-        if (!$recruitment) {
-            return response()->json(['error' => 'Kierunek rekrutacyjny nie istnieje.'], 404);
-        }
-
-        $currentDate = Carbon::now();
-
-        if ($currentDate->isBefore($recruitment->start_date) || $currentDate->isAfter($recruitment->end_date)) {
-            return response()->json(['error' => 'Nie możesz aplikować na ten kierunek.'], 400);
-        }
-
-        // Sprawdź, czy użytkownik już złożył wniosek na ten kierunek
-        $existingApplication = Application::where('user_id', $user->id)
-            ->where('recruitment_id', $recruitmentId)
-            ->first();
-
-        if ($existingApplication) {
-            return response()->json(['error' => 'Już złożyłeś wniosek na ten kierunek.'], 400);
-        }
-
-        // Jeśli użytkownik spełnia wszystkie warunki, zapisz wniosek do bazy danych
-        $application = new Application();
-        $application->recruitment_id = $recruitmentId;
-        $application->user_id = $user->id;
-        $application->submission_date = $currentDate;
-        $application->status_id = 1;
-        $application->save();
-
-        return response()->json(['message' => 'Wniosek został pomyślnie złożony.']);
+    if (!$recruitment) {
+        return response()->json(['error' => 'Kierunek rekrutacyjny nie istnieje.'], 404);
     }
+
+    $currentDate = Carbon::now();
+
+    if ($currentDate->isBefore($recruitment->start_date) || $currentDate->isAfter($recruitment->end_date)) {
+        return response()->json(['error' => 'Nie możesz aplikować na ten kierunek.'], 400);
+    }
+
+    $existingApplication = Application::where('user_id', $user->id)
+        ->where('recruitment_id', $recruitmentId)
+        ->first();
+
+    if ($existingApplication) {
+        return response()->json(['error' => 'Już złożyłeś wniosek na ten kierunek.'], 400);
+    }
+
+    $application = new Application();
+    $application->recruitment_id = $recruitmentId;
+    $application->user_id = $user->id;
+    $application->status_id = 1;
+    $application->submission_date = $currentDate;
+    $application->save();
+
+    return response()->json(['message' => 'Wniosek został pomyślnie złożony.']);
+}
+
+
+public function processRecruitmentResults(Request $request)
+{
+    $currentDate = Carbon::now();
+
+    $finishedRecruitments = Recruitment::where('end_date', '<', $currentDate)->get();
+
+    foreach ($finishedRecruitments as $recruitment) {
+
+        $applications = Application::where('recruitment_id', $recruitment->id)->get();
+
+        $usersScores = [];
+        foreach ($applications as $application) {
+            $userId = $application->user_id;
+            $results = Result::where('user_id', $userId)->get();
+
+            $totalScore = 0;
+            foreach ($results as $result) {
+                $score = $result->score;
+                $balance = $result->balance;
+                $totalScore += $score * $balance;
+            }
+
+            $usersScores[$userId] = $totalScore;
+        }
+        arsort($usersScores);
+
+        $places = $recruitment->places;
+        $acceptedUsers = array_slice(array_keys($usersScores), 0, $places);
+
+        foreach ($applications as $application) {
+            $userId = $application->user_id;
+
+            if (in_array($userId, $acceptedUsers)) {
+                $application->status_id = 2;
+            } else {
+                $application->status_id = 3;
+            }
+
+            $application->save();
+        }
+
+        $rejectedUsers = array_slice(array_keys($usersScores), $places);
+
+        foreach ($rejectedUsers as $userId) {
+            $application = Application::where('recruitment_id', $recruitment->id)
+                ->where('user_id', $userId)
+                ->first();
+
+            if ($application) {
+                $application->status_id = 3;
+                $application->save();
+            }
+        }
+    }
+
+    return response()->json(['message' => 'Przetworzono wnioski po zakończonych rekrutacjach.']);
+}
+
+
+
+
+
 }
