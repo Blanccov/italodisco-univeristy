@@ -16,10 +16,13 @@ class RoleSeeder extends Seeder
         Role::insert(
             [
                 [
-                    'name' => "admin",
+                    'name' => "guest",
                 ],
                 [
                     'name' => "student",
+                ],
+                [
+                    'name' => "admin",
                 ],
             ]
         );
