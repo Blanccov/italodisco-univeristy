@@ -31,7 +31,7 @@ class AuthController extends Controller
 
         $user->save();
 
-        $user->roles()->attach($basicRoles);
+        $user->roles($basicRoles);
 
         return $user;
 
