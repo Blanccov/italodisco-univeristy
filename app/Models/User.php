@@ -56,11 +56,11 @@ class User extends Authenticatable
     }
 
     public function results(){
-        return $this->belongsTo(Result::class);
+        return $this->hasMany(Result::class);
     }
 
     public function roles(){
-        return $this->hasOne(Role::class);
+        return $this->belongsTo(Role::class);
     }
 
 

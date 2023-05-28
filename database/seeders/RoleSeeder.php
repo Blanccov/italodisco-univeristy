@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
                     'name' => "guest",
                 ],
                 [
-                    'name' => "student",
+                    'name' => "user",
                 ],
                 [
                     'name' => "admin",

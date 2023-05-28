@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Cookie;
 use App\Http\Controllers\Controller;
+use App\Models\Role;
 
 class AuthController extends Controller
 {
@@ -35,12 +36,12 @@ class AuthController extends Controller
 
         return $user;
 
-//        return User::create([
-//            'first_name' => $request->input('first_name'),
-//            'last_name' => $request->input('last_name'),
-//            'email' => $request->input('email'),
-//            'password' => Hash::make($request->input('password'))
-//        ]);
+        //        return User::create([
+        //            'first_name' => $request->input('first_name'),
+        //            'last_name' => $request->input('last_name'),
+        //            'email' => $request->input('email'),
+        //            'password' => Hash::make($request->input('password'))
+        //        ]);
     }
 
     public function login(LoginRequest $request)
@@ -52,27 +53,20 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        $roles = $user->roles;
-        $token = null;
+        $userRole = $user->role_id;
 
-        foreach ($roles as $role) {
-            // TODO: improve roles by specific models in future
-            if ($role->name === 'admin') {
-                $token = $user->createToken('jwt',
-                    ['user:create', 'user:read', 'user:update', 'user:delete',
-                        'product:read', 'product:delete',
-                        'order:read', 'order:delete',
-                        'category:create', 'category:read', 'category:delete',
-                        'role:create', 'role:read', 'role:update', 'role:delete']);
-                break;
-            }
-
-            if ($role->name === 'user') {
-                $token = $user->createToken('jwt',
-                    ['user:read', 'user:update',
-                        'product:create', 'product:read', 'product:update', 'product:delete',
-                        'order:create', 'order:read', 'order:delete']);
-            }
+        if ($userRole === 3) {
+            $token = $user->createToken('jwt', [
+                'create', 'read', 'update', 'delete'
+            ]);
+        } elseif ($userRole === 2) {
+            $token = $user->createToken('jwt', [
+                'create', 'read', 'update', 'delete'
+            ]);
+        } else {
+            return response([
+                'message' => 'Invalid role!'
+            ]);
         }
 
         $token = $token->plainTextToken;
@@ -83,6 +77,7 @@ class AuthController extends Controller
             'message' => 'Successfully logged in!'
         ])->withCookie($cookie);
     }
+
 
     public function logout()
     {

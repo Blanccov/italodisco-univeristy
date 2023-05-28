@@ -17,7 +17,7 @@ class Role extends Model
 
 
     public function users(){
-        return $this->belongsTo(User::class);
+        return $this->hasMany(User::class);
     }
 
     public $timestamps = false;

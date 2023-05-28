@@ -23,16 +23,13 @@ use App\Http\Controllers\Api\V1\AuthController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::group(['namespace' => 'App\Http\Controllers\Api\V1'], function(){
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('user', [AuthController::class, 'user']);
+    Route::get('logout', [AuthController::class, 'logout']);
+
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('statuses', StatusController::class);
 });
-
-//, 'middleware' => 'auth:sanctum'
-//'prefix'=>'v1',
