@@ -19,15 +19,19 @@ class UserSeeder extends Seeder
             ->count(25)
             ->create();
 
-        // User::insert(
-        //     [
-        //         [
-        //             'name' => 'Jan', 'email' => 'jan@email.com', 'password' => Hash::make('1234'),
-        //             'student_id' => 1, 'role_id' => 1,
-        //         ],
+        User::insert(
+            [
+                [
+                    'name' => 'admin', 'surname'=>'admin', 'email' => 'admin@admin.com', 'password' => Hash::make('admin'),
+                    'pesel' => "000000000", 'phone' => '997997997', 'address' => 'fakeaddress', 'role_id' => 3
+                ],
+                [
+                    'name' => 'user', 'surname'=>'user', 'email' => 'user@user.com', 'password' => Hash::make('user'),
+                    'pesel' => "000000001", 'phone' => '997997998', 'address' => 'fakeaddress', 'role_id' => 2
+                ],
 
 
-        //     ]
-        // );
+            ]
+        );
     }
 }

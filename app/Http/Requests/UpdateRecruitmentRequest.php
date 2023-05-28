@@ -29,6 +29,8 @@ class UpdateRecruitmentRequest extends FormRequest
                 'departament' => ['required'],
                 'description' => ['required'],
                 'places' => ['required', 'numeric'],
+                'amount' => ['required', 'integer'],
+                'ispaid' => ['required', 'boolean'],
                 'startDate' => ['required', 'date'],
                 'endDate' => ['required', 'date']
             ];
@@ -38,6 +40,8 @@ class UpdateRecruitmentRequest extends FormRequest
                 'departament' => ['sometimes', 'required'],
                 'description' => ['sometimes', 'required'],
                 'places' => ['sometimes', 'required', 'numeric'],
+                'amount' => ['sometimes', 'required', 'integer'],
+                'ispaid' => ['sometimes', 'required', 'boolean'],
                 'startDate' => ['sometimes', 'required', 'date'],
                 'endDate' => ['sometimes', 'required', 'date']
             ];

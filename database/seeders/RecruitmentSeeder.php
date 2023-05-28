@@ -14,7 +14,7 @@ class RecruitmentSeeder extends Seeder
     public function run(): void
     {
         Recruitment::factory()
-            ->count(4)
+            ->count(20)
             ->create();
     }
 }

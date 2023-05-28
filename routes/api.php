@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\RecruitmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('statuses', StatusController::class);
+    Route::apiResource('recruitments', RecruitmentController::class);
 });
