@@ -59,5 +59,10 @@ class User extends Authenticatable
         return $this->belongsTo(Result::class);
     }
 
+    public function roles(){
+        return $this->hasMany(Role::class);
+    }
+
+
     public $timestamps = false;
 }
