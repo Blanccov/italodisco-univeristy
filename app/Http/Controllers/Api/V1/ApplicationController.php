@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateApplicationRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ApplicationCollection;
 use App\Http\Resources\ApplicationResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class ApplicationController extends Controller
 {
@@ -64,6 +65,8 @@ class ApplicationController extends Controller
      */
     public function destroy(Application $application)
     {
-        //
+        $application->delete();
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }

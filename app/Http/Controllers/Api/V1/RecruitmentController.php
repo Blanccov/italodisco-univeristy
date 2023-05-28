@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRecruitmentRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecruitmentCollection;
 use App\Http\Resources\RecruitmentResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class RecruitmentController extends Controller
 {
@@ -64,6 +65,8 @@ class RecruitmentController extends Controller
      */
     public function destroy(Recruitment $recruitment)
     {
-        //
+        $recruitment->delete();
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }

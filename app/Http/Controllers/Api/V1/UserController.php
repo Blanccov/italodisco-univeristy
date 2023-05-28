@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
+use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
@@ -32,4 +33,10 @@ class UserController extends Controller
         $user->update($request->all());
     }
 
+    public function destroy(User $user)
+    {
+        $user->delete();
+
+        return response('', Response::HTTP_NO_CONTENT);
+    }
 }

@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateStatusRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\StatusCollection;
 use App\Http\Resources\StatusResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class StatusController extends Controller
 {
@@ -64,6 +65,8 @@ class StatusController extends Controller
      */
     public function destroy(Status $status)
     {
-        //
+        $status->delete();
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }

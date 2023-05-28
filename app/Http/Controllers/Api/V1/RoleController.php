@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateRoleRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RoleCollection;
 use App\Http\Resources\RoleResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class RoleController extends Controller
 {
@@ -64,6 +65,8 @@ class RoleController extends Controller
      */
     public function destroy(Role $role)
     {
-        //
+        $role->delete();
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }

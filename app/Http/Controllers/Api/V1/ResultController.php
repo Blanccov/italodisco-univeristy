@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateResultRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ResultCollection;
 use App\Http\Resources\ResultResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class ResultController extends Controller
 {
@@ -66,5 +67,7 @@ class ResultController extends Controller
     public function destroy(Result $result)
     {
         $result->delete();
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 }
