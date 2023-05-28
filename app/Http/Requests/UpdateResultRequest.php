@@ -27,12 +27,14 @@ class UpdateResultRequest extends FormRequest
                 return [
                     'subject' => ['required'],
                     'score' => ['required', 'integer'],
+                    'balance' => ['required', 'numeric'],
                     'userId' => ['numeric', 'required']
                 ];
             }else{
                 return [
                     'subject' => ['sometimes','required'],
                     'score' => ['sometimes','required', 'integer'],
+                    'balance' => ['sometimes', 'required', 'numeric'],
                     'userId' => ['sometimes','numeric', 'required']
                 ];
             }

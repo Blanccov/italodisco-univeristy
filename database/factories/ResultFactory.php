@@ -22,6 +22,7 @@ class ResultFactory extends Factory
         return [
             'subject' => $subject,
             'score' => $this->faker->numberBetween(0,100),
+            'balance' => $this->faker->randomElement([0.25, 0.5, 0.75, 1]),
             'user_id' => $this->faker->numberBetween(1,25)
         ];
     }

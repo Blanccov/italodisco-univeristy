@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->integer('score');
+            $table->float('balance');
             // $table->timestamps();
         });
     }
