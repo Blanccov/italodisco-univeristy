@@ -29,7 +29,7 @@ class RegisterRequest extends FormRequest
             'pesel' => ['required', 'size:11'],
             'phone' => ['required'],
             'address' => ['required'],
-            'roleId' => ['required', 'numeric']
+            'role_id' => ['required', 'numeric']
         ];
     }
 }

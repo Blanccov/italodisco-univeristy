@@ -22,57 +22,25 @@ use App\Models\User;
 
 Route::view('{path?}', 'welcome');
 
-Route::get('/setup', function(){
-    $credientials = [
-        'email' => 'admin@admin.com',
-        'password' => 'password'
-    ];
-
-    if(!Auth::attempt($credientials)){
-        $user = new \App\Models\User();
-
-        $user->name = 'Admin';
-        $user->email = $credientials['email'];
-        $user->password = $credientials['password'];
-        $user->pesel = '';
-        $user->address = '';
-        $user->surname = '';
-        $user->phone = '';
-        $user->role_id = 2;
-
-        $user->save();
-
-        if(Auth::attempt($credientials)) {
-
-            $user = Auth::user();
-
-            $adminToken = $user->createToken('admin-token', ['create', 'update', 'delete']);
-            $updateToken = $user->createToken('update-token', ['create', 'update']);
-            $bacisToken = $user->createToken('basic-token');
-
-            return[
-                'admin' => $adminToken->plainTextToken,
-                'update' => $adminToken->plainTextToken,
-                'basic' => $adminToken->plainTextToken,
-            ];
-        }
-    }
-});
-
-
-
 // Route::get('/setup', function(){
 //     $credientials = [
-//         'name' => 'admin@admin.com',
+//         'email' => 'admin@admin.com',
 //         'password' => 'password'
 //     ];
 
 //     if(!Auth::attempt($credientials)){
-//         $role = new \App\Models\Role();
+//         $user = new \App\Models\User();
 
-//         $role->name = 'Admin';
+//         $user->name = 'Admin';
+//         $user->email = $credientials['email'];
+//         $user->password = $credientials['password'];
+//         $user->pesel = '';
+//         $user->address = '';
+//         $user->surname = '';
+//         $user->phone = '';
+//         $user->role_id = 2;
 
-//         $role->save();
+//         $user->save();
 
 //         if(Auth::attempt($credientials)) {
 
@@ -90,3 +58,6 @@ Route::get('/setup', function(){
 //         }
 //     }
 // });
+
+
+

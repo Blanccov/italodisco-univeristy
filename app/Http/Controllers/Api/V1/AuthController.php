@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Cookie;
+use App\Http\Controllers\Controller;
 
 class AuthController extends Controller
 {
@@ -23,7 +24,6 @@ class AuthController extends Controller
         $user->surname = $request->input('surname');
         $user->phone = $request->input('phone');
         $user->pesel = $request->input('pesel');
-        $user->postal_code = $request->input('postal_code');
         $user->address = $request->input('address');
         $user->role_id = $request->input('role_id');
         $user->email = $request->input('email');
