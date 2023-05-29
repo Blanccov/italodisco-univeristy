@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('logout', [AuthController::class, 'logout']);
 
     Route::post('applications/applyForRecruitment', [ApplicationController::class, 'applyForRecruitment']);
-    Route::post('/calculate-top-applicants', [ApplicationController::class, 'processRecruitmentResults']);
+    Route::post('applications/processRecruitmentResults', [ApplicationController::class, 'processRecruitmentResults']);
 
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);

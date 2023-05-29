@@ -12,7 +12,7 @@ class Application extends Model
     use Filterable;
 
     protected $fillable = [
-        'recruitment_id',
+        'recrutiment_id',
         'user_id',
         'status_id',
         'submission_id',

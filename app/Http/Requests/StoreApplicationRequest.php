@@ -33,7 +33,7 @@ class StoreApplicationRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'recruitment_id' => $this->recrutimentId,
+            'recrutiment_id' => $this->recrutimentId,
             'user_id' => $this->userId,
             'status_id' => $this->statusId,
             'submission_date' => $this->submissionDate
