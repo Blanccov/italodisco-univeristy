@@ -40,5 +40,8 @@ class UserController extends Controller
 
         return response('', Response::HTTP_NO_CONTENT);
     }
+    public function searchUsers(Request $request){
+        return (new UserService())->searchUsers($request);
+    }
 
 }
