@@ -75,8 +75,8 @@ class ApplicationController extends Controller
     public function applyForRecruitment(Request $request){
         return (new ApplicationService())->applyForRecruitment($request);
     }
-    public function processRecruitmentResults(Request $request){
-        return (new ApplicationService())->processRecruitmentResults($request);
+    public function processRecruitmentResults(){
+        return (new ApplicationService())->processRecruitmentResults();
     }
 
 }

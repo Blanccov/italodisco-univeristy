@@ -49,7 +49,7 @@ class ApplicationService
 }
 
 
-public function processRecruitmentResults(Request $request)
+public function processRecruitmentResults()
 {
     $currentDate = Carbon::now();
 
@@ -62,16 +62,21 @@ public function processRecruitmentResults(Request $request)
         $usersScores = [];
         foreach ($applications as $application) {
             $userId = $application->user_id;
-            $results = Result::where('user_id', $userId)->get();
+            $statusId = $application->status_id;
 
-            $totalScore = 0;
-            foreach ($results as $result) {
-                $score = $result->score;
-                $balance = $result->balance;
-                $totalScore += $score * $balance;
+            // Przetwarzaj tylko użytkowników z status 2 (oczekujący)
+            if ($statusId == 2) {
+                $results = Result::where('user_id', $userId)->get();
+
+                $totalScore = 0;
+                foreach ($results as $result) {
+                    $score = $result->score;
+                    $balance = $result->balance;
+                    $totalScore += $score * $balance;
+                }
+
+                $usersScores[$userId] = $totalScore;
             }
-
-            $usersScores[$userId] = $totalScore;
         }
         arsort($usersScores);
 
@@ -82,9 +87,9 @@ public function processRecruitmentResults(Request $request)
             $userId = $application->user_id;
 
             if (in_array($userId, $acceptedUsers)) {
-                $application->status_id = 2;
-            } else {
                 $application->status_id = 3;
+            } else {
+                $application->status_id = 4;
             }
 
             $application->save();
@@ -98,7 +103,7 @@ public function processRecruitmentResults(Request $request)
                 ->first();
 
             if ($application) {
-                $application->status_id = 3;
+                $application->status_id = 4;
                 $application->save();
             }
         }
@@ -106,8 +111,6 @@ public function processRecruitmentResults(Request $request)
 
     return response()->json(['message' => 'Przetworzono wnioski po zakończonych rekrutacjach.']);
 }
-
-
 
 
 

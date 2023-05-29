@@ -19,6 +19,9 @@ class StatusSeeder extends Seeder
                     'status' => "In progress...",
                 ],
                 [
+                    'status' => "waiting",
+                ],
+                [
                     'status' => "accepted",
                 ],
                 [

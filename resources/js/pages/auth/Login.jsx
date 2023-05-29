@@ -37,7 +37,7 @@ function Login() {
             );
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.accessToken;
-            const roles = response?.data?.roles;
+            const roles = response?.data?.userRole;
             console.log(accessToken);
             console.log(roles);
             setAuth({ user, pwd, roles, accessToken });
