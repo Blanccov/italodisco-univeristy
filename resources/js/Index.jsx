@@ -36,9 +36,7 @@ function Index() {
 
     return (
         <>
-            <Header />
             <RouterProvider router={router} />
-
         </>
     );
 }
