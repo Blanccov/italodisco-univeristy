@@ -30,6 +30,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('applications/applyForRecruitment', [ApplicationController::class, 'applyForRecruitment']);
     Route::post('applications/processRecruitmentResults', [ApplicationController::class, 'processRecruitmentResults']);
+    Route::post('applications/makePaymentForRecruitment', [ApplicationController::class, 'makePaymentForRecruitment']);
 
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);

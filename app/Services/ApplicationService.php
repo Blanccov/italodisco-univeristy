@@ -112,6 +112,47 @@ public function processRecruitmentResults()
     return response()->json(['message' => 'Przetworzono wnioski po zakończonych rekrutacjach.']);
 }
 
+public function makePaymentForRecruitment(Request $request)
+{
+    $recruitmentId = $request->input('recruitment_id');
+    $amount = $request->input('amount');
+
+    $recruitment = Recruitment::find($recruitmentId);
+
+    if (!$recruitment) {
+        return response()->json(['error' => 'Kierunek rekrutacyjny nie istnieje.'], 404);
+    }
+
+    $currentDate = Carbon::now();
+
+    if ($currentDate->isAfter($recruitment->end_date)) {
+        return response()->json(['error' => 'Nie możesz dokonać wpłaty po zakończeniu rekrutacji.'], 400);
+    }
+
+    $application = Application::where('recruitment_id', $recruitmentId)
+        ->where('status_id', 1) // Tylko dla aplikacji ze statusem 1 (złożone)
+        ->first();
+
+    if (!$application) {
+        return response()->json(['error' => 'Brak złożonych wniosków dla danego kierunku.'], 400);
+    }
+
+    // Porównaj wartość 'amount' z wartością przechowywaną w rekrutacji
+    if ($amount !== $recruitment->amount) {
+        return response()->json(['error' => 'Nieprawidłowa kwota wpłaty.'], 400);
+    }
+
+    // Dokonaj płatności
+
+    // Jeśli płatność jest poprawna, zmień status na 2 (opłacone)
+    $application->status_id = 2;
+    $application->save();
+
+    return response()->json(['message' => 'Płatność została pomyślnie zrealizowana.']);
+}
+
+
+
 
 
 }
