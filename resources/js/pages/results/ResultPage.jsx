@@ -11,7 +11,7 @@ function ResultPage() {
         setIsLoading(true);
         setError(null);
         try {
-            const response = await fetch("http://localhost:8000/api/v1/results");
+            const response = await fetch("http://localhost:8000/api/results");
             console.log(response)
             console.log(response.status)
             if (!response.ok) {

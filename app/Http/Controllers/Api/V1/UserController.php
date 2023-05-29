@@ -10,6 +10,7 @@ use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserResource;
 use App\Models\User;
 use Symfony\Component\HttpFoundation\Response;
+use App\Services\UserService;
 
 class UserController extends Controller
 {
@@ -39,4 +40,5 @@ class UserController extends Controller
 
         return response('', Response::HTTP_NO_CONTENT);
     }
+
 }
