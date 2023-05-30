@@ -183,6 +183,7 @@ public function showApplications()
             'status_id' => $status->id,
             'status_name' => $status->status,
             'score' => $score,
+            'amount' => $recruitment->amount,
         ];
     }
 
