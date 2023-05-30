@@ -21,7 +21,6 @@ class RecruitmentResource extends JsonResource
             'description' => $this->description,
             'places' => $this->places,
             'amount' => $this->amount,
-            'ispaid' => $this->ispaid,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date
         ];
