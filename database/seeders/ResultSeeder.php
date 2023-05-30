@@ -14,35 +14,72 @@ class ResultSeeder extends Seeder
      */
     public function run(): void
     {
-        Result::factory()
-            ->count(25)
-            ->create();
 
-        Result::factory()
-            ->count(5)
-            ->create();
+        Result::insert(
+            [
+                ['subject' => "matematyka", "balance" => 0.3, "recruitment_id" => 1],
+                ['subject' => "fizyka", "balance" => 0.5, "recruitment_id" => 1],
+                ['subject' => "chemia", "balance" => 0.2, "recruitment_id" => 1],
+                ['subject' => "biologia", "balance" => 0.7, "recruitment_id" => 1],
+                ['subject' => "historia", "balance" => 0.4, "recruitment_id" => 1],
+                ['subject' => "język angielski", "balance" => 0.6, "recruitment_id" => 1],
+                ['subject' => "matematyka", "balance" => 0.8, "recruitment_id" => 2],
+                ['subject' => "fizyka", "balance" => 0.4, "recruitment_id" => 2],
+                ['subject' => "chemia", "balance" => 0.6, "recruitment_id" => 2],
+                ['subject' => "biologia", "balance" => 0.9, "recruitment_id" => 2],
+                ['subject' => "historia", "balance" => 0.3, "recruitment_id" => 2],
+                ['subject' => "język angielski", "balance" => 0.7, "recruitment_id" => 2],
+                ['subject' => "matematyka", "balance" => 0.5, "recruitment_id" => 3],
+                ['subject' => "fizyka", "balance" => 0.2, "recruitment_id" => 3],
+                ['subject' => "chemia", "balance" => 0.7, "recruitment_id" => 3],
+                ['subject' => "biologia", "balance" => 0.4, "recruitment_id" => 3],
+                ['subject' => "historia", "balance" => 0.6, "recruitment_id" => 3],
+                ['subject' => "język angielski", "balance" => 0.8, "recruitment_id" => 3],
+                ['subject' => "matematyka", "balance" => 0.2, "recruitment_id" => 4],
+                ['subject' => "fizyka", "balance" => 0.6, "recruitment_id" => 4],
+                ['subject' => "chemia", "balance" => 0.3, "recruitment_id" => 4],
+                ['subject' => "biologia", "balance" => 0.8, "recruitment_id" => 4],
+                ['subject' => "historia", "balance" => 0.7, "recruitment_id" => 4],
+                ['subject' => "język angielski", "balance" => 0.5, "recruitment_id" => 4],
+                ['subject' => "matematyka", "balance" => 0.6, "recruitment_id" => 5],
+                ['subject' => "fizyka", "balance" => 0.9, "recruitment_id" => 5],
+                ['subject' => "chemia", "balance" => 0.4, "recruitment_id" => 5],
+                ['subject' => "biologia", "balance" => 0.2, "recruitment_id" => 5],
+                ['subject' => "historia", "balance" => 0.8, "recruitment_id" => 5],
+                ['subject' => "język angielski", "balance" => 0.3, "recruitment_id" => 5],
+                ['subject' => "matematyka", "balance" => 0.7, "recruitment_id" => 6],
+                ['subject' => "fizyka", "balance" => 0.3, "recruitment_id" => 6],
+                ['subject' => "chemia", "balance" => 0.5, "recruitment_id" => 6],
+                ['subject' => "biologia", "balance" => 0.6, "recruitment_id" => 6],
+                ['subject' => "historia", "balance" => 0.2, "recruitment_id" => 6],
+                ['subject' => "język angielski", "balance" => 0.4, "recruitment_id" => 6],
+                ['subject' => "matematyka", "balance" => 0.4, "recruitment_id" => 7],
+                ['subject' => "fizyka", "balance" => 0.7, "recruitment_id" => 7],
+                ['subject' => "chemia", "balance" => 0.8, "recruitment_id" => 7],
+                ['subject' => "biologia", "balance" => 0.3, "recruitment_id" => 7],
+                ['subject' => "historia", "balance" => 0.5, "recruitment_id" => 7],
+                ['subject' => "język angielski", "balance" => 0.6, "recruitment_id" => 7],
+                ['subject' => "matematyka", "balance" => 0.9, "recruitment_id" => 8],
+                ['subject' => "fizyka", "balance" => 0.5, "recruitment_id" => 8],
+                ['subject' => "chemia", "balance" => 0.2, "recruitment_id" => 8],
+                ['subject' => "biologia", "balance" => 0.6, "recruitment_id" => 8],
+                ['subject' => "historia", "balance" => 0.7, "recruitment_id" => 8],
+                ['subject' => "język angielski", "balance" => 0.4, "recruitment_id" => 8],
+                ['subject' => "matematyka", "balance" => 0.3, "recruitment_id" => 9],
+                ['subject' => "fizyka", "balance" => 0.6, "recruitment_id" => 9],
+                ['subject' => "chemia", "balance" => 0.9, "recruitment_id" => 9],
+                ['subject' => "biologia", "balance" => 0.5, "recruitment_id" => 9],
+                ['subject' => "historia", "balance" => 0.4, "recruitment_id" => 9],
+                ['subject' => "język angielski", "balance" => 0.7, "recruitment_id" => 9],
+                ['subject' => "matematyka", "balance" => 0.5, "recruitment_id" => 10],
+                ['subject' => "fizyka", "balance" => 0.8, "recruitment_id" => 10],
+                ['subject' => "chemia", "balance" => 0.4, "recruitment_id" => 10],
+                ['subject' => "biologia", "balance" => 0.7, "recruitment_id" => 10],
+                ['subject' => "historia", "balance" => 0.3, "recruitment_id" => 10],
+                ['subject' => "język angielski", "balance" => 0.6, "recruitment_id" => 10],
 
-        // Result::insert(
-        //     [
-        //         ["subject" => "angielski", "score" => null, "balance" => 0.5, "user_id" => null, "recruitment_id" => 1],
-        //         ["subject" => "matematyka", "score" => null, "balance" => 0.3, "user_id" => null, "recruitment_id" => 1],
-        //         ["subject" => "historia", "score" => null, "balance" => 0.9, "user_id" => null, "recruitment_id" => 1],
-        //         ["subject" => "fizyka", "score" => null, "balance" => 0.6, "user_id" => null, "recruitment_id" => 1],
-        //         ["subject" => "biologia", "score" => null, "balance" => 0.8, "user_id" => null, "recruitment_id" => 1],
-        //         ["subject" => "chemia", "score" => null, "balance" => 0.4, "user_id" => null, "recruitment_id" => 1],
-        //         ["subject" => "angielski", "score" => null, "balance" => 0.7, "user_id" => null, "recruitment_id" => 2],
-        //         ["subject" => "matematyka", "score" => null, "balance" => 0.2, "user_id" => null, "recruitment_id" => 2],
-        //         ["subject" => "historia", "score" => null, "balance" => 0.4, "user_id" => null, "recruitment_id" => 2],
-        //         ["subject" => "fizyka", "score" => null, "balance" => 0.9, "user_id" => null, "recruitment_id" => 2],
-        //         ["subject" => "biologia", "score" => null, "balance" => 0.6, "user_id" => null, "recruitment_id" => 2],
-        //         ["subject" => "chemia", "score" => null, "balance" => 0.3, "user_id" => null, "recruitment_id" => 2],
-        //         ["subject" => "angielski", "score" => null, "balance" => 0.9, "user_id" => null, "recruitment_id" => 3],
-        //         ["subject" => "matematyka", "score" => null, "balance" => 0.6, "user_id" => null, "recruitment_id" => 3],
-        //         ["subject" => "historia", "score" => null, "balance" => 0.8, "user_id" => null, "recruitment_id" => 3],
-        //         ["subject" => "fizyka", "score" => null, "balance" => 0.4, "user_id" => null, "recruitment_id" => 3],
-        //         ["subject" => "biologia", "score" => null, "balance" => 0.7, "user_id" => null, "recruitment_id" => 3]
-        //     ]
-        //     );
+            ]
+        );
 
     }
 }

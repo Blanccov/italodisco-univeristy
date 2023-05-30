@@ -155,5 +155,45 @@ public function makePaymentForRecruitment(Request $request)
     return response()->json(['message' => 'Płatność została pomyślnie zrealizowana.']);
 }
 
+public function showApplications()
+{
+    $user = Auth::user();
+    $applications = Application::where('user_id', $user->id)->get();
+
+    $data = [];
+
+    foreach ($applications as $application) {
+        $recruitment = Recruitment::find($application->recruitment_id);
+        $status = Status::find($application->status_id);
+
+        $score = 0;
+
+        if ($status->id == 3 || $status->id == 4) {
+            $results = Result::where('recruitment_id', $recruitment->id)->get();
+
+            foreach ($results as $result) {
+                $scoreRecord = Score::where('result_id', $result->id)
+                    ->where('user_id', $user->id)
+                    ->first();
+
+                if ($scoreRecord) {
+                    $score += $scoreRecord->score * $result->balance;
+                }
+            }
+        }
+
+        $data[] = [
+            'application_id' => $application->id,
+            'recruitment_id' => $recruitment->id,
+            'recruitment_name' => $recruitment->name,
+            'status_id' => $status->id,
+            'status_name' => $status->name,
+            'score' => $score,
+        ];
+    }
+
+    return response()->json(['applications' => $data]);
+}
+
 
 }
