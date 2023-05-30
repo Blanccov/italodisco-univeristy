@@ -20,8 +20,11 @@ class Recruitment extends Model
         'end_date'
     ];
 
-    public function users(){
-        return $this->belongsToMany(User::class, 'applications', 'statuses', 'recruitments', 'users');
+    // public function users(){
+    //     return $this->belongsToMany(User::class, 'applications', 'statuses', 'recruitments', 'users');
+    // }
+    public function statuses(){
+        return $this->belongsToMany(Status::class, 'applications', 'statuses', 'recruitments', 'users');
     }
 
     public $timestamps = false;

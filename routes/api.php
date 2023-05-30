@@ -24,13 +24,14 @@ use App\Http\Controllers\Api\V1\RecruitmentController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
+// Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::get('logout', [AuthController::class, 'logout']);
 
     Route::post('applications/applyForRecruitment', [ApplicationController::class, 'applyForRecruitment']);
     Route::post('applications/processRecruitmentResults', [ApplicationController::class, 'processRecruitmentResults']);
     Route::post('applications/makePaymentForRecruitment', [ApplicationController::class, 'makePaymentForRecruitment']);
+    Route::get('applications/getRecruitmentDetails', [ApplicationController::class, 'getRecruitmentDetails']);
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
 
@@ -40,4 +41,4 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('statuses', StatusController::class);
     Route::apiResource('recruitments', RecruitmentController::class);
-});
+// });

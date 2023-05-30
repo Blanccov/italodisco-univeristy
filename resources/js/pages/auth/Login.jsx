@@ -4,6 +4,7 @@ import AuthContext from "./AuthProvider";
 
 import axios from "../api/axios";
 import Header from "../shared/Header";
+import HeaderUser from "../shared/HeaderUser";
 const LOGIN_URL = "/login";
 
 function Login() {
@@ -37,7 +38,7 @@ function Login() {
                 }
             );
             console.log(JSON.stringify(response?.data));
-            const accessToken = response?.data?.accessToken;
+            const accessToken = response?.data?.token;
             const roles = response?.data?.userRole;
             console.log(accessToken);
             console.log(roles);
@@ -62,6 +63,7 @@ function Login() {
         <>
             {success ? (
                 <section>
+                    <HeaderUser />
                     <h1>You are logged in!</h1>
                 </section>
             ) : (

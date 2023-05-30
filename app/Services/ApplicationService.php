@@ -9,6 +9,8 @@ use App\Models\Recruitment;
 use Illuminate\Support\Facades\DB;
 use App\Models\Result;
 use App\Models\User;
+use App\Models\Status;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicationService
 {
@@ -150,9 +152,6 @@ public function makePaymentForRecruitment(Request $request)
 
     return response()->json(['message' => 'Płatność została pomyślnie zrealizowana.']);
 }
-
-
-
 
 
 }

@@ -81,5 +81,4 @@ class ApplicationController extends Controller
     public function makePaymentForRecruitment(Request $request){
         return (new ApplicationService())->makePaymentForRecruitment($request);
     }
-
 }
