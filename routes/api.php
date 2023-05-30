@@ -31,8 +31,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('applications/applyForRecruitment', [ApplicationController::class, 'applyForRecruitment']);
     Route::post('applications/processRecruitmentResults', [ApplicationController::class, 'processRecruitmentResults']);
     Route::post('applications/makePaymentForRecruitment', [ApplicationController::class, 'makePaymentForRecruitment']);
-    Route::get('applications/getRecruitmentDetails', [ApplicationController::class, 'getRecruitmentDetails']);
     Route::get('applications/showApplications', [ApplicationController::class, 'showApplications']);
+    Route::post('applications/rejectApplication', [ApplicationController::class, 'rejectApplication']);
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);

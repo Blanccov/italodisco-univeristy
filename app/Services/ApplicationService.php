@@ -66,7 +66,6 @@ public function processRecruitmentResults()
             $userId = $application->user_id;
             $statusId = $application->status_id;
 
-            // Process only applications with status 1 (submitted) or 2 (paid)
             if ($statusId == 1 || $statusId == 2) {
                 $results = Result::where('recruitment_id', $recruitment->id)->get();
                 $totalScore = 0;
@@ -96,14 +95,13 @@ public function processRecruitmentResults()
             $userId = $application->user_id;
             $statusId = $application->status_id;
 
-            // Assign a new status based on the previous status
             if ($statusId == 1) {
-                $application->status_id = 4; // Change status to 4 (rejected)
+                $application->status_id = 4;
             } elseif ($statusId == 2) {
                 if (in_array($userId, $acceptedUsers)) {
-                    $application->status_id = 3; // Change status to 3 (accepted)
+                    $application->status_id = 3;
                 } else {
-                    $application->status_id = 4; // Change status to 4 (rejected)
+                    $application->status_id = 4;
                 }
             }
 
@@ -133,22 +131,18 @@ public function makePaymentForRecruitment(Request $request)
     }
 
     $application = Application::where('recruitment_id', $recruitmentId)
-        ->where('status_id', 1) // Tylko dla aplikacji ze statusem 1 (złożone)
+        ->where('status_id', 1)
         ->first();
 
     if (!$application) {
         return response()->json(['error' => 'Brak złożonych wniosków dla danego kierunku.'], 400);
     }
 
-    // Porównaj wartość 'amount' z wartością przechowywaną w rekrutacji
     if ($amount !== $recruitment->amount) {
         echo $amount;
         return response()->json(['error' => 'Nieprawidłowa kwota wpłaty.'], 400);
     }
 
-    // Dokonaj płatności
-
-    // Jeśli płatność jest poprawna, zmień status na 2 (opłacone)
     $application->status_id = 2;
     $application->save();
 
@@ -195,5 +189,24 @@ public function showApplications()
     return response()->json(['applications' => $data]);
 }
 
+public function rejectApplication(Request $request)
+{
+    $user = Auth::user();
+    $applicationId = $request->input('application_id');
+
+    $application = Application::where('id', $applicationId)
+        ->where('user_id', $user->id)
+        ->where('status_id', '!=', 4) // Status różny od 4
+        ->first();
+
+    if (!$application) {
+        return response()->json(['error' => 'Nie znaleziono aplikacji do odrzucenia lub aplikacja ma już status 4 (odrzucona).'], 404);
+    }
+
+    $application->status_id = 5; // Ustaw status na 5 (odrzucone)
+    $application->save();
+
+    return response()->json(['message' => 'Aplikacja została odrzucona.']);
+}
 
 }
