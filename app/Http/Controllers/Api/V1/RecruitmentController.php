@@ -78,4 +78,7 @@ class RecruitmentController extends Controller
     public function getRecruitmentsByDepartmentWithDate(Request $request){
         return (new RecruitmentService())->getRecruitmentsByDepartmentWithDate($request);
     }
+    public function checkAndReopenRecruitment(){
+        return (new RecruitmentService())->checkAndReopenRecruitment();
+    }
 }

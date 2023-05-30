@@ -42,6 +42,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
     Route::post('recruitments/getRecruitmentsByDepartmentWithDate', [RecruitmentController::class, 'getRecruitmentsByDepartmentWithDate']);
+    Route::post('recruitments/checkAndReopenRecruitment', [RecruitmentController::class, 'checkAndReopenRecruitment']);
 
 
     Route::apiResource('results', ResultController::class);

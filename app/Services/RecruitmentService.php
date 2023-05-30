@@ -3,10 +3,8 @@
 namespace App\Services;
 
 use Illuminate\Http\Request;
-use App\Models\Result;
-use App\Models\Score;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Recruitment;
+use App\Models\Application;
 
 class RecruitmentService
 {
@@ -40,5 +38,30 @@ class RecruitmentService
 
     return response()->json(['recruitments' => $recruitments]);
 }
+
+public function checkAndReopenRecruitment()
+{
+    $recruitments = Recruitment::whereDate('end_date', '<', now()->subMonth())
+        ->get();
+
+    foreach ($recruitments as $recruitment) {
+        $acceptedCount = Application::where('recruitment_id', $recruitment->id)
+            ->where('status_id', 3)
+            ->count();
+
+        $availableSpots = $recruitment->places - $acceptedCount;
+
+        if ($availableSpots >= 10) {
+            $recruitment->update([
+                'places' => $availableSpots,
+                'start_date' => now()->toDateString(),
+                'end_date' => now()->addMonth()->toDateString(),
+            ]);
+        }
+    }
+
+    return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);
+}
+
 
 }
