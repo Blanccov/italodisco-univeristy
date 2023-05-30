@@ -43,5 +43,8 @@ class UserController extends Controller
     public function searchUsers(Request $request){
         return (new UserService())->searchUsers($request);
     }
+    public function getAcceptedStudents(Request $request){
+        return (new UserService())->getAcceptedStudents($request);
+    }
 
 }

@@ -52,7 +52,7 @@ class User extends Authenticatable
     ];
 
     public function recruitments(){
-        return $this->belongsToMany(User::class, 'applications', 'statuses', 'recruitments', 'users');
+        return $this->belongsToMany(Recruitment::class, 'applications', 'statuses', 'recruitments', 'users');
     }
 
     public function scores(){

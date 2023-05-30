@@ -35,6 +35,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('applications/showApplications', [ApplicationController::class, 'showApplications']);
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
+    Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);
 
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);

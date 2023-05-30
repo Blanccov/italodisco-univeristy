@@ -187,7 +187,7 @@ public function showApplications()
             'recruitment_id' => $recruitment->id,
             'recruitment_name' => $recruitment->name,
             'status_id' => $status->id,
-            'status_name' => $status->name,
+            'status_name' => $status->status,
             'score' => $score,
         ];
     }
