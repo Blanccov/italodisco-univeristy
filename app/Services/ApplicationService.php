@@ -16,7 +16,9 @@ class ApplicationService
 {
     public function applyForRecruitment(Request $request)
 {
-    $user = $request->user();
+    $user = Auth::user();
+
+    echo $user;
 
     $recruitmentId = $request->input('recruitment_id');
 
@@ -58,7 +60,6 @@ public function processRecruitmentResults()
     $finishedRecruitments = Recruitment::where('end_date', '<', $currentDate)->get();
 
     foreach ($finishedRecruitments as $recruitment) {
-
         $applications = Application::where('recruitment_id', $recruitment->id)->get();
 
         $usersScores = [];
@@ -66,15 +67,17 @@ public function processRecruitmentResults()
             $userId = $application->user_id;
             $statusId = $application->status_id;
 
-            // Przetwarzaj tylko użytkowników z status 2 (oczekujący)
-            if ($statusId == 2) {
-                $results = Result::where('user_id', $userId)->get();
+            // Przetwarzaj tylko aplikacje ze statusem 1 (złożone) lub 2 (opłacone)
+            if ($statusId == 1 || $statusId == 2) {
+                $results = Result::where('user_id', $userId)
+                ->where('recruitment_id', $recruitment->id) // Filter by recruitment_id
+                ->get();
 
                 $totalScore = 0;
                 foreach ($results as $result) {
                     $score = $result->score;
-                    $balance = $result->balance;
-                    $totalScore += $score * $balance;
+                    $balanceMultiplier = $result->balance; // Retrieve the balance from the Result model
+                    $totalScore += $score * $balanceMultiplier;
                 }
 
                 $usersScores[$userId] = $totalScore;
@@ -87,31 +90,25 @@ public function processRecruitmentResults()
 
         foreach ($applications as $application) {
             $userId = $application->user_id;
+            $statusId = $application->status_id;
 
-            if (in_array($userId, $acceptedUsers)) {
-                $application->status_id = 3;
-            } else {
-                $application->status_id = 4;
+            // Przypisz nowy status w zależności od poprzedniego statusu
+            if ($statusId == 1) {
+                $application->status_id = 4; // Zmiana statusu na 4 (odrzucone)
+            } elseif ($statusId == 2) {
+                if (in_array($userId, $acceptedUsers)) {
+                    $application->status_id = 3; // Zmiana statusu na 3 (przyjęte)
+                } else {
+                    $application->status_id = 4; // Zmiana statusu na 4 (odrzucone)
+                }
             }
 
             $application->save();
         }
-
-        $rejectedUsers = array_slice(array_keys($usersScores), $places);
-
-        foreach ($rejectedUsers as $userId) {
-            $application = Application::where('recruitment_id', $recruitment->id)
-                ->where('user_id', $userId)
-                ->first();
-
-            if ($application) {
-                $application->status_id = 4;
-                $application->save();
-            }
-        }
     }
 
-    return response()->json(['message' => 'Przetworzono wnioski po zakończonych rekrutacjach.']);
+
+    return response()->json(['message' => 'Przetworzono aplikacje po zakończonych rekrutacjach.']);
 }
 
 public function makePaymentForRecruitment(Request $request)

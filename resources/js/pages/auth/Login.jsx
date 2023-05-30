@@ -17,9 +17,9 @@ function Login() {
     const [errMsg, setErrMsg] = useState("");
     const [success, setSuccess] = useState(false);
 
-    useEffect(() => {
-        userRef.current.focus();
-    }, []);
+    // useEffect(() => {
+    //     userRef.current.focus();
+    // }, []);
 
     useEffect(() => {
         setErrMsg("");
@@ -37,15 +37,21 @@ function Login() {
                     withCredentials: true,
                 }
             );
+            console.log(response);
+
             console.log(JSON.stringify(response?.data));
             const accessToken = response?.data?.token;
-            const roles = response?.data?.userRole;
+            const roles = response?.data?.role_id;
             console.log(accessToken);
+            localStorage.setItem('token', 'Bearer ' + accessToken);
             console.log(roles);
             setAuth({ user, pwd, roles, accessToken });
             setUser("");
             setPwd("");
             setSuccess(true);
+
+
+
         } catch (err) {
             if (!err?.response) {
                 setErrMsg("No Server Response");

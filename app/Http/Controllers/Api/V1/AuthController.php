@@ -74,7 +74,9 @@ class AuthController extends Controller
         $cookie = cookie('token-cookie', $token, 60 * 24); // valid for 1 day
 
         return response([
-            'message' => 'Successfully logged in!'
+            'message' => 'Successfully logged in!',
+            'token' => $token,
+            'user' => $user
         ])->withCookie($cookie);
     }
 

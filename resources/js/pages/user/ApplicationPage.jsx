@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
 import style from "./ApplicationPage.module.scss";
 import Card from "../UI/Card";
-import ApplicationList from "./ApplicationList";
 function Application() {
     return (
         <div className={style["bg-image"]}>
