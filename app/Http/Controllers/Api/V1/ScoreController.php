@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Score;
 use App\Http\Requests\StoreScoreRequest;
 use App\Http\Requests\UpdateScoreRequest;
+use App\Services\ScoreService;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
 class ScoreController extends Controller
 {
@@ -62,5 +65,9 @@ class ScoreController extends Controller
     public function destroy(Score $score)
     {
         //
+    }
+
+    public function addScore(Request $request){
+        return (new ScoreService())->addScore($request);
     }
 }

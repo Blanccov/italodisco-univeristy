@@ -196,14 +196,14 @@ public function rejectApplication(Request $request)
 
     $application = Application::where('id', $applicationId)
         ->where('user_id', $user->id)
-        ->where('status_id', '!=', 4) // Status różny od 4
+        ->where('status_id', '!=', 4)
         ->first();
 
     if (!$application) {
         return response()->json(['error' => 'Nie znaleziono aplikacji do odrzucenia lub aplikacja ma już status 4 (odrzucona).'], 404);
     }
 
-    $application->status_id = 5; // Ustaw status na 5 (odrzucone)
+    $application->status_id = 5;
     $application->save();
 
     return response()->json(['message' => 'Aplikacja została odrzucona.']);

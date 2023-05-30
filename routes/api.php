@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\RecruitmentController;
+use App\Http\Controllers\Api\V1\ScoreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);
+
+    Route::post('scores/addScore', [ScoreController::class, 'addScore']);
 
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);
