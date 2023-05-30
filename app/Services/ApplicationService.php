@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Result;
 use App\Models\User;
 use App\Models\Status;
+use App\Models\Score;
 use Illuminate\Support\Facades\Auth;
 
 class ApplicationService
@@ -17,8 +18,6 @@ class ApplicationService
     public function applyForRecruitment(Request $request)
 {
     $user = Auth::user();
-
-    echo $user;
 
     $recruitmentId = $request->input('recruitment_id');
 
@@ -67,22 +66,27 @@ public function processRecruitmentResults()
             $userId = $application->user_id;
             $statusId = $application->status_id;
 
-            // Przetwarzaj tylko aplikacje ze statusem 1 (złożone) lub 2 (opłacone)
+            // Process only applications with status 1 (submitted) or 2 (paid)
             if ($statusId == 1 || $statusId == 2) {
-                $results = Result::where('user_id', $userId)
-                ->where('recruitment_id', $recruitment->id) // Filter by recruitment_id
-                ->get();
-
+                $results = Result::where('recruitment_id', $recruitment->id)->get();
                 $totalScore = 0;
+
                 foreach ($results as $result) {
-                    $score = $result->score;
-                    $balanceMultiplier = $result->balance; // Retrieve the balance from the Result model
-                    $totalScore += $score * $balanceMultiplier;
+                    $scoreRecord = Score::where('result_id', $result->id)
+                        ->where('user_id', $userId)
+                        ->first();
+
+                    if ($scoreRecord) {
+                        $score = $scoreRecord->score;
+                        $balanceMultiplier = $result->balance;
+                        $totalScore += $score * $balanceMultiplier;
+                    }
                 }
 
                 $usersScores[$userId] = $totalScore;
             }
         }
+
         arsort($usersScores);
 
         $places = $recruitment->places;
@@ -92,14 +96,14 @@ public function processRecruitmentResults()
             $userId = $application->user_id;
             $statusId = $application->status_id;
 
-            // Przypisz nowy status w zależności od poprzedniego statusu
+            // Assign a new status based on the previous status
             if ($statusId == 1) {
-                $application->status_id = 4; // Zmiana statusu na 4 (odrzucone)
+                $application->status_id = 4; // Change status to 4 (rejected)
             } elseif ($statusId == 2) {
                 if (in_array($userId, $acceptedUsers)) {
-                    $application->status_id = 3; // Zmiana statusu na 3 (przyjęte)
+                    $application->status_id = 3; // Change status to 3 (accepted)
                 } else {
-                    $application->status_id = 4; // Zmiana statusu na 4 (odrzucone)
+                    $application->status_id = 4; // Change status to 4 (rejected)
                 }
             }
 
@@ -107,9 +111,9 @@ public function processRecruitmentResults()
         }
     }
 
-
-    return response()->json(['message' => 'Przetworzono aplikacje po zakończonych rekrutacjach.']);
+    return response()->json(['message' => 'Processed applications for finished recruitments.']);
 }
+
 
 public function makePaymentForRecruitment(Request $request)
 {
@@ -138,6 +142,7 @@ public function makePaymentForRecruitment(Request $request)
 
     // Porównaj wartość 'amount' z wartością przechowywaną w rekrutacji
     if ($amount !== $recruitment->amount) {
+        echo $amount;
         return response()->json(['error' => 'Nieprawidłowa kwota wpłaty.'], 400);
     }
 

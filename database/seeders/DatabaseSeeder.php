@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             RecruitmentSeeder::class,
             ResultSeeder::class,
             ApplicationSeeder::class,
+            ScoreSeeder::class,
         ]);
     }
 }

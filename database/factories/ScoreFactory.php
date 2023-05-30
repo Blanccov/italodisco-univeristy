@@ -19,7 +19,7 @@ class ScoreFactory extends Factory
     {
         return [
             'result_id' => $this->faker->randomElement([1,2,3,4]),
-            'user_id' => User::factory(),
+            'user_id' => $this->faker->numberBetween(1,20),
             'score' => $this->faker->numberBetween(0,100)
         ];
     }
