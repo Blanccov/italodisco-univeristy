@@ -2,26 +2,20 @@
 
 namespace App\Models;
 
-use Abbasudo\Purity\Traits\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Abbasudo\Purity\Traits\Filterable;
 
-class Result extends Model
+class Score extends Model
 {
     use HasFactory;
     use Filterable;
 
     protected $fillable = [
-        'subject',
+        'result_id',
+        'user_id',
         'score',
-        'recruitment_id',
-        'balance'
     ];
-
-    public function scores(){
-        return $this->belongsToMany(User::class, 'scores');
-    }
-
 
     public $timestamps = false;
 }

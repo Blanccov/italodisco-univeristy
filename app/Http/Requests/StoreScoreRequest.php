@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreResultRequest extends FormRequest
+class StoreScoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,17 +22,9 @@ class StoreResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => ['required'],
-            'balance' => ['required', 'numeric'],
-            'recruitmentId' =>['numeric', 'required'],
+            'result_id' => ['required', 'numeric'],
+            'user_id' => ['required', 'numeric'],
+            'score' =>['numeric', 'required'],
         ];
-    }
-
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'user_id' => $this->userId,
-            'recruitment_id' => $this->recruitmentId
-        ]);
     }
 }

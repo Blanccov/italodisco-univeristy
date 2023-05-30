@@ -55,8 +55,8 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'applications', 'statuses', 'recruitments', 'users');
     }
 
-    public function results(){
-        return $this->hasMany(Result::class);
+    public function scores(){
+        return $this->belongsToMany(Result::class, 'scores');
     }
 
     public function roles(){

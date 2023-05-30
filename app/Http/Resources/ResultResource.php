@@ -17,9 +17,7 @@ class ResultResource extends JsonResource
         return [
             'id' => $this->id,
             'subject' => $this->subject,
-            'score' => $this->score,
             'balance' => $this->balance,
-            'user_id' => $this->user_id,
             'recruitment_id' => $this->recruitment_id
         ];
     }
