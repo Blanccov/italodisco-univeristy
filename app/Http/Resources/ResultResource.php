@@ -19,7 +19,8 @@ class ResultResource extends JsonResource
             'subject' => $this->subject,
             'score' => $this->score,
             'balance' => $this->balance,
-            'user_id' => $this->user_id
+            'user_id' => $this->user_id,
+            'recruitment_id' => $this->recruitment_id
         ];
     }
 }

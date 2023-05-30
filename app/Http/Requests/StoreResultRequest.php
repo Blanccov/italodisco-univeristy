@@ -25,14 +25,16 @@ class StoreResultRequest extends FormRequest
             'subject' => ['required'],
             'score' => ['required', 'integer'],
             'balance' => ['required', 'numeric'],
-            'userId' => ['numeric', 'required']
+            'userId' => ['numeric', 'required'],
+            'recruitmentId' =>['numeric', 'required'],
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'user_id' => $this->userId
+            'user_id' => $this->userId,
+            'recruitment_id' => $this->recruitmentId
         ]);
     }
 }

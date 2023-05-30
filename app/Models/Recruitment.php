@@ -27,5 +27,9 @@ class Recruitment extends Model
         return $this->belongsToMany(Status::class, 'applications', 'statuses', 'recruitments', 'users');
     }
 
+    public function roles(){
+        return $this->belongsTo(Role::class);
+    }
+
     public $timestamps = false;
 }

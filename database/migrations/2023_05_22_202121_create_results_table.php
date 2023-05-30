@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->string('subject');
-            $table->integer('score');
+            $table->integer('score')->nullable();
             $table->float('balance');
             // $table->timestamps();
         });

@@ -20,5 +20,9 @@ class Role extends Model
         return $this->hasMany(User::class);
     }
 
+    public function recruitments(){
+        return $this->hasMany(Recruitment::class);
+    }
+
     public $timestamps = false;
 }

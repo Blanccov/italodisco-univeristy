@@ -28,14 +28,17 @@ class UpdateResultRequest extends FormRequest
                     'subject' => ['required'],
                     'score' => ['required', 'integer'],
                     'balance' => ['required', 'numeric'],
-                    'userId' => ['numeric', 'required']
+                    'userId' => ['numeric', 'required'],
+                    'recruitmentId' =>['numeric', 'required'],
                 ];
             }else{
                 return [
                     'subject' => ['sometimes','required'],
                     'score' => ['sometimes','required', 'integer'],
                     'balance' => ['sometimes', 'required', 'numeric'],
-                    'userId' => ['sometimes','numeric', 'required']
+                    'userId' => ['sometimes','numeric', 'required'],
+                    'recruitmentId' =>['sometimes','numeric', 'required'],
+
                 ];
             }
     }
@@ -45,6 +48,11 @@ class UpdateResultRequest extends FormRequest
         if($this->userId){
             $this->merge([
                 'user_id' => $this->userId
+            ]);
+        }
+        if($this->recruitmentId){
+            $this->merge([
+                'recruitment_id' => $this->recruitmentId
             ]);
         }
     }
