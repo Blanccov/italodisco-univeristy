@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->integer('places');
             $table->integer('amount');
-            $table->boolean('ispaid')->default(false);
             $table->date('start_date');
             $table->date('end_date');
             // $table->timestamps();

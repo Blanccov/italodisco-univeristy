@@ -40,6 +40,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
 
+    Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
+    Route::post('recruitments/getRecruitmentsByDepartmentWithDate', [RecruitmentController::class, 'getRecruitmentsByDepartmentWithDate']);
+
+
     Route::apiResource('results', ResultController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);

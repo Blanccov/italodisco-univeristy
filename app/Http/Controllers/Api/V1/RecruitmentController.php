@@ -8,7 +8,9 @@ use App\Http\Requests\UpdateRecruitmentRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RecruitmentCollection;
 use App\Http\Resources\RecruitmentResource;
+use App\Services\RecruitmentService;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Http\Request;
 
 class RecruitmentController extends Controller
 {
@@ -68,5 +70,12 @@ class RecruitmentController extends Controller
         $recruitment->delete();
 
         return response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public function getRecruitmentsByDepartment(Request $request){
+        return (new RecruitmentService())->getRecruitmentsByDepartment($request);
+    }
+    public function getRecruitmentsByDepartmentWithDate(Request $request){
+        return (new RecruitmentService())->getRecruitmentsByDepartmentWithDate($request);
     }
 }
