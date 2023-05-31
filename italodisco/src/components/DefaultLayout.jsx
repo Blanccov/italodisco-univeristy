@@ -5,10 +5,13 @@ import { useStateContext } from "../context/ContextProvider";
 export default function DefaultLayout() {
     const { user, token } = useStateContext();
 
-    if(!token){
-
-        return <Navigate to="/login" />
+    if (!token) {
+        return <Navigate to="/login" />;
     }
+
+    const onLogout = (ev) => {
+        ev.preventDefault();
+    };
 
     return (
         <div>
@@ -19,7 +22,7 @@ export default function DefaultLayout() {
                 <header>
                     <div>header</div>
                     <div>{user.name}</div>
-                    {/* <a onClick={onLogout}>Logout</a> */}
+                    <a onClick={onLogout}>Logout</a>
                 </header>
                 <main>
                     <Outlet></Outlet>
