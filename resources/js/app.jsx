@@ -7,9 +7,12 @@ import { AuthProvider } from "./pages/auth/AuthProvider";
 import ReactDOM from "react-dom/client";
 // import Home from './pages/Home';
 import Index from "./Index";
+import { RouterProvider } from "react-router-dom";
+import router from "./pages/router"
 
 ReactDOM.createRoot(document.getElementById("app")).render(
     <AuthProvider>
-        <Index />
+        {/* <Index /> */}
+        <RouterProvider router={router} />
     </AuthProvider>
 );

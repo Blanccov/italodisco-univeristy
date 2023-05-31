@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from "react";
 import style from "./ApplicationPage.module.scss";
 import Card from "../UI/Card";
-function Application() {
+function ApplicationPage() {
     return (
         <div className={style["bg-image"]}>
             <div class="d-flex align-content-center flex-wrap w-100">
@@ -42,4 +42,4 @@ function Application() {
     );
 }
 
-export default Application;
+export default ApplicationPage;
