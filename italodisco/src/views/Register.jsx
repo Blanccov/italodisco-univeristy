@@ -18,13 +18,22 @@ export default function Register() {
     const onSubmit = (ev) => {
         ev.preventDefault();
         const payload = {
-            name: nameRef.current.value,
-            surname: surnameRef.current.value,
-            pesel: peselRef.current.value,
-            phone: phoneRef.current.value,
-            address: addressRef.current.value,
-            email: emailRef.current.value,
-            password: passwordRef.current.value,
+            // name: nameRef.current.value,
+            // surname: surnameRef.current.value,
+            // pesel: peselRef.current.value,
+            // phone: phoneRef.current.value,
+            // address: addressRef.current.value,
+            // email: emailRef.current.value,
+            // password: passwordRef.current.value,
+            // role_id: 2,
+            name: "Maciek",
+            surname: "Maciek",
+            pesel: "12345678912",
+            phone: "123123123",
+            address: "jakisadres123",
+            email: "maciek@maciek.com",
+            password: "123123123123123",
+            role_id: 2,
         };
 
         console.log(payload);
