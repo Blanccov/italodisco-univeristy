@@ -63,5 +63,4 @@ public function checkAndReopenRecruitment()
     return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);
 }
 
-
 }

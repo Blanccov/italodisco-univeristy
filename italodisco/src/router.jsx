@@ -7,6 +7,8 @@ import Register from "./views/Register";
 import NotFound from "./views/NotFound";
 import UserForm from "./views/UserForm";
 import Recruitment from "./views/Recruitment";
+import RecruitmentForm from "./views/RecruitmentForm";
+import RecruitmentShow from "./views/RecruitmentShow";
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,10 @@ const router = createBrowserRouter([
             {
                 path: '/recruitments',
                 element: <Recruitment />
+            },
+            {
+                path: '/recruitments/:name',
+                element: <RecruitmentShow />
             },
         ]
     },

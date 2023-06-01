@@ -1,22 +1,54 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../UX/Card";
-import styles from "./Recruitment.module.scss"
+import axiosClient from "../axios-client";
+import styles from "./Recruitment.module.scss";
 
-export default function Recruitment(){
+export default function Recruitment() {
+    const [recruitments, setRecruitments] = useState([]);
+    const [loading, setLoding] = useState(false);
+
+    useEffect(() => {
+        getRecruitment();
+    }, []);
+
+    const getRecruitment = () => {
+        setLoding(true);
+        axiosClient
+            .get("/recruitments")
+            .then(({ data }) => {
+                setLoding(false);
+                setRecruitments(data.data);
+            })
+            .catch(() => {
+                setLoding(false);
+            });
+    };
 
     return (
         <div className={styles["bg-image"]}>
-            <div class="d-flex align-content-center flex-wrap w-100">
-                <Card
-                    style={{
-                        backgroundImage: `url("images/bookphoto.jpg")`,
-                    }}
-                    href={"/result"}
-                >
-                    your application
-                </Card>
+
+                {loading && (
+                    <div className="center">
+                        <tr>
+                            <td className="text-white display-4">Loading...</td>
+                        </tr>
+                    </div>
+                )}
+
+            <div class="my-sizing d-flex  flex-wrap w-100 ">
+
+                {recruitments.map((r) => (
+                    <Card
+                        style={{
+                            backgroundImage: `url("images/bookphoto.jpg")`,
+                        }}
+                        to={"/recruitments/"+r.name}
+                    >
+                        {r.name}
+                    </Card>
+                ))}
             </div>
         </div>
-    )
+    );
 
 }

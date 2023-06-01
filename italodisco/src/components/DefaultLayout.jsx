@@ -71,7 +71,7 @@ export default function DefaultLayout() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/recruitments">
+                                <Link className="nav-link" to="/recruitments?filters[departament][$eq]=Kolegium%20Nauk%20Medycznych">
                                     Recruitment
                                 </Link>
                             </li>

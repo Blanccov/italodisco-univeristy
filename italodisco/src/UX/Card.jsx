@@ -9,7 +9,7 @@ export default function Card(props) {
                 <h1>{props.children}</h1>
                 <p>Check now</p>
                 <div className={styles.pic} style={props.style}></div>
-                <a href={props.href}></a>
+                <Link to={props.to}></Link>
             </div>
         </div>
     );
