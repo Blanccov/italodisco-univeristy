@@ -71,9 +71,9 @@ export default function DefaultLayout() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    Pricing
-                                </a>
+                                <Link className="nav-link" to="/recruitments">
+                                    Recruitment
+                                </Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">

@@ -1,7 +1,7 @@
 /* index.css */
 .container {
-    // width: 100%;
-    // height: 100%;
+    width: 100%;
+    height: 100%;
     margin: 2rem;
     display: flex;
     justify-content: center;
@@ -11,8 +11,8 @@
 }
 .container .card {
     position: relative;
-    // min-width: 485px;
-    // max-width: 500px;
+    min-width: 485px;
+    max-width: 500px;
     width: 500px;
     height: 200px;
     background-color: #fff;
