@@ -125,9 +125,14 @@ export default function DefaultLayout() {
                 </div>
             </nav>
             <main>
+            {notification && (
+                <div className="alert alert-dismissible alert-success">
+                    {notification}
+                </div>
+            )}
                 <Outlet />
             </main>
-            {notification && <div>{notification}</div>}
+
         </>
     );
 }

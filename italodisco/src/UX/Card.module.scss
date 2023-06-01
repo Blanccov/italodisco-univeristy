@@ -1,0 +1,83 @@
+/* index.css */
+.container {
+    // width: 100%;
+    // height: 100%;
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-height: 80vh;
+}
+.container .card {
+    position: relative;
+    // min-width: 485px;
+    // max-width: 500px;
+    width: 500px;
+    height: 200px;
+    background-color: #fff;
+    overflow: hidden;
+    margin-bottom: 4px;
+    $breakpoint-tablet: 768px;
+    $breakpoint-laptop: 1145px;
+    @media (max-width: $breakpoint-laptop) {
+        width: 300px;
+    }
+}
+
+.container .card h1 {
+    z-index: 99;
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    bottom: 0;
+    right: 130px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+.container .card p {
+    z-index: 99;
+    position: absolute;
+    top: 20px;
+    right: 70px;
+    color: #333;
+    opacity: 0.7;
+    font-size: 12px;
+    letter-spacing: 1px;
+    writing-mode: vertical-lr;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.container .card .pic {
+    z-index: 100;
+    width: 400px;
+    height: 200px;
+    // background-image: url(images/bookphoto.jpg);
+    background-size: 100% 100%;
+    filter: grayscale(100%);
+}
+
+.container .card a {
+    position: absolute;
+    right: 14px;
+    bottom: 14px;
+    width: 30px;
+    height: 30px;
+    background-color: #4b302a;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    mix-blend-mode: hard-light;
+}
+
+.container .card:hover a {
+    transform: scale(16.5);
+}
+.container .card:hover p {
+    color: #fff;
+}
+.container .card:hover .pic {
+    filter: grayscale(0);
+}

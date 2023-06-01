@@ -76,9 +76,9 @@ export default function UserForm() {
             {!user.id && <h1 className="text-white">New User</h1>}
             <div>{loading && <div>loading</div>}</div>
             {errors && (
-                <div>
+                <div >
                     {Object.keys(errors).map((key) => (
-                        <p key={key}>{errors[key][0]}</p>
+                        <p key={key} className="text-danger">{errors[key][0]}</p>
                     ))}
                 </div>
             )}

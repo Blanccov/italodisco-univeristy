@@ -38,7 +38,7 @@ export default function Users() {
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <div>
                 <h1 className="text-white">Users</h1>
-                <Link className="my-link" to="/users/new">
+                <Link className="btn mb-2" to="/users/new">
                     Add new
                 </Link>
             </div>
@@ -53,6 +53,7 @@ export default function Users() {
                             <th>pesel</th>
                             <th>phone</th>
                             <th>address</th>
+                            <th></th>
                         </tr>
                     </thead>
                     {loading && (

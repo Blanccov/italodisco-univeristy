@@ -1,8 +1,11 @@
-
 * {
     box-sizing: border-box;
 }
-html, body, #root, #defaultLayout, #guestLayout {
+html,
+body,
+#root,
+#defaultLayout,
+#guestLayout {
     min-height: 100vh;
     min-width: 100%;
 }
@@ -18,7 +21,7 @@ html, body, #root, #defaultLayout, #guestLayout {
     background-color: transparent;
     border: 2px solid #fff;
     color: #fff;
-    &:hover{
+    &:hover {
         background-color: #fff;
         color: #443735;
         border-color: #443735;
@@ -33,9 +36,32 @@ html, body, #root, #defaultLayout, #guestLayout {
     max-height: 80vh;
 }
 
-.table {
+.table,
+.table-responsive {
     background-color: #96724d;
     color: white;
+    th {
+        padding: 1.5rem;
+        background-color: #695c4f;
+        color: white;
+        border-top: 2px solid #443735;
+    }
+    td {
+        border-top: 2px solid #443735;
+        padding: 1.5rem 0;
+    }
+
+    &-sm {
+        th {
+            padding: 0.7rem;
+            background-color: #695c4f;
+            color: white;
+            border-top: 2px solid #443735;
+        }
+        td {
+            border-top: 2px solid #443735;
+        }
+    }
 }
 
 .accordion-button {
@@ -44,28 +70,32 @@ html, body, #root, #defaultLayout, #guestLayout {
 }
 .accordion-body {
     background-color: #443735;
-    overflow-x:scroll;
+    overflow-x: scroll;
     max-height: 60vh;
 }
 
-.accordion{
+.accordion {
     max-height: 80vh;
 }
 
-.my-link{
+.my-link {
     color: white;
     text-decoration: none;
-    &:hover{
+    &:hover {
         color: wheat;
     }
 }
 
-.my-sizing{
+.my-sizing {
     height: 80vh;
-
 }
 
-.table-responsive{
+.table-responsive {
     background-color: #96724d;
+}
 
+.alert {
+    position: absolute;
+    left: 4rem;
+    right: 4rem;
 }
