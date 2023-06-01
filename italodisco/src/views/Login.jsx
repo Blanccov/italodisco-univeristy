@@ -33,12 +33,15 @@ export default function Login() {
                 console.log(err);
                 if (response && response.status === 422) {
                     if (response.data.errors) {
-                        setErrors(response.data.errors);
+                        setErrors("Fill all fields!");
                     } else {
                         setErrors({
                             email: [response.data.message],
                         });
                     }
+                }
+                if(response && response.status === 401){
+                    setErrors("Email or password is wrong!");
                 }
             });
 
@@ -53,12 +56,8 @@ export default function Login() {
                                         Login
                                     </legend>
                                     {errors && (
-                                        <div>
-                                            {Object.keys(errors).map((key) => (
-                                                <p key={key}>
-                                                    {errors[key][0]}
-                                                </p>
-                                            ))}
+                                        <div className="text-danger">
+                                            {errors}
                                         </div>
                                     )}
 

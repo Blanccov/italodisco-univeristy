@@ -43,7 +43,7 @@ export default function Users() {
                 </Link>
             </div>
             <div className="my-sizing">
-                <table className="table table-hover">
+                <table className="table-responsive table-hover">
                     <thead>
                         <tr className="table-primary">
                             <th>ID</th>

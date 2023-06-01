@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
+import styles from "./Users.module.scss"
 
 export default function UserForm() {
     const { id } = useParams();
@@ -70,9 +71,9 @@ export default function UserForm() {
     };
 
     return (
-        <>
-            {user.id && <h1>Update User: {user.name}</h1>}
-            {!user.id && <h1>New User</h1>}
+        <div className={styles["bg-image"] + " d-flex flex-column"}>
+            {user.id && <h1 className="text-white">Update User: {user.name}</h1>}
+            {!user.id && <h1 className="text-white">New User</h1>}
             <div>{loading && <div>loading</div>}</div>
             {errors && (
                 <div>
@@ -82,7 +83,7 @@ export default function UserForm() {
                 </div>
             )}
             {!loading && (
-                <form onSubmit={onSubmit}>
+                <form onSubmit={onSubmit} className="my-form">
                     <input
                         value={user.name}
                         onChange={(ev) =>
@@ -132,9 +133,9 @@ export default function UserForm() {
                         }
                         placeholder="Address"
                     />
-                    <button>Save</button>
+                    <button className="btn btn-outline-primary">Save</button>
                 </form>
             )}
-        </>
+        </div>
     );
 }
