@@ -18,6 +18,11 @@ html, body, #root, #defaultLayout, #guestLayout {
     background-color: transparent;
     border: 2px solid #fff;
     color: #fff;
+    &:hover{
+        background-color: #fff;
+        color: #443735;
+        border-color: #443735;
+    }
 }
 .my-form {
     color: black;
@@ -57,5 +62,10 @@ html, body, #root, #defaultLayout, #guestLayout {
 
 .my-sizing{
     height: 80vh;
+
+}
+
+.table-responsive{
+    background-color: #96724d;
 
 }
