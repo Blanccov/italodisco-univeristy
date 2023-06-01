@@ -6,10 +6,16 @@ function Register() {
         <div>
             <div className={styles["bg-image"]}>
                 <div className="my-form">
-                    <form>
+                    <form onSubmit={onSubmit}>
                         <fieldset>
                             <legend className="text-white ">Register</legend>
-
+                            {errors && (
+                                <div>
+                                    {Object.keys(errors).map((key) => (
+                                        <p key={key}>{errors[key][0]}</p>
+                                    ))}
+                                </div>
+                            )}
                             <div className="d-flex">
                                 <div className="form-group me-2">
                                     <label
@@ -23,6 +29,7 @@ function Register() {
                                         className="form-control"
                                         placeholder="Enter Name"
                                         id="inputDefault"
+                                        ref={nameRef}
                                     />
                                 </div>
                                 <div className="form-group ms-2">
@@ -37,6 +44,7 @@ function Register() {
                                         className="form-control"
                                         placeholder="Enter Surname"
                                         id="inputDefault"
+                                        ref={surnameRef}
                                     />
                                 </div>
                             </div>
@@ -53,6 +61,7 @@ function Register() {
                                         className="form-control"
                                         placeholder="Enter pesel"
                                         id="inputDefault"
+                                        ref={peselRef}
                                     />
                                 </div>
                                 <div className="form-group ms-2">
@@ -67,6 +76,7 @@ function Register() {
                                         className="form-control"
                                         placeholder="Enter phone"
                                         id="inputDefault"
+                                        ref={phoneRef}
                                     />
                                 </div>
                             </div>
@@ -83,6 +93,7 @@ function Register() {
                                     placeholder="Enter address"
                                     id="inputDefault"
                                     rows={2}
+                                    ref={addressRef}
                                 />
                             </div>
 
@@ -99,6 +110,7 @@ function Register() {
                                     id="exampleInputEmail1"
                                     aria-describedby="emailHelp"
                                     placeholder="Enter email"
+                                    ref={emailRef}
                                 />
                                 <small
                                     id="emailHelp"
@@ -120,6 +132,7 @@ function Register() {
                                     className="form-control "
                                     id="exampleInputPassword1"
                                     placeholder="Password"
+                                    ref={passwordRef}
                                 />
                             </div>
                             <button
@@ -128,6 +141,10 @@ function Register() {
                             >
                                 Register
                             </button>
+                            <p>
+                                Have account?
+                                <Link to="/login">Login</Link>
+                            </p>
                         </fieldset>
                     </form>
                 </div>

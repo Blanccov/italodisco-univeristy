@@ -1,0 +1,16 @@
+.bg-image {
+    background: url(images/chessphoto.jpg);
+    height: 100vh;
+    object-fit: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        color: grey;
+    }
+}
+
+textarea {
+    resize: none;
+}

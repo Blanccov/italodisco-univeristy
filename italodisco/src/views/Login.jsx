@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
+import styles from "./Sign.module.scss"
 
 export default function Login() {
     const emailRef = useRef();
@@ -44,34 +45,72 @@ export default function Login() {
     };
 
     return (
-        <div>
-            <div>
-                <form onSubmit={onSubmit}>
-                    <h1>Login into</h1>
-                    {errors && (
-                        <div>
-                            {Object.keys(errors).map((key) => (
-                                <p key={key}>{errors[key][0]}</p>
-                            ))}
+        <div className={styles["bg-image"]}>
+                        <div className="my-form">
+                            <form onSubmit={onSubmit}>
+                                <fieldset>
+                                    <legend className="text-white ">
+                                        Login
+                                    </legend>
+                                    {errors && (
+                                        <div>
+                                            {Object.keys(errors).map((key) => (
+                                                <p key={key}>
+                                                    {errors[key][0]}
+                                                </p>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <div className="form-group">
+                                        <label
+                                            htmlFor="email"
+                                            className="form-label mt-4 text-white "
+                                        >
+                                            Email address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="form-control"
+                                            id="email"
+                                            aria-describedby="emailHelp"
+                                            placeholder="Enter email"
+                                            ref={emailRef}
+                                            required
+                                        />
+                                        <small
+                                            id="emailHelp"
+                                            className="form-text text-muted"
+                                        >
+                                            We'll never share your email with
+                                            anyone else.
+                                        </small>
+                                    </div>
+                                    <div className="form-group">
+                                        <label
+                                            htmlFor="password"
+                                            className="form-label mt-4 text-white"
+                                        >
+                                            Password
+                                        </label>
+                                        <input
+                                            type="password"
+                                            className="form-control "
+                                            id="password"
+                                            placeholder="Password"
+                                            ref={passwordRef}
+                                            required
+                                        />
+                                    </div>
+                                    <button
+                                        className="btn btn-secondary mt-5 w-100"
+                                        type="submit"
+                                    >
+                                        Login
+                                    </button>
+                                </fieldset>
+                            </form>
                         </div>
-                    )}
-                    <input
-                        ref={emailRef}
-                        type="email"
-                        placeholder="Email"
-                    ></input>
-                    <input
-                        ref={passwordRef}
-                        type="password"
-                        placeholder="Password"
-                    ></input>
-                    <button>Login</button>
-                    <p>
-                        Not Registered?
-                        <Link to="/register">Create account</Link>
-                    </p>
-                </form>
-            </div>
-        </div>
+                    </div>
     );
 }

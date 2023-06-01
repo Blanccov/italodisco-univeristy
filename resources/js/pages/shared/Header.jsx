@@ -38,7 +38,9 @@ function Header() {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <Link to="/users">Users </Link>
+                                <Link className="nav-link" to="/users">
+                                    Users{" "}
+                                </Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">
@@ -86,8 +88,8 @@ function Header() {
                                     </a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="/register">
-                                        Register
+                                    <a className="nav-link" onClick={onLogout}>
+                                        Logout
                                     </a>
                                 </li>
                             </ul>
@@ -95,7 +97,10 @@ function Header() {
                     </div>
                 </div>
             </nav>
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
+            {notification && <div>{notification}</div>}
         </>
     );
 }

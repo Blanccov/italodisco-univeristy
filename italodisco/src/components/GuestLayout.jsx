@@ -1,7 +1,7 @@
 import React from "react";
 import { Navigate, Outlet, Link } from "react-router-dom";
 import { useStateContext } from "../context/ContextProvider";
-import styles from "./Layout.module.scss"
+import styles from "./Layout.module.scss";
 
 export default function GuestLayout() {
     const { token } = useStateContext();
@@ -44,7 +44,9 @@ export default function GuestLayout() {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/users">Users </Link>
+                                <Link className="nav-link" to="/users">
+                                    Users{" "}
+                                </Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#">
@@ -101,7 +103,9 @@ export default function GuestLayout() {
                     </div>
                 </div>
             </nav>
-            <Outlet />
+            <main>
+                <Outlet />
+            </main>
         </>
     );
 }

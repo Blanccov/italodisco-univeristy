@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../axios-client";
+import styles from "./Users.module.scss";
 
 export default function Users() {
     const [users, setUsers] = useState([]);
@@ -34,13 +35,17 @@ export default function Users() {
     };
 
     return (
-        <div>
-            <h1>Users</h1>
-            <Link to="/users/new">Add new</Link>
+        <div className={styles["bg-image"] + " d-flex flex-column"}>
             <div>
-                <table>
+                <h1 className="text-white">Users</h1>
+                <Link className="my-link" to="/users/new">
+                    Add new
+                </Link>
+            </div>
+            <div className="my-sizing">
+                <table className="table table-hover">
                     <thead>
-                        <tr>
+                        <tr className="table-primary">
                             <th>ID</th>
                             <th>Name</th>
                             <th>Surname</th>
