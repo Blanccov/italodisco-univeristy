@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../axios-client";
+import { useStateContext } from "../context/ContextProvider";
 
 export default function UserForm() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
+    const { setNotification } = useStateContext();
     const [user, setUser] = useState({
         id: null,
         name: "",
@@ -16,7 +18,7 @@ export default function UserForm() {
         pesel: "",
         phone: "",
         address: "",
-        roleId: 2 // to będzie trzeba ustawić defaultowo w php
+        roleId: 2, // to będzie trzeba ustawić defaultowo w php
     });
 
     if (id) {
@@ -40,6 +42,7 @@ export default function UserForm() {
             axiosClient
                 .patch(`/users/${user.id}`, user)
                 .then(() => {
+                    setNotification("User was succesfully updated")
                     navigate("/users");
                 })
                 .catch((err) => {
@@ -49,10 +52,11 @@ export default function UserForm() {
                         setErrors(response.data.errors);
                     }
                 });
-        }else{
+        } else {
             axiosClient
                 .post(`/users/`, user)
                 .then(() => {
+                    setNotification("User was succesfully created")
                     navigate("/users");
                 })
                 .catch((err) => {
