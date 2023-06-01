@@ -77,7 +77,8 @@ class AuthController extends Controller
             'message' => 'Successfully logged in!',
             'token' => $token,
             'user' => $user
-        ])->withCookie($cookie);
+        ])
+        ->withCookie($cookie);
     }
 
 
@@ -88,10 +89,16 @@ class AuthController extends Controller
         return response([
             'message' => 'Successfully logout!'
         ])->withCookie($cookie);
+
+        // $user = $request->user();
+        //     $user->currentAccessToken()->delete();
+        //     return response('', 204);
     }
 
     public function user()
     {
-        return Auth::user(); // authenticated user
+        $user = Auth::user();
+        return response([$user]); // authenticated user
+        // return Auth::user();
     }
 }
