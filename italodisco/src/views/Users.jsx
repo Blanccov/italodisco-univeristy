@@ -9,6 +9,7 @@ export default function Users() {
 
     useEffect(() => {
         getUsers();
+
     }, []);
 
     const onDelete = (u) => {

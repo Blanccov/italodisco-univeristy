@@ -70,4 +70,7 @@ class ScoreController extends Controller
     public function addScore(Request $request){
         return (new ScoreService())->addScore($request);
     }
+    public function uniqueSubjects(){
+        return (new ScoreService())->uniqueSubjects();
+    }
 }

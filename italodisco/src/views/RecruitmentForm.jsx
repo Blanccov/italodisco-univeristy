@@ -176,7 +176,7 @@ export default function RecruitmentForm() {
                                     startDate: ev.target.value,
                                 })
                             }
-                            placeholder="Start Date"
+                            placeholder="Start Date (YYYY-MM-DD)"
                         />
                         <input
                             value={recruitment.endDate}
@@ -186,7 +186,7 @@ export default function RecruitmentForm() {
                                     endDate: ev.target.value,
                                 })
                             }
-                            placeholder="End Date"
+                            placeholder="End Date (YYYY-MM-DD)"
                         />
                     </div>
                     <div>

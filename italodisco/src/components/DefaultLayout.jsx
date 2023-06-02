@@ -76,9 +76,9 @@ export default function DefaultLayout() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    About
-                                </a>
+                                <Link className="nav-link" to="/applications">
+                                    Applications
+                                </Link>
                             </li>
                             <li className="nav-item dropdown">
                                 <a

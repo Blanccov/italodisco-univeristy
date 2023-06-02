@@ -10,6 +10,7 @@ export default function RecruitmentShow() {
 
     useEffect(() => {
         getRecruitment();
+
     }, []);
 
     const onDelete = (u) => {
@@ -27,6 +28,7 @@ export default function RecruitmentShow() {
             .get(`/recruitments?filters[departament][$eq]=${departament}`)
             .then(({ data }) => {
                 setRecruitment(data.data);
+
             })
             .catch(() => {});
     };

@@ -52,6 +52,12 @@ class ScoreService
     return response()->json(['message' => 'Wynik został dodany lub zaktualizowany.', 'balance' => $balance]);
 }
 
+public function uniqueSubjects()
+    {
+        $results = Result::select('subject')->distinct()->get();
+        return $results;
+
+    }
 
 
 }
