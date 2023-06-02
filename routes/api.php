@@ -43,6 +43,7 @@ Route::post('login', [AuthController::class, 'login']);
     Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
     Route::post('recruitments/getRecruitmentsByDepartmentWithDate', [RecruitmentController::class, 'getRecruitmentsByDepartmentWithDate']);
     Route::post('recruitments/checkAndReopenRecruitment', [RecruitmentController::class, 'checkAndReopenRecruitment']);
+    Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
 
 
     Route::apiResource('results', ResultController::class);

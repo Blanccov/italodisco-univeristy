@@ -14,10 +14,10 @@ export default function Recruitment() {
     const getRecruitment = () => {
         setLoding(true);
         axiosClient
-            .get("/recruitments")
+            .get("/recruitments/getDepartments")
             .then(({ data }) => {
                 setLoding(false);
-                setRecruitments(data.data);
+                setRecruitments(data);
             })
             .catch(() => {
                 setLoding(false);
@@ -44,7 +44,7 @@ export default function Recruitment() {
                         }}
                         to={"/recruitments/"+r.name}
                     >
-                        {r.name}
+                        {r.departament}
                     </Card>
                 ))}
             </div>

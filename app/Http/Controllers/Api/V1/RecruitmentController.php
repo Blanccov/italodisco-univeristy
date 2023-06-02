@@ -81,4 +81,8 @@ class RecruitmentController extends Controller
     public function checkAndReopenRecruitment(){
         return (new RecruitmentService())->checkAndReopenRecruitment();
     }
+
+    public function getDepartments(){
+        return (new RecruitmentService())->getDepartments();
+    }
 }
