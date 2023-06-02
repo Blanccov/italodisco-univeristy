@@ -53,10 +53,14 @@ export default function ApplicationForm() {
 
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        console.log(id);
+
+        const recruId = {
+            recruitment_id: id,
+        };
+        console.log(recruId);
 
         axiosClient
-            .post(`applications/applyForRecruitment`, id)
+            .post(`applications/applyForRecruitment`, recruId)
             .then(() => {
                 setNotification("User was succesfully created");
                 navigate("/users");
@@ -104,87 +108,84 @@ export default function ApplicationForm() {
                 </div>
             )}
             {!loading && (
-                <form onSubmit={handleSubmit} className="my-form">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Subject</th>
-                                <th>Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {addedScores.map((score) => (
-                                <tr key={score.id}>
-                                    <td>{score.subject}</td>
-                                    <td>{score.score}</td>
-                                </tr>
+                <form onSubmit={onSubmit} className="my-form">
+                    <div>
+                        <select
+                            value={scores.recruitment_id}
+                            onChange={(ev) =>
+                                setScores({
+                                    ...scores,
+                                    recruitment_id: ev.target.value,
+                                })
+                            }
+                        >
+                            <option value="">Select Recruitment</option>
+                            {recruitments.map((recruitment) => (
+                                <option
+                                    key={recruitment.id}
+                                    value={recruitment.id}
+                                >
+                                    {recruitment.name}
+                                </option>
                             ))}
-                        </tbody>
-                    </table>
+                        </select>
 
-                    <form onSubmit={onSubmit} className="my-form">
-                        <div>
-                            <select
-                                value={scores.recruitment_id}
-                                onChange={(ev) =>
-                                    setScores({
-                                        ...scores,
-                                        recruitment_id: ev.target.value,
-                                    })
-                                }
-                            >
-                                <option value="">Select Recruitment</option>
-                                {recruitments.map((recruitment) => (
-                                    <option
-                                        key={recruitment.id}
-                                        value={recruitment.id}
-                                    >
-                                        {recruitment.name}
-                                    </option>
-                                ))}
-                            </select>
-
-                            <select
-                                value={subjects.subject}
-                                onChange={(ev) =>
-                                    setScores({
-                                        ...subjects,
-                                        subject: ev.target.value,
-                                    })
-                                }
-                            >
-                                <option value="">Select Subject</option>
-                                {subjects.map((subject) => (
-                                    <option
-                                        key={subject.subject}
-                                        value={subject.subject}
-                                    >
-                                        {subject.subject}
-                                    </option>
-                                ))}
-                            </select>
-                            <input
-                                value={scores.score}
-                                onChange={(ev) =>
-                                    setScores({
-                                        ...scores,
-                                        score: ev.target.value,
-                                    })
-                                }
-                                placeholder="Score"
-                            />
-                        </div>
-                        <div>
-                            <button className="btn btn-outline-primary mt-2">
-                                Add scores
-                            </button>
-                        </div>
-                    </form>
-                    <button className="btn btn-outline-primary mt-2">
-                        Apply
-                    </button>
+                        <select
+                            value={subjects.subject}
+                            onChange={(ev) =>
+                                setScores({
+                                    ...subjects,
+                                    subject: ev.target.value,
+                                })
+                            }
+                        >
+                            <option value="">Select Subject</option>
+                            {subjects.map((subject) => (
+                                <option
+                                    key={subject.subject}
+                                    value={subject.subject}
+                                >
+                                    {subject.subject}
+                                </option>
+                            ))}
+                        </select>
+                        <input
+                            value={scores.score}
+                            onChange={(ev) =>
+                                setScores({
+                                    ...scores,
+                                    score: ev.target.value,
+                                })
+                            }
+                            placeholder="Score"
+                        />
+                    </div>
+                    <div>
+                        <button className="btn btn-outline-primary mt-2">
+                            Add scores
+                        </button>
+                    </div>
                 </form>
             )}
+            <form onSubmit={handleSubmit} className="my-form">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {addedScores.map((score) => (
+                            <tr key={score.id}>
+                                <td>{score.subject}</td>
+                                <td>{score.score}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <button className="btn btn-outline-primary mt-2">Apply</button>
+            </form>
         </div>
     );
 }
