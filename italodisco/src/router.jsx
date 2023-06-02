@@ -12,6 +12,7 @@ import RecruitmentShow from "./views/RecruitmentShow";
 import Appliacations from "./views/Applications";
 import ScoreForm from "./views/ApplicationForm";
 import ApplicationForm from "./views/ApplicationForm";
+import Students from "./views/Students";
 
 const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
             {
                 path: '/applications/:id',
                 element: <ApplicationForm key="applicationUpdate"/>
+            },
+            {
+                path: '/students/:id',
+                element: <Students key="students"/>
             },
         ]
     },

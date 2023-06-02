@@ -53,6 +53,7 @@ export default function RecruitmentShow() {
                                 Delete
                             </button>
                             <Link to={"/applications/" + u.id}>Apply</Link>
+                            <Link to={"/students/" + u.id}>Students</Link>
                         </div>
                     ))}
                 </div>
