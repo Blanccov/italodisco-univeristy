@@ -65,7 +65,7 @@ export default function Users() {
                     )}
                     <tbody>
                         {users.map((u) => (
-                            <tr>
+                            <tr key={u.id}>
                                 <td>{u.id}</td>
                                 <td>{u.name}</td>
                                 <td>{u.surname}</td>

@@ -16,6 +16,7 @@ class Recruitment extends Model
         'departament',
         'description',
         'places',
+        'amount',
         'start_date',
         'end_date'
     ];

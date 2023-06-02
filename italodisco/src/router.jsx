@@ -36,8 +36,16 @@ const router = createBrowserRouter([
                 element: <Recruitment />
             },
             {
-                path: '/recruitments/:name',
+                path: '/recruitments/:departament',
                 element: <RecruitmentShow />
+            },
+            {
+                path: '/recruitments/new',
+                element: <RecruitmentForm key="recruitmentCreate"/>
+            },
+            {
+                path: '/recruitments/:id',
+                element: <RecruitmentForm key="recruitmentUpdate"/>
             },
         ]
     },

@@ -26,7 +26,7 @@ class StoreRecruitmentRequest extends FormRequest
             'departament' => ['required'],
             'description' => ['required'],
             'places' => ['required', 'numeric'],
-            'amount' => ['required', 'integer'],
+            'amount' => ['required', 'numeric'],
             'startDate' => ['required', 'date'],
             'endDate' => ['required', 'date']
         ];

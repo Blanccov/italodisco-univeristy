@@ -5,44 +5,42 @@ import styles from "./Recruitment.module.scss";
 
 export default function Recruitment() {
     const [recruitments, setRecruitments] = useState([]);
-    const [loading, setLoding] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getRecruitment();
     }, []);
 
     const getRecruitment = () => {
-        setLoding(true);
+        setLoading(true);
         axiosClient
             .get("/recruitments/getDepartments")
             .then(({ data }) => {
-                setLoding(false);
+                setLoading(false);
                 setRecruitments(data);
             })
             .catch(() => {
-                setLoding(false);
+                setLoading(false);
             });
     };
 
     return (
         <div className={styles["bg-image"]}>
-
-                {loading && (
-                    <div className="center">
-                        <tr>
-                            <td className="text-white display-4">Loading...</td>
-                        </tr>
+            {loading && (
+                <div className="center">
+                    <div>
+                        <div className="text-white display-4">Loading...</div>
                     </div>
-                )}
+                </div>
+            )}
 
-            <div class="my-sizing d-flex  flex-wrap w-100 ">
-
+            <div className="my-sizing d-flex  flex-wrap w-100 ">
                 {recruitments.map((r) => (
                     <Card
                         style={{
                             backgroundImage: `url("images/bookphoto.jpg")`,
                         }}
-                        to={"/recruitments/"+r.name}
+                        to={"/recruitments/" + r.departament}
                     >
                         {r.departament}
                     </Card>
@@ -50,5 +48,4 @@ export default function Recruitment() {
             </div>
         </div>
     );
-
 }

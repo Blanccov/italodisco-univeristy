@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
-import styles from "./Users.module.scss"
+import styles from "./Users.module.scss";
 
 export default function UserForm() {
     const { id } = useParams();
@@ -43,7 +43,7 @@ export default function UserForm() {
             axiosClient
                 .patch(`/users/${user.id}`, user)
                 .then(() => {
-                    setNotification("User was succesfully updated")
+                    setNotification("User was succesfully updated");
                     navigate("/users");
                 })
                 .catch((err) => {
@@ -57,7 +57,7 @@ export default function UserForm() {
             axiosClient
                 .post(`/users/`, user)
                 .then(() => {
-                    setNotification("User was succesfully created")
+                    setNotification("User was succesfully created");
                     navigate("/users");
                 })
                 .catch((err) => {
@@ -72,13 +72,17 @@ export default function UserForm() {
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
-            {user.id && <h1 className="text-white">Update User: {user.name}</h1>}
+            {user.id && (
+                <h1 className="text-white">Update User: {user.name}</h1>
+            )}
             {!user.id && <h1 className="text-white">New User</h1>}
             <div>{loading && <div>loading</div>}</div>
             {errors && (
-                <div >
+                <div>
                     {Object.keys(errors).map((key) => (
-                        <p key={key} className="text-danger">{errors[key][0]}</p>
+                        <p key={key} className="text-danger">
+                            {errors[key][0]}
+                        </p>
                     ))}
                 </div>
             )}
