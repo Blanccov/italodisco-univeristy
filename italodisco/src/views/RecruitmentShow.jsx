@@ -48,10 +48,11 @@ export default function RecruitmentShow() {
                                 <p className="card-text">{u.description}</p>
                             </div>
                             <Link to={"/recruitments/" + u.id}>Edit</Link>
-                            &nbsp;
+                            {/* &nbsp; */}
                             <button onClick={(ev) => onDelete(u)}>
                                 Delete
                             </button>
+                            <Link to={"/applications/" + u.id}>Apply</Link>
                         </div>
                     ))}
                 </div>

@@ -47,7 +47,7 @@ export default function Appliacations() {
                     </Card>
                 ))}
             </div>
-            <Link className="btn m-2" to="/applications/new">
+            <Link className="btn m-2" to="/recruitments">
                     Add new
             </Link>
         </div>

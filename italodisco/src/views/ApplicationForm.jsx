@@ -4,7 +4,7 @@ import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
 import styles from "./Application.module.scss";
 
-export default function ScoreForm() {
+export default function ApplicationForm() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);

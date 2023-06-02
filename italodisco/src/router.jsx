@@ -10,7 +10,8 @@ import Recruitment from "./views/Recruitment";
 import RecruitmentForm from "./views/RecruitmentForm";
 import RecruitmentShow from "./views/RecruitmentShow";
 import Appliacations from "./views/Applications";
-import ScoreForm from "./views/ScoreForm";
+import ScoreForm from "./views/ApplicationForm";
+import ApplicationForm from "./views/ApplicationForm";
 
 const router = createBrowserRouter([
     {
@@ -53,9 +54,13 @@ const router = createBrowserRouter([
                 path: '/applications',
                 element: <Appliacations />
             },
+            // {
+            //     path: '/applications/new',
+            //     element: <ScoreForm key="applicationCreate"/>
+            // },
             {
-                path: '/applications/new',
-                element: <ScoreForm key="applicationCreate"/>
+                path: '/applications/:id',
+                element: <ApplicationForm key="applicationUpdate"/>
             },
         ]
     },
