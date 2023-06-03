@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosClient from "../axios-client";
-import { useStateContext } from "../context/ContextProvider";
+import axiosClient from "../../axios-client";
+import { useStateContext } from "../../context/ContextProvider";
 import styles from "./Application.module.scss";
 
-export default function ApplicationForm() {
+export default function ApplicationFormA() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -59,7 +59,7 @@ export default function ApplicationForm() {
             .post(`applications/applyForRecruitment`, recruId)
             .then(() => {
                 setNotification("User was succesfully created");
-                navigate("/users");
+                navigate("/admin/users");
             })
             .catch((err) => {
                 const response = err.response;

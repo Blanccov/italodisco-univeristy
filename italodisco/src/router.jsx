@@ -1,150 +1,128 @@
 import { Navigate, createBrowserRouter } from "react-router-dom";
 import Login from "./views/Login";
 import DefaultLayout from "./components/DefaultLayout";
-import Users from "./views/Users";
 import GuestLayout from "./components/GuestLayout";
 import Register from "./views/Register";
 import NotFound from "./views/NotFound";
-import UserForm from "./views/UserForm";
-import Recruitment from "./views/Recruitment";
-import RecruitmentForm from "./views/RecruitmentForm";
-import RecruitmentShow from "./views/RecruitmentShow";
-import Appliacations from "./views/Applications";
-import ApplicationForm from "./views/ApplicationForm";
-import Students from "./views/Students";
-import StudentsList from "./views/StudentsList";
+import Recruitment from "./views/default/Recruitment";
+import RecruitmentShow from "./views/default/RecruitmentShow";
+import Appliacations from "./views/default/Applications";
+import ApplicationForm from "./views/default/ApplicationForm";
 import AdminLayout from "./components/AdminLayout";
 import About from "./views/About";
+import UsersA from "./views/Admin/UsersA";
+import UserFormA from "./views/Admin/UserFormA";
+import RecruitmentA from "./views/Admin/RecruitmentA";
+import RecruitmentFormA from "./views/Admin/RecruitmentFormA";
+import RecruitmentShowA from "./views/Admin/RecruitmentShowA";
+import AppliacationsA from "./views/Admin/ApplicationsA";
+import ApplicationFormA from "./views/Admin/ApplicationFormA";
+import StudentsA from "./views/Admin/StudentsA";
+import StudentsListA from "./views/Admin/StudentsListA";
 
 const router = createBrowserRouter([
     {
-        path: '/',
+        path: "/",
         element: <DefaultLayout />,
         children: [
             {
-                path: '/',
-                element: <Navigate to="/recruitments" />
-            },
-            {
-                path: '/users/new',
-                element: <UserForm key="userCreate"/>
-            },
-            {
-                path: '/users/:id',
-                element: <UserForm key="userUpdate" />
+                path: "/",
+                element: <Navigate to="/recruitments" />,
             },
 
             {
-                path: '/recruitments/:departament',
-                element: <RecruitmentShow />
+                path: "/recruitments",
+                element: <Recruitment />,
             },
             {
-                path: '/recruitments/new',
-                element: <RecruitmentForm key="recruitmentCreate"/>
+                path: "/recruitments/:departament",
+                element: <RecruitmentShow />,
             },
+
             {
-                path: '/recruitments/:id',
-                element: <RecruitmentForm key="recruitmentUpdate"/>
+                path: "/applications",
+                element: <Appliacations />,
             },
+
             {
-                path: '/applications',
-                element: <Appliacations />
+                path: "/applications/:id",
+                element: <ApplicationForm key="applicationUpdate" />,
             },
-            // {
-            //     path: '/applications/new',
-            //     element: <ScoreForm key="applicationCreate"/>
-            // },
+
             {
-                path: '/applications/:id',
-                element: <ApplicationForm key="applicationUpdate"/>
+                path: "/about",
+                element: <About />,
             },
-            {
-                path: '/students/:id',
-                element: <Students key="students"/>
-            },
-            {
-                path: '/users/getAcceptedStudentsList',
-                element: <StudentsList />
-            },
-            {
-                path: '/about',
-                element: <About />
-            }
-        ]
+        ],
     },
     {
-        path: '/',
+        path: "/",
         element: <AdminLayout />,
         children: [
             {
-                path: '/users',
-                element: <Users />
+                path: "/admin/users",
+                element: <UsersA />,
             },
             {
-                path: '/users/new',
-                element: <UserForm key="userCreate"/>
+                path: "/admin/users/new",
+                element: <UserFormA key="userCreate" />,
             },
             {
-                path: '/users/:id',
-                element: <UserForm key="userUpdate" />
+                path: "/admin/users/:id",
+                element: <UserFormA key="userUpdate" />,
             },
             {
-                path: '/recruitments',
-                element: <Recruitment />
+                path: "/admin/recruitments",
+                element: <RecruitmentA />,
             },
             {
-                path: '/recruitments/:departament',
-                element: <RecruitmentShow />
+                path: "/admin/recruitments/:departament",
+                element: <RecruitmentShowA />,
             },
             {
-                path: '/recruitments/new',
-                element: <RecruitmentForm key="recruitmentCreate"/>
+                path: "/admin/recruitments/new",
+                element: <RecruitmentFormA key="recruitmentCreate" />,
             },
             {
-                path: '/recruitments/:id',
-                element: <RecruitmentForm key="recruitmentUpdate"/>
+                path: "/admin/recruitments/:id",
+                element: <RecruitmentFormA key="recruitmentUpdate" />,
             },
             {
-                path: '/applications',
-                element: <Appliacations />
-            },
-            // {
-            //     path: '/applications/new',
-            //     element: <ScoreForm key="applicationCreate"/>
-            // },
-            {
-                path: '/applications/:id',
-                element: <ApplicationForm key="applicationUpdate"/>
+                path: "/admin/applications",
+                element: <AppliacationsA />,
             },
             {
-                path: '/students/:id',
-                element: <Students key="students"/>
+                path: "/admin/applications/:id",
+                element: <ApplicationFormA key="applicationUpdate" />,
             },
             {
-                path: '/users/getAcceptedStudentsList',
-                element: <StudentsList />
+                path: "/admin/students/:id",
+                element: <StudentsA key="students" />,
             },
-        ]
+            {
+                path: "/admin/users/getAcceptedStudentsList",
+                element: <StudentsListA />,
+            },
+        ],
     },
     {
-        path: '/',
+        path: "/",
         element: <GuestLayout />,
         children: [
             {
-                path: '/login',
-                element: <Login />
+                path: "/login",
+                element: <Login />,
             },
             {
-                path: '/register',
-                element: <Register />
-            }
-        ]
+                path: "/register",
+                element: <Register />,
+            },
+        ],
     },
     {
-        path: '*',
-        element: <NotFound />
-    }
-
+        path: "*",
+        element: <NotFound />,
+    },
 ]);
 
 export default router;

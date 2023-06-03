@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Card from "../UX/Card";
-import axiosClient from "../axios-client";
+import Card from "../../UX/Card";
+import axiosClient from "../../axios-client";
 import styles from "./Recruitment.module.scss";
-import { Link } from "react-router-dom";
 
-export default function Appliacations() {
-    const [applications, setApplications] = useState([]);
+export default function Recruitment() {
+    const [recruitments, setRecruitments] = useState([]);
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
@@ -15,10 +14,10 @@ export default function Appliacations() {
     const getRecruitment = () => {
         setLoading(true);
         axiosClient
-            .get("/applications/showApplications")
+            .get("/recruitments/getDepartments")
             .then(({ data }) => {
                 setLoading(false);
-                setApplications(data);
+                setRecruitments(data);
             })
             .catch(() => {
                 setLoading(false);
@@ -36,20 +35,17 @@ export default function Appliacations() {
             )}
 
             <div className="my-sizing d-flex  flex-wrap w-100 ">
-                {applications.map((r) => (
+                {recruitments.map((r) => (
                     <Card
                         style={{
                             backgroundImage: `url("images/bookphoto.jpg")`,
                         }}
-                        to={"/applications/" + r.departament}
+                        to={"/recruitments/" + r.departament}
                     >
                         {r.departament}
                     </Card>
                 ))}
             </div>
-            <Link className="btn m-2" to="/recruitments">
-                    Add new
-            </Link>
         </div>
     );
 }

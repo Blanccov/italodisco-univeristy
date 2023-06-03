@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosClient from "../axios-client";
+import axiosClient from "../../axios-client";
 import styles from "./Recruitment.module.scss";
 import { Link, useParams } from "react-router-dom";
 
@@ -10,7 +10,6 @@ export default function RecruitmentShow() {
 
     useEffect(() => {
         getRecruitment();
-
     }, []);
 
     const onDelete = (u) => {
@@ -28,7 +27,6 @@ export default function RecruitmentShow() {
             .get(`/recruitments?filters[departament][$eq]=${departament}`)
             .then(({ data }) => {
                 setRecruitment(data.data);
-
             })
             .catch(() => {});
     };
@@ -41,19 +39,17 @@ export default function RecruitmentShow() {
                 </Link>
                 <div className="d-flex flex-row flex-wrap">
                     {recruitment.map((u) => (
-                        <div className="card border-dark m-3 my-card" key={u.id}>
+                        <div
+                            className="card border-dark m-3 my-card"
+                            key={u.id}
+                        >
                             <div className="card-header">{u.departament}</div>
                             <div className="card-body">
                                 <h4 className="card-title">{u.name}</h4>
                                 <p className="card-text">{u.description}</p>
                             </div>
-                            <Link to={"/recruitments/" + u.id}>Edit</Link>
-                            {/* &nbsp; */}
-                            <button onClick={(ev) => onDelete(u)}>
-                                Delete
-                            </button>
+
                             <Link to={"/applications/" + u.id}>Apply</Link>
-                            <Link to={"/students/" + u.id}>Students</Link>
                         </div>
                     ))}
                 </div>

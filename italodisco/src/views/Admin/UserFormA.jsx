@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosClient from "../axios-client";
-import { useStateContext } from "../context/ContextProvider";
+import axiosClient from "../../axios-client";
+import { useStateContext } from "../../context/ContextProvider";
 import styles from "./Users.module.scss";
 
-export default function UserForm() {
+export default function UserFormA() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -44,7 +44,7 @@ export default function UserForm() {
                 .patch(`/users/${user.id}`, user)
                 .then(() => {
                     setNotification("User was succesfully updated");
-                    navigate("/users");
+                    navigate("/admin/users");
                 })
                 .catch((err) => {
                     const response = err.response;
@@ -58,7 +58,7 @@ export default function UserForm() {
                 .post(`/users/`, user)
                 .then(() => {
                     setNotification("User was succesfully created");
-                    navigate("/users");
+                    navigate("/admin/users");
                 })
                 .catch((err) => {
                     const response = err.response;

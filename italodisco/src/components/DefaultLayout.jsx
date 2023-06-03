@@ -10,13 +10,14 @@ export default function DefaultLayout() {
     if (!token) {
         return <Navigate to="/login" />;
     }
+
     if (user.role_id === 3) {
         console.log("3!!")
-        return <Navigate to="/users" />;
+        return <Navigate to="/admin/users" />;
     }
     if (user.role_id === 2) {
         console.log("2!!")
-        return <Navigate to="/" />;
+        return <Navigate to="/recruitments" />;
     }
 
     const onLogout = (ev) => {

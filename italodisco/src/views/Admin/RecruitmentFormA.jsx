@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axiosClient from "../axios-client";
+import axiosClient from "../../axios-client";
 import styles from "./Recruitment.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import { useStateContext } from "../context/ContextProvider";
+import { useStateContext } from "../../context/ContextProvider";
 
-export default function RecruitmentForm() {
+export default function RecruitmentFormA() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
@@ -61,7 +61,7 @@ export default function RecruitmentForm() {
                 .patch(`/recruitments/${recruitment.id}`, recruitment)
                 .then(() => {
                     setNotification("recruitment was succesfully updated");
-                    navigate("/recruitments/");
+                    navigate("/admin/recruitments/");
                 })
                 .catch((err) => {
                     const response = err.response;
@@ -75,7 +75,7 @@ export default function RecruitmentForm() {
                 .post(`/recruitments/`, recruitment)
                 .then(() => {
                     setNotification("recruitment was succesfully created");
-                    navigate("/recruitments");
+                    navigate("/admin/recruitments");
                 })
                 .catch((err) => {
                     const response = err.response;

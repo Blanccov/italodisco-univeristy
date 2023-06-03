@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axiosClient from "../axios-client";
+import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
 
-export default function Users() {
+export default function UsersA() {
     const [users, setUsers] = useState([]);
     const [loading, setLoding] = useState(false);
 

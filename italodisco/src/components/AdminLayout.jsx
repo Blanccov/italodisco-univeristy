@@ -11,10 +11,10 @@ export default function AdminLayout() {
         return <Navigate to="/login" />;
     }
     if (user.role_id === 3) {
-        return <Navigate to="/users" />;
+        return <Navigate to="/admin/users" />;
     }
     if (user.role_id === 2) {
-        return <Navigate to="/" />;
+        return <Navigate to="/recruitments" />;
     }
 
     const onLogout = (ev) => {
@@ -64,7 +64,7 @@ export default function AdminLayout() {
                     >
                         <ul className="navbar-nav me-auto">
                             <li className="nav-item">
-                                <a className="nav-link active" href="/">
+                                <a className="nav-link active" href="/admin/users">
                                     Home
                                     <span className="visually-hidden">
                                         (current)
@@ -72,25 +72,25 @@ export default function AdminLayout() {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/users">
+                                <Link className="nav-link" to="/admin/users">
                                     Users
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/recruitments">
+                                <Link className="nav-link" to="/admin/recruitments">
                                     Recruitment
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/applications">
+                                <Link className="nav-link" to="/admin/applications">
                                     Students
                                 </Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="nav-link" to="/about">
+                            {/* <li className="nav-item">
+                                <Link className="nav-link" to="/admin/about">
                                     About
                                 </Link>
-                            </li>
+                            </li> */}
                             <li className="nav-item dropdown">
                                 <a
                                     className="nav-link dropdown-toggle"

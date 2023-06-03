@@ -7,10 +7,10 @@ export default function GuestLayout() {
     const { token, user } = useStateContext();
     // debugger;
     if (token && user.role_id === 2) {
-        return <Navigate to="/" />;
+        return <Navigate to="/users" />;
     }
     if (token && user.role_id === 3) {
-        return <Navigate to="/users" />;
+        return <Navigate to="/admin/users" />;
     }
     return (
         <>

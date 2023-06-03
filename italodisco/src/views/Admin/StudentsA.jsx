@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import axiosClient from "../axios-client";
+import { Link, useParams } from "react-router-dom";
+import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
 
-export default function StudentsList() {
-    const [users, setUsers] = useState([]);
+export default function StudentsA() {
+    const { id } = useParams();
+    const [students, setStudents] = useState([]);
     const [loading, setLoding] = useState(false);
 
     useEffect(() => {
         getUsers();
-
     }, []);
 
     const onDelete = (u) => {
@@ -24,11 +24,19 @@ export default function StudentsList() {
 
     const getUsers = () => {
         setLoding(true);
+
+        const recruId = {
+            recruitment_id: id,
+        };
+
+        console.log(recruId);
+
         axiosClient
-            .get("/users/getAcceptedStudentsList")
+            .post("/users/getAcceptedStudents", recruId)
             .then(({ data }) => {
                 setLoding(false);
-                setUsers(data.accepted_students);
+                setStudents(data.accepted_students);
+                console.log(students);
             })
             .catch(() => {
                 setLoding(false);
@@ -38,8 +46,8 @@ export default function StudentsList() {
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <div>
-                <h1 className="text-white">Users</h1>
-                <Link className="btn mb-2" to="/users/new">
+                <h1 className="text-white">Students</h1>
+                <Link className="btn mb-2" to="/admin/students/new">
                     Add new
                 </Link>
             </div>
@@ -65,24 +73,27 @@ export default function StudentsList() {
                         </tbody>
                     )}
                     <tbody>
-                        {users.map((u) => (
-                            <tr key={u.id}>
-                                <td>{u.id}</td>
-                                <td>{u.name}</td>
-                                <td>{u.surname}</td>
-                                <td>{u.email}</td>
-                                <td>{u.pesel}</td>
-                                <td>{u.phone}</td>
-                                <td>{u.address}</td>
-                                <td>
-                                    <Link to={"/users/" + u.id}>Edit</Link>
-                                    &nbsp;
-                                    <button onClick={(ev) => onDelete(u)}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                        {students &&
+                            students.map((u) => (
+                                <tr key={u.id}>
+                                    <td>{u.id}</td>
+                                    <td>{u.name}</td>
+                                    <td>{u.surname}</td>
+                                    <td>{u.email}</td>
+                                    <td>{u.pesel}</td>
+                                    <td>{u.phone}</td>
+                                    <td>{u.address}</td>
+                                    <td>
+                                        <Link to={"/admin/students/" + u.id}>
+                                            Edit
+                                        </Link>
+                                        &nbsp;
+                                        <button onClick={(ev) => onDelete(u)}>
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                     </tbody>
                 </table>
             </div>
