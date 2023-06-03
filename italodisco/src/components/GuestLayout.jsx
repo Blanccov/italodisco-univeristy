@@ -4,10 +4,13 @@ import { useStateContext } from "../context/ContextProvider";
 import styles from "./Layout.module.scss";
 
 export default function GuestLayout() {
-    const { token } = useStateContext();
+    const { token, user } = useStateContext();
     // debugger;
-    if (token) {
+    if (token && user.role_id === 2) {
         return <Navigate to="/" />;
+    }
+    if (token && user.role_id === 3) {
+        return <Navigate to="/users" />;
     }
     return (
         <>

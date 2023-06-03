@@ -10,9 +10,11 @@ import Recruitment from "./views/Recruitment";
 import RecruitmentForm from "./views/RecruitmentForm";
 import RecruitmentShow from "./views/RecruitmentShow";
 import Appliacations from "./views/Applications";
-import ScoreForm from "./views/ApplicationForm";
 import ApplicationForm from "./views/ApplicationForm";
 import Students from "./views/Students";
+import StudentsList from "./views/StudentsList";
+import AdminLayout from "./components/AdminLayout";
+import About from "./views/About";
 
 const router = createBrowserRouter([
     {
@@ -21,8 +23,59 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Navigate to="/users" />
+                element: <Navigate to="/recruitments" />
             },
+            {
+                path: '/users/new',
+                element: <UserForm key="userCreate"/>
+            },
+            {
+                path: '/users/:id',
+                element: <UserForm key="userUpdate" />
+            },
+
+            {
+                path: '/recruitments/:departament',
+                element: <RecruitmentShow />
+            },
+            {
+                path: '/recruitments/new',
+                element: <RecruitmentForm key="recruitmentCreate"/>
+            },
+            {
+                path: '/recruitments/:id',
+                element: <RecruitmentForm key="recruitmentUpdate"/>
+            },
+            {
+                path: '/applications',
+                element: <Appliacations />
+            },
+            // {
+            //     path: '/applications/new',
+            //     element: <ScoreForm key="applicationCreate"/>
+            // },
+            {
+                path: '/applications/:id',
+                element: <ApplicationForm key="applicationUpdate"/>
+            },
+            {
+                path: '/students/:id',
+                element: <Students key="students"/>
+            },
+            {
+                path: '/users/getAcceptedStudentsList',
+                element: <StudentsList />
+            },
+            {
+                path: '/about',
+                element: <About />
+            }
+        ]
+    },
+    {
+        path: '/',
+        element: <AdminLayout />,
+        children: [
             {
                 path: '/users',
                 element: <Users />
@@ -66,6 +119,10 @@ const router = createBrowserRouter([
             {
                 path: '/students/:id',
                 element: <Students key="students"/>
+            },
+            {
+                path: '/users/getAcceptedStudentsList',
+                element: <StudentsList />
             },
         ]
     },

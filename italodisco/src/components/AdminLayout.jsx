@@ -4,18 +4,16 @@ import { useStateContext } from "../context/ContextProvider";
 import axiosClient from "../axios-client";
 import styles from "./Layout.module.scss";
 
-export default function DefaultLayout() {
+export default function AdminLayout() {
     const { user, token, notification, setUser, setToken } = useStateContext();
 
     if (!token) {
         return <Navigate to="/login" />;
     }
     if (user.role_id === 3) {
-        console.log("3!!")
         return <Navigate to="/users" />;
     }
     if (user.role_id === 2) {
-        console.log("2!!")
         return <Navigate to="/" />;
     }
 
@@ -48,7 +46,7 @@ export default function DefaultLayout() {
                 }
             >
                 <div className="container-fluid">
-                    <a className="navbar-brand ">Italodisco</a>
+                    <a className="navbar-brand ">Italodisco ADMIN</a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -85,7 +83,7 @@ export default function DefaultLayout() {
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/applications">
-                                    Applications
+                                    Students
                                 </Link>
                             </li>
                             <li className="nav-item">

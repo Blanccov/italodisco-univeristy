@@ -37,6 +37,7 @@ Route::post('login', [AuthController::class, 'login']);
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);
+    Route::get('users/getAcceptedStudentsList', [UserController::class, 'getAcceptedStudentsList']);
 
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
     Route::get('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);

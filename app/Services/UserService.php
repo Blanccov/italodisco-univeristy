@@ -39,5 +39,17 @@ class UserService
         return response()->json(['accepted_students' => $acceptedStudents]);
     }
 
+    public function getAcceptedStudentsList()
+    {
+
+        $acceptedStudents = Application::join('users', 'applications.user_id', '=', 'users.id')
+        ->join('recruitments', 'applications.recruitment_id', '=', 'recruitments.id')
+        ->where('applications.status_id', 3)
+        ->select('users.id', 'users.name', 'users.surname', 'users.email', 'users.pesel', 'users.phone', 'users.address', 'recruitments.name as recruitment_name')
+        ->get();
+
+    return response()->json(['accepted_students' => $acceptedStudents]);
+    }
+
 
 }
