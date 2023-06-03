@@ -12,11 +12,12 @@ export default function ApplicationForm() {
     const { setNotification } = useStateContext();
     const [scores, setScores] = useState({
         id: null,
-        recruitment_id: null,
+        recruitment_id: id,
         subject: "",
         score: null,
     });
     const [recruitments, setRecruitments] = useState([]);
+    const [subjects, setSubjects] = useState([]);
     const [addedScores, setAddedScores] = useState([]);
 
     useEffect(() => {
@@ -32,12 +33,7 @@ export default function ApplicationForm() {
                 setLoading(false);
                 console.log("Error fetching departments:", error);
             });
-    }, []);
 
-    const [subjects, setSubjects] = useState([]);
-
-    useEffect(() => {
-        setLoading(true);
         axiosClient
             .get(`scores/uniqueSubjects`)
             .then(({ data }) => {
@@ -91,6 +87,8 @@ export default function ApplicationForm() {
                     setErrors(response.data.errors);
                 }
             });
+
+        console.log(scores);
     };
 
     return (
@@ -110,26 +108,6 @@ export default function ApplicationForm() {
             {!loading && (
                 <form onSubmit={onSubmit} className="my-form">
                     <div>
-                        <select
-                            value={scores.recruitment_id}
-                            onChange={(ev) =>
-                                setScores({
-                                    ...scores,
-                                    recruitment_id: ev.target.value,
-                                })
-                            }
-                        >
-                            <option value="">Select Recruitment</option>
-                            {recruitments.map((recruitment) => (
-                                <option
-                                    key={recruitment.id}
-                                    value={recruitment.id}
-                                >
-                                    {recruitment.name}
-                                </option>
-                            ))}
-                        </select>
-
                         <select
                             value={subjects.subject}
                             onChange={(ev) =>
