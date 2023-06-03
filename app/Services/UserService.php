@@ -19,7 +19,7 @@ class UserService
             ->orWhere('surname', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('pesel', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('email', 'LIKE', '%' . $searchTerm . '%')
-            ->orWhere('phone_number', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('phone', 'LIKE', '%' . $searchTerm . '%')
             ->get();
 
         return response()->json(['users' => $users]);

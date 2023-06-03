@@ -4,47 +4,76 @@ import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
 
 export default function UsersA() {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoding] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [searchTerm, setSearchTerm] = useState({
+    search: ""
+  });
 
-    useEffect(() => {
-        getUsers();
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-    }, []);
+  const onDelete = (u) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) {
+      return;
+    }
 
-    const onDelete = (u) => {
-        if (!window.confirm("are you sure u want to delete this user?")) {
-            return;
-        }
+    axiosClient.delete(`/users/${u.id}`).then(() => {
+      getUsers();
+    });
+  };
 
-        axiosClient.delete(`/users/${u.id}`).then(() => {
-            getUsers();
-        });
-    };
+  const getUsers = () => {
+    setLoading(true);
+    axiosClient
+      .get("/users")
+      .then(({ data }) => {
+        setLoading(false);
+        setUsers(data.data);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
 
-    const getUsers = () => {
-        setLoding(true);
-        axiosClient
-            .get("/users")
-            .then(({ data }) => {
-                setLoding(false);
-                setUsers(data.data);
-            })
-            .catch(() => {
-                setLoding(false);
-            });
-    };
+  const handleSearch = () => {
+    setLoading(true);
 
-    return (
-        <div className={styles["bg-image"] + " d-flex flex-column"}>
-            <div>
-                <h1 className="text-white">Users</h1>
-                <Link className="btn mb-2" to="/users/new">
-                    Add new
-                </Link>
-            </div>
-            <div className="my-sizing">
-                <table className="table-responsive table-hover">
+    const searching = {
+        search: searchTerm
+    }
+    console.log(searchTerm)
+    axiosClient
+      .post(`/users/searchUsers`, searching)
+      .then(({ data }) => {
+        setLoading(false);
+        setUsers(data.users);
+        // console.log(users)
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
+
+  return (
+    <div className={styles["bg-image"] + " d-flex flex-column"}>
+      <div>
+        <h1 className="text-white">Users</h1>
+        <Link className="btn mb-2" to="/users/new">
+          Add new
+        </Link>
+        <div className="mb-2 ">
+          <input
+            type="text"
+            placeholder="Search users"
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button onClick={handleSearch} className="btn">Search</button>
+        </div>
+      </div>
+      <div className="my-sizing">
+        <table className="table-responsive table-hover">
                     <thead>
                         <tr className="table-primary">
                             <th>ID</th>
