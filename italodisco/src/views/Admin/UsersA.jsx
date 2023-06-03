@@ -75,7 +75,7 @@ export default function UsersA() {
                                 <td>{u.phone}</td>
                                 <td>{u.address}</td>
                                 <td>
-                                    <Link to={"/users/" + u.id}>Edit</Link>
+                                    <Link to={"/admin/users/" + u.id}>Edit</Link>
                                     &nbsp;
                                     <button onClick={(ev) => onDelete(u)}>
                                         Delete

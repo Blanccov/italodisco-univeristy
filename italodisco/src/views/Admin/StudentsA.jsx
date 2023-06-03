@@ -84,7 +84,7 @@ export default function StudentsA() {
                                     <td>{u.phone}</td>
                                     <td>{u.address}</td>
                                     <td>
-                                        <Link to={"/admin/students/" + u.id}>
+                                        <Link to={"/admin/users/" + u.id}>
                                             Edit
                                         </Link>
                                         &nbsp;

@@ -52,7 +52,6 @@ export default function RecruitmentShowA() {
                             <button onClick={(ev) => onDelete(u)}>
                                 Delete
                             </button>
-                            <Link to={"/admin/applications/" + u.id}>Apply</Link>
                             <Link to={"/admin/students/" + u.id}>Students</Link>
                         </div>
                     ))}

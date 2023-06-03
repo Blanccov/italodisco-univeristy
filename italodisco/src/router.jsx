@@ -15,8 +15,6 @@ import UserFormA from "./views/Admin/UserFormA";
 import RecruitmentA from "./views/Admin/RecruitmentA";
 import RecruitmentFormA from "./views/Admin/RecruitmentFormA";
 import RecruitmentShowA from "./views/Admin/RecruitmentShowA";
-import AppliacationsA from "./views/Admin/ApplicationsA";
-import ApplicationFormA from "./views/Admin/ApplicationFormA";
 import StudentsA from "./views/Admin/StudentsA";
 import StudentsListA from "./views/Admin/StudentsListA";
 
@@ -60,6 +58,10 @@ const router = createBrowserRouter([
         element: <AdminLayout />,
         children: [
             {
+                path: "/admin",
+                element: <Navigate to="/admin/users" />,
+            },
+            {
                 path: "/admin/users",
                 element: <UsersA />,
             },
@@ -88,19 +90,11 @@ const router = createBrowserRouter([
                 element: <RecruitmentFormA key="recruitmentUpdate" />,
             },
             {
-                path: "/admin/applications",
-                element: <AppliacationsA />,
-            },
-            {
-                path: "/admin/applications/:id",
-                element: <ApplicationFormA key="applicationUpdate" />,
-            },
-            {
                 path: "/admin/students/:id",
                 element: <StudentsA key="students" />,
             },
             {
-                path: "/admin/users/getAcceptedStudentsList",
+                path: "/admin/students",
                 element: <StudentsListA />,
             },
         ],

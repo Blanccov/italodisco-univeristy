@@ -82,7 +82,7 @@ export default function AdminLayout() {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/admin/applications">
+                                <Link className="nav-link" to="/admin/students">
                                     Students
                                 </Link>
                             </li>
