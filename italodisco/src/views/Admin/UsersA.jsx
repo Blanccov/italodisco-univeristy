@@ -2,18 +2,23 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
-import Pagination from "../../UX/Pagination";
+import Pagination from "react-js-pagination";
 
 export default function UsersA() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [searchTerm, setSearchTerm] = useState({
-    search: ""
-  });
+  const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const itemsPerPage = 5;
 
   useEffect(() => {
     getUsers();
   }, []);
+
+  useEffect(() => {
+    handleSearch();
+  }, [searchTerm]);
 
   const onDelete = (u) => {
     if (!window.confirm("Are you sure you want to delete this user?")) {
@@ -32,6 +37,7 @@ export default function UsersA() {
       .then(({ data }) => {
         setLoading(false);
         setUsers(data.data);
+        setTotalItems(data.data.length);
       })
       .catch(() => {
         setLoading(false);
@@ -42,20 +48,28 @@ export default function UsersA() {
     setLoading(true);
 
     const searching = {
-        search: searchTerm
-    }
-    console.log(searchTerm)
+      search: searchTerm,
+    };
+
     axiosClient
       .post(`/users/searchUsers`, searching)
       .then(({ data }) => {
         setLoading(false);
         setUsers(data.users);
-        // console.log(users)
+        setTotalItems(data.users.length);
       })
       .catch(() => {
         setLoading(false);
       });
   };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className={styles["bg-image"] + " d-flex flex-column"}>
@@ -68,55 +82,66 @@ export default function UsersA() {
           <input
             type="text"
             placeholder="Search users"
+            value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button onClick={handleSearch} className="btn">Search</button>
+          <button onClick={handleSearch} className="btn">
+            Search
+          </button>
         </div>
       </div>
       <div className="my-sizing">
         <table className="table-responsive table-hover">
-                    <thead>
-                        <tr className="table-primary">
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>email</th>
-                            <th>pesel</th>
-                            <th>phone</th>
-                            <th>address</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    {loading && (
-                        <tbody>
-                            <tr>
-                                <td>Loading...</td>
-                            </tr>
-                        </tbody>
-                    )}
-                    <tbody>
-                        {users.map((u) => (
-                            <tr key={u.id}>
-                                <td>{u.id}</td>
-                                <td>{u.name}</td>
-                                <td>{u.surname}</td>
-                                <td>{u.email}</td>
-                                <td>{u.pesel}</td>
-                                <td>{u.phone}</td>
-                                <td>{u.address}</td>
-                                <td>
-                                    <Link to={"/admin/users/" + u.id}>Edit</Link>
-                                    &nbsp;
-                                    <button onClick={(ev) => onDelete(u)}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-                {/* <Pagination /> */}
-            </div>
-        </div>
-    );
+          <thead>
+            <tr className="table-primary">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>email</th>
+              <th>pesel</th>
+              <th>phone</th>
+              <th>address</th>
+              <th></th>
+            </tr>
+          </thead>
+          {loading && (
+            <tbody>
+              <tr>
+                <td>Loading...</td>
+              </tr>
+            </tbody>
+          )}
+          {!loading && (
+            <tbody>
+              {currentItems.map((u) => (
+                <tr key={u.id}>
+                  <td>{u.id}</td>
+                  <td>{u.name}</td>
+                  <td>{u.surname}</td>
+                  <td>{u.email}</td>
+                  <td>{u.pesel}</td>
+                  <td>{u.phone}</td>
+                  <td>{u.address}</td>
+                  <td>
+                    <Link to={"/admin/users/" + u.id}>Edit</Link>
+                    &nbsp;
+                    <button onClick={(ev) => onDelete(u)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+        <Pagination
+          activePage={currentPage}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={totalItems}
+          pageRangeDisplayed={5}
+          onChange={handlePageChange}
+          itemClass="page-item"
+          linkClass="page-link"
+        />
+      </div>
+    </div>
+  );
 }
