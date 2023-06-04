@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
+import Pagination from "../../UX/Pagination";
 
 export default function UsersA() {
   const [users, setUsers] = useState([]);
@@ -114,6 +115,7 @@ export default function UsersA() {
                         ))}
                     </tbody>
                 </table>
+                {/* <Pagination /> */}
             </div>
         </div>
     );

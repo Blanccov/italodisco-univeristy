@@ -29,6 +29,8 @@ export default function Register() {
             role_id: 2,
         };
 
+        console.log(payload)
+
         axiosClient
             .post("/register", payload)
             .then(({ data }) => {
