@@ -6,12 +6,13 @@ import styles from "./Application.module.scss";
 
 export default function ApplicationForm() {
     const { id } = useParams();
+    const { user } = useStateContext();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
     const { setNotification } = useStateContext();
     const [scores, setScores] = useState({
-        id: null,
+        id: user.id,
         recruitment_id: id,
         subject: "",
         score: null,
