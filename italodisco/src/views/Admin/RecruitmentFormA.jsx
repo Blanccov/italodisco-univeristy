@@ -13,7 +13,7 @@ export default function RecruitmentFormA() {
     const [recruitment, setRecruitment] = useState({
         id: null,
         name: "",
-        department: "",
+        departament: "",
         description: "",
         places: null,
         amount: null,
@@ -70,6 +70,7 @@ export default function RecruitmentFormA() {
                         setErrors(response.data.errors);
                     }
                 });
+                console.log(recruitment);
         } else {
             axiosClient
                 .post(`/recruitments/`, recruitment)
@@ -119,11 +120,11 @@ export default function RecruitmentFormA() {
                             placeholder="Name"
                         />
                         <select
-                            value={recruitment.department}
+                            value={recruitment.departament}
                             onChange={(ev) =>
                                 setRecruitment({
                                     ...recruitment,
-                                    department: ev.target.value,
+                                    departament: ev.target.value,
                                 })
                             }
                         >

@@ -11,14 +11,14 @@ export default function DefaultLayout() {
         return <Navigate to="/login" />;
     }
 
-    if (user.role_id === 3) {
-        console.log("3!!")
-        return <Navigate to="/admin/users" />;
-    }
-    if (user.role_id === 2) {
-        console.log("2!!")
-        return <Navigate to="/recruitments" />;
-    }
+    // if (user.role_id === 3) {
+    //     console.log("3!!")
+    //     return <Navigate to="/admin/users" />;
+    // }
+    // if (user.role_id === 2) {
+    //     console.log("2!!")
+    //     return <Navigate to="/recruitments" />;
+    // }
 
     const onLogout = (ev) => {
         ev.preventDefault();

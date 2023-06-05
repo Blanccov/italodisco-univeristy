@@ -35,8 +35,9 @@ export default function Recruitment() {
             )}
 
             <div className="my-sizing d-flex  flex-wrap w-100 ">
-                {recruitments.map((r) => (
+                {recruitments.map((r, index) => (
                     <Card
+                    key={index}
                         style={{
                             backgroundImage: `url("images/bookphoto.jpg")`,
                         }}

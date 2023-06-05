@@ -2,15 +2,18 @@ import React, { useState, useEffect } from "react";
 import axiosClient from "../../axios-client";
 import styles from "./Recruitment.module.scss";
 import { Link, useParams } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 export default function RecruitmentShowA() {
     const { departament } = useParams();
     const [recruitment, setRecruitment] = useState([]);
     // const [loading, setLoding] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalItems, setTotalItems] = useState(0);
+    const itemsPerPage = 5;
 
     useEffect(() => {
         getRecruitment();
-
     }, []);
 
     const onDelete = (u) => {
@@ -28,9 +31,14 @@ export default function RecruitmentShowA() {
             .get(`/recruitments?filters[departament][$eq]=${departament}`)
             .then(({ data }) => {
                 setRecruitment(data.data);
-
+                console.log(data.data.length)
+                setTotalItems(data.data.length);
             })
             .catch(() => {});
+    };
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
     };
 
     return (
@@ -41,7 +49,10 @@ export default function RecruitmentShowA() {
                 </Link>
                 <div className="d-flex flex-row flex-wrap">
                     {recruitment.map((u) => (
-                        <div className="card border-dark m-3 my-card" key={u.id}>
+                        <div
+                            className="card border-dark m-3 my-card"
+                            key={u.id}
+                        >
                             <div className="card-header">{u.departament}</div>
                             <div className="card-body">
                                 <h4 className="card-title">{u.name}</h4>
@@ -56,6 +67,15 @@ export default function RecruitmentShowA() {
                         </div>
                     ))}
                 </div>
+                <Pagination
+                    activePage={currentPage}
+                    itemsCountPerPage={itemsPerPage}
+                    totalItemsCount={totalItems}
+                    pageRangeDisplayed={5}
+                    onChange={handlePageChange}
+                    itemClass="page-item"
+                    linkClass="page-link"
+                />
             </div>
         </div>
     );

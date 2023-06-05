@@ -10,12 +10,12 @@ export default function AdminLayout() {
     if (!token) {
         return <Navigate to="/login" />;
     }
-    if (user.role_id === 3) {
-        return <Navigate to="/admin/users" />;
-    }
-    if (user.role_id === 2) {
-        return <Navigate to="/recruitments" />;
-    }
+    // if (user.role_id === 3) {
+    //     return <Navigate to="/admin/users" />;
+    // }
+    // if (user.role_id === 2) {
+    //     return <Navigate to="/recruitments" />;
+    // }
 
     const onLogout = (ev) => {
         ev.preventDefault();

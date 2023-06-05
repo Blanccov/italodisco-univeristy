@@ -12,16 +12,6 @@ export default function RecruitmentShow() {
         getRecruitment();
     }, []);
 
-    const onDelete = (u) => {
-        if (!window.confirm("are you sure u want to delete this user?")) {
-            return;
-        }
-
-        axiosClient.delete(`/recruitments/${u.id}`).then(() => {
-            getRecruitment();
-        });
-    };
-
     const getRecruitment = () => {
         axiosClient
             .get(`/recruitments?filters[departament][$eq]=${departament}`)

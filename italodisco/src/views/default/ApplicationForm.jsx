@@ -76,7 +76,7 @@ export default function ApplicationForm() {
         axiosClient
             .post(`/scores/addScore`, scores)
             .then(() => {
-                setNotification("User was succesfully created");
+                setNotification("Score was succesfully added");
                 setAddedScores([...addedScores, data]);
                 // navigate("/users");
             })
@@ -109,10 +109,10 @@ export default function ApplicationForm() {
                 <form onSubmit={onSubmit} className="my-form">
                     <div>
                         <select
-                            value={subjects.subject}
+                            value={scores.subject}
                             onChange={(ev) =>
                                 setScores({
-                                    ...subjects,
+                                    ...scores,
                                     subject: ev.target.value,
                                 })
                             }

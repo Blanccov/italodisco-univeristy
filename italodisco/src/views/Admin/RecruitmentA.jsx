@@ -39,7 +39,7 @@ export default function RecruitmentA() {
                     <Card
                         key={index}
                         style={{
-                            backgroundImage: `url("images/bookphoto.jpg")`,
+                            backgroundImage: `url("../images/bookphoto.jpg")`,
                         }}
                         to={"/admin/recruitments/" + r.departament}
                     >

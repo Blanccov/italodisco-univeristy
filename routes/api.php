@@ -24,7 +24,7 @@ use App\Http\Controllers\Api\V1\ScoreController;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-// Route::middleware('auth:sanctum')->group(function () {
+Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('user', [AuthController::class, 'user']);
     Route::get('logout', [AuthController::class, 'logout']);
@@ -54,4 +54,4 @@ Route::post('login', [AuthController::class, 'login']);
     Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('statuses', StatusController::class);
     Route::apiResource('recruitments', RecruitmentController::class);
-// });
+});
