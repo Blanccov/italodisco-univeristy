@@ -17,6 +17,7 @@ import RecruitmentFormA from "./views/Admin/RecruitmentFormA";
 import RecruitmentShowA from "./views/Admin/RecruitmentShowA";
 import StudentsA from "./views/Admin/StudentsA";
 import StudentsListA from "./views/Admin/StudentsListA";
+import Payment from "./views/default/Payment";
 
 const router = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Navigate to="/recruitments" />,
+                element: <Navigate to="/applications" />,
             },
 
             {
@@ -97,6 +98,10 @@ const router = createBrowserRouter([
                 path: "/admin/students",
                 element: <StudentsListA />,
             },
+            {
+                path: "/applications/payment/:id",
+                element: <Payment key="payment" />
+            }
         ],
     },
     {

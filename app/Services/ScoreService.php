@@ -47,10 +47,7 @@ class ScoreService
             $newScore->save();
         }
 
-        $result->balance = $result->balance * $scoreValue; // Aktualizacja pola balance
-        $result->save();
-
-        $balance = $result->balance;
+        $balance = $result->balance * $scoreValue; // Aktualizacja pola balance
 
         return response()->json(['data' =>[
             'message' => 'Wynik został dodany lub zaktualizowany.',

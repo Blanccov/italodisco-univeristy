@@ -23,18 +23,19 @@ export default function Appliacations() {
             .catch(() => {
                 setLoading(false);
             });
-    };
+        };
+        console.log(applications)
 
     const checkStatus = (status) => {
-        if (status == 3) {
+        if (status === 3) {
             return "Accepted";
-        } else if (status == 2) {
-            return "Paied";
-        } else if (status == 1) {
-            return "Waitnig for Payment";
-        } else if (status == 4) {
+        } else if (status === 2) {
+            return "Paid";
+        } else if (status === 1) {
+            return "Waiting for Payment";
+        } else if (status === 4) {
             return "Unaccepted";
-        } else if (status == 5) {
+        } else if (status === 5) {
             return "Rejected";
         }
     };
@@ -50,12 +51,13 @@ export default function Appliacations() {
             )}
 
             <div className="my-sizing d-flex flex-wrap w-100 ">
-                {applications.map((r) => (
+                {applications && applications.map((r) => (
                     <Card
+                        key={r.application_id}
                         style={{
                             backgroundImage: `url("images/bookphoto.jpg")`,
                         }}
-                        to={"/applications/" + r.departament}
+                        to={"/applications/payment/" + r.application_id}
                         p={checkStatus(r.status_id)}
                     >
                         {r.recruitment_name}

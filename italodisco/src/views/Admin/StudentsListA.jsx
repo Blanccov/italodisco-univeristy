@@ -9,11 +9,12 @@ export default function StudentsListA() {
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItems, setTotalItems] = useState(0);
+  const [searchTerm, setSearchTerm] = useState("");
   const itemsPerPage = 5;
 
   useEffect(() => {
     getUsers();
-  }, []);
+  }, [currentPage]);
 
   const onDelete = (user) => {
     if (!window.confirm("Are you sure you want to delete this user?")) {
@@ -29,6 +30,7 @@ export default function StudentsListA() {
     setLoading(true);
     const params = {
       page: currentPage,
+      searchTerm: searchTerm
     };
 
     axiosClient
@@ -48,9 +50,18 @@ export default function StudentsListA() {
     setCurrentPage(pageNumber);
   };
 
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  const filteredUsers = users.filter((user) => {
+    const fullName = `${user.name} ${user.surname}`.toLowerCase();
+    return fullName.includes(searchTerm.toLowerCase());
+  });
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredUsers.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <div className={styles["bg-image"] + " d-flex flex-column"}>
@@ -59,7 +70,14 @@ export default function StudentsListA() {
         <Link className="btn mb-2" to="/admin/users/new">
           Add new
         </Link>
-
+        <div className="mb-2">
+        <input
+          type="text"
+          placeholder="Search students..."
+          value={searchTerm}
+          onChange={handleSearch}
+        />
+        </div>
       </div>
       <div className="my-sizing">
         <table className="table-responsive table-hover">
