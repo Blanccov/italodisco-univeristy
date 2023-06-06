@@ -31,52 +31,59 @@ export default function Payment() {
 
     const [amount, setAmount] = useState([]);
 
-    const onSubmit = (ev) =>{
+    const onSubmit = (ev) => {
         ev.preventDefault();
-        console.log(amount)
+        console.log(amount);
 
         axiosClient
-                .post(`/applications/makePaymentForRecruitment`, amount)
-                .then(() => {
-                    setNotification("User was succesfully created");
-                    navigate("/admin/users");
-                })
-                .catch((err) => {
-                    const response = err.response;
-                    console.log(err);
-                    if (response && response.status === 422) {
-                        setErrors(response.data.errors);
-                    }
-                });
-    }
+            .post(`/applications/makePaymentForRecruitment`, amount)
+            .then(() => {
+                setNotification("You paid succesfull");
+                navigate("/applications");
+            })
+            .catch((err) => {
+                const response = err.response;
+                console.log(err);
+                if (response && response.status === 400) {
+                    setErrors("Wrong deposit amount");
+                }
+            });
+    };
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <h1 className="text-white">
-                {application.recruitment_name} application
+                application for: {application.recruitment_name}
             </h1>
 
             {errors && (
-                <div>
-                    {Object.keys(errors).map((key) => (
-                        <p key={key} className="text-danger">
-                            {errors[key][0]}
-                        </p>
-                    ))}
-                </div>
+                <h4 className="text-danger">
+                    wrong deposit amount
+                </h4>
             )}
 
             {!loading && (
                 <div className="my-form">
                     <h2>Status: {application.status_name}</h2>
                     <h3>Your points: {application.score}</h3>
-                    {(application.status_id == 1) && (
+                    {application.status_id == 1 && (
                         <form onSubmit={onSubmit}>
                             <h3>Amount to pay: {application.amount}</h3>
-                            <input placeholder="amount" onChange={(ev) =>
-                            setAmount({ ...amount, amount: ev.target.value, recruitment_id: application.recruitment_id })
-                        }/>
-                        <button className="btn btn-outline-primary ms-1">Pay</button>
+                            <input
+                                placeholder="amount"
+                                onChange={(ev) =>
+                                    setAmount({
+                                        ...amount,
+                                        amount: parseInt(ev.target.value),
+                                        recruitment_id:
+                                            application.recruitment_id,
+                                    })
+                                }
+                            />
+
+                            <button className="btn btn-outline-primary ms-1">
+                                Pay
+                            </button>
                         </form>
                     )}
                 </div>

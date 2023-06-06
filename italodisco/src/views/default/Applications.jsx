@@ -26,20 +26,6 @@ export default function Appliacations() {
         };
         console.log(applications)
 
-    const checkStatus = (status) => {
-        if (status === 3) {
-            return "Accepted";
-        } else if (status === 2) {
-            return "Paid";
-        } else if (status === 1) {
-            return "Waiting for Payment";
-        } else if (status === 4) {
-            return "Unaccepted";
-        } else if (status === 5) {
-            return "Rejected";
-        }
-    };
-
     return (
         <div className={styles["bg-image"]}>
             {loading && (
@@ -58,7 +44,7 @@ export default function Appliacations() {
                             backgroundImage: `url("images/bookphoto.jpg")`,
                         }}
                         to={"/applications/payment/" + r.application_id}
-                        p={checkStatus(r.status_id)}
+                        p={r.status_name}
                     >
                         {r.recruitment_name}
                     </Card>
