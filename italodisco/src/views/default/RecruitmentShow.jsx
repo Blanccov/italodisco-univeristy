@@ -7,18 +7,27 @@ export default function RecruitmentShow() {
     const { departament } = useParams();
     const [recruitment, setRecruitment] = useState([]);
     // const [loading, setLoding] = useState(false);
+    const [errors, setErrors] = useState(null);
 
     useEffect(() => {
         getRecruitment();
     }, []);
 
     const getRecruitment = () => {
+        const dep = { departament };
+        console.log(dep);
         axiosClient
-            .get(`/recruitments?filters[departament][$eq]=${departament}`)
+            .post(`/recruitments/getRecruitmentsByDepartmentWithDate`, dep)
             .then(({ data }) => {
-                setRecruitment(data.data);
+                setRecruitment(data.recruitments);
             })
-            .catch(() => {});
+            .catch((err) => {
+                const response = err.response;
+                console.log(err);
+                if (response && response.status === 404) {
+                    setErrors("There are currently no courses available ;(");
+                }
+            });
     };
 
     return (
@@ -27,6 +36,7 @@ export default function RecruitmentShow() {
                 <Link className="btn mb-2" to="/recruitments/new">
                     Add new
                 </Link>
+                {errors && <h1 className="text-white">{errors}</h1>}
                 <div className="d-flex flex-row flex-wrap">
                     {recruitment.map((u) => (
                         <div

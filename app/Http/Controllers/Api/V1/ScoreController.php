@@ -8,6 +8,7 @@ use App\Http\Requests\UpdateScoreRequest;
 use App\Services\ScoreService;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Resources\ScoreCollection;
 
 class ScoreController extends Controller
 {
@@ -16,7 +17,7 @@ class ScoreController extends Controller
      */
     public function index()
     {
-        //
+        return new ScoreCollection(Score::filter()->get());
     }
 
     /**

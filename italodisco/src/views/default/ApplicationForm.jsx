@@ -16,6 +16,8 @@ export default function ApplicationForm() {
         recruitment_id: id,
         subject: "",
         score: null,
+        result: null,
+        result_id: null,
     });
     const [recruitments, setRecruitments] = useState([]);
     const [subjects, setSubjects] = useState([]);
@@ -57,16 +59,16 @@ export default function ApplicationForm() {
         console.log(recruId);
 
         axiosClient
-            .post(`applications/applyForRecruitment`, recruId)
+            .post(`/applications/applyForRecruitment`, recruId)
             .then(() => {
                 setNotification("User was succesfully created");
-                navigate("/users");
             })
             .catch((err) => {
                 const response = err.response;
                 console.log(err);
-                if (response && response.status === 422) {
+                if (response && response.status === 400) {
                     setErrors(response.data.errors);
+
                 }
             });
     };
@@ -76,10 +78,10 @@ export default function ApplicationForm() {
 
         axiosClient
             .post(`/scores/addScore`, scores)
-            .then(() => {
+            .then((response) => {
+                const { data } = response.data;
                 setNotification("Score was succesfully added");
-                setAddedScores([...addedScores, data]);
-                // navigate("/users");
+                console.log(data);
             })
             .catch((err) => {
                 const response = err.response;
@@ -89,7 +91,6 @@ export default function ApplicationForm() {
                 }
             });
 
-        console.log(scores);
     };
 
     return (

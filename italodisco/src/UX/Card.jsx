@@ -7,7 +7,7 @@ export default function Card(props) {
         <div className={`${styles.container} ${props.className}`}>
             <div className={styles.card}>
                 <h1>{props.children}</h1>
-                <p>Check now</p>
+                <p>{props.p}</p>
                 <div className={styles.pic} style={props.style}></div>
                 <Link to={props.to}></Link>
             </div>

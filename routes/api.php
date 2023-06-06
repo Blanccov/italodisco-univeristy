@@ -54,4 +54,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('statuses', StatusController::class);
     Route::apiResource('recruitments', RecruitmentController::class);
+    Route::apiResource('scores', ScoreController::class);
 });
