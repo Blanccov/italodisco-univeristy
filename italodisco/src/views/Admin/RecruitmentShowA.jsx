@@ -58,7 +58,8 @@ export default function RecruitmentShowA() {
                                 <h4 className="card-title">{u.name}</h4>
                                 <p className="card-text">{u.description}</p>
                             </div>
-                            <Link to={"/admin/recruitments/" + u.id}>Edit</Link>
+                            {/* <Link to={"/admin/recruitments/" + u.id}>Edit</Link> */}
+                            <Link to={"/admin/recruitments/"+ u.departament + "/" + u.id}>Edit</Link>
                             {/* &nbsp; */}
                             <button onClick={(ev) => onDelete(u)}>
                                 Delete

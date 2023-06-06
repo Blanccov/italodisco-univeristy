@@ -15,12 +15,14 @@ export default function RecruitmentFormA() {
         name: "",
         departament: "",
         description: "",
-        places: null,
-        amount: null,
-        startDate: null,
-        endDate: null,
+        places: "",
+        amount: "",
+        start_date: "",
+        end_date: "",
     });
     const [departaments, setDepartaments] = useState([]);
+
+
 
     useEffect(() => {
         setLoading(true);
@@ -45,12 +47,13 @@ export default function RecruitmentFormA() {
                 .get(`/recruitments/${id}`)
                 .then(({ data }) => {
                     setLoading(false);
-                    setRecruitment(data);
+                    setRecruitment(data.data);
                 })
                 .catch(() => {
                     setLoading(false);
                 });
         }, []);
+        console.log(recruitment)
     }
 
     const onSubmit = (ev) => {
@@ -170,21 +173,23 @@ export default function RecruitmentFormA() {
                             placeholder="Amount"
                         />
                         <input
-                            value={recruitment.startDate}
+                        type="date"
+                            value={recruitment.start_date}
                             onChange={(ev) =>
                                 setRecruitment({
                                     ...recruitment,
-                                    startDate: ev.target.value,
+                                    start_date: ev.target.value,
                                 })
                             }
                             placeholder="Start Date (YYYY-MM-DD)"
                         />
                         <input
-                            value={recruitment.endDate}
+                            type="date"
+                            value={recruitment.end_date}
                             onChange={(ev) =>
                                 setRecruitment({
                                     ...recruitment,
-                                    endDate: ev.target.value,
+                                    end_date: ev.target.value,
                                 })
                             }
                             placeholder="End Date (YYYY-MM-DD)"
