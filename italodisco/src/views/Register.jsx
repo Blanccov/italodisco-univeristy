@@ -64,7 +64,7 @@ export default function Register() {
                             <div className="form-group me-2">
                                 <label
                                     className="col-form-label mt-4 text-white"
-                                    htmlFor="inputDefault"
+                                    htmlFor="Name"
                                 >
                                     Name
                                 </label>
@@ -72,14 +72,14 @@ export default function Register() {
                                     type="text"
                                     className="form-control"
                                     placeholder="Enter Name"
-                                    id="inputDefault"
+                                    id="Name"
                                     ref={nameRef}
                                 />
                             </div>
                             <div className="form-group ms-2">
                                 <label
                                     className="col-form-label mt-4 text-white"
-                                    htmlFor="inputDefault"
+                                    htmlFor="Surname"
                                 >
                                     Surname
                                 </label>
@@ -87,7 +87,7 @@ export default function Register() {
                                     type="text"
                                     className="form-control"
                                     placeholder="Enter Surname"
-                                    id="inputDefault"
+                                    id="Surname"
                                     ref={surnameRef}
                                 />
                             </div>
@@ -96,7 +96,7 @@ export default function Register() {
                             <div className="form-group me-2">
                                 <label
                                     className="col-form-label mt-4 text-white"
-                                    htmlFor="inputDefault"
+                                    htmlFor="Pesel"
                                 >
                                     Pesel
                                 </label>
@@ -104,14 +104,14 @@ export default function Register() {
                                     type="text"
                                     className="form-control"
                                     placeholder="Enter pesel"
-                                    id="inputDefault"
+                                    id="Pesel"
                                     ref={peselRef}
                                 />
                             </div>
                             <div className="form-group ms-2">
                                 <label
                                     className="col-form-label mt-4 text-white"
-                                    htmlFor="inputDefault"
+                                    htmlFor="Phone"
                                 >
                                     Phone
                                 </label>
@@ -119,7 +119,7 @@ export default function Register() {
                                     type="text"
                                     className="form-control"
                                     placeholder="Enter phone"
-                                    id="inputDefault"
+                                    id="Phone"
                                     ref={phoneRef}
                                 />
                             </div>
@@ -127,7 +127,7 @@ export default function Register() {
                         <div className="form-group">
                             <label
                                 className="col-form-label mt-4 text-white"
-                                htmlFor="inputDefault"
+                                htmlFor="Address"
                             >
                                 Address
                             </label>
@@ -135,7 +135,7 @@ export default function Register() {
                                 type="text"
                                 className="form-control"
                                 placeholder="Enter address"
-                                id="inputDefault"
+                                id="Address"
                                 rows={2}
                                 ref={addressRef}
                             />
@@ -143,7 +143,7 @@ export default function Register() {
 
                         <div className="form-group">
                             <label
-                                htmlFor="exampleInputEmail1"
+                                htmlFor="Email"
                                 className="form-label mt-4 text-white "
                             >
                                 Email address
@@ -151,7 +151,7 @@ export default function Register() {
                             <input
                                 type="email"
                                 className="form-control"
-                                id="exampleInputEmail1"
+                                id="Email"
                                 aria-describedby="emailHelp"
                                 placeholder="Enter email"
                                 ref={emailRef}
@@ -166,7 +166,7 @@ export default function Register() {
                         </div>
                         <div className="form-group">
                             <label
-                                htmlFor="exampleInputPassword1"
+                                htmlFor="Password"
                                 className="form-label mt-4 text-white"
                             >
                                 Password
@@ -174,7 +174,7 @@ export default function Register() {
                             <input
                                 type="password"
                                 className="form-control "
-                                id="exampleInputPassword1"
+                                id="Password"
                                 placeholder="Password"
                                 ref={passwordRef}
                             />

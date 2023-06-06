@@ -2,90 +2,117 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
+import Pagination from "react-js-pagination";
 
 export default function StudentsListA() {
-    const [users, setUsers] = useState([]);
-    const [loading, setLoding] = useState(false);
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const itemsPerPage = 5;
 
-    useEffect(() => {
-        getUsers();
+  useEffect(() => {
+    getUsers();
+  }, []);
 
-    }, []);
+  const onDelete = (user) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) {
+      return;
+    }
 
-    const onDelete = (u) => {
-        if (!window.confirm("are you sure u want to delete this user?")) {
-            return;
-        }
+    axiosClient.delete(`/users/${user.id}`).then(() => {
+      getUsers();
+    });
+  };
 
-        axiosClient.delete(`/users/${u.id}`).then(() => {
-            getUsers();
-        });
+  const getUsers = () => {
+    setLoading(true);
+    const params = {
+      page: currentPage,
     };
 
-    const getUsers = () => {
-        setLoding(true);
-        axiosClient
-            .get("/users/getAcceptedStudentsList")
-            .then(({ data }) => {
-                setLoding(false);
-                setUsers(data.accepted_students);
-            })
-            .catch(() => {
-                setLoding(false);
-            });
-    };
+    axiosClient
+      .get("/users/getAcceptedStudentsList", { params })
+      .then(({ data }) => {
+        setLoading(false);
+        setUsers(data.accepted_students);
+        setTotalItems(data.accepted_students.length);
+      })
+      .catch(() => {
+        setLoading(false);
+      });
+  };
 
-    return (
-        <div className={styles["bg-image"] + " d-flex flex-column"}>
-            <div>
-                <h1 className="text-white">Users</h1>
-                <Link className="btn mb-2" to="/admin/users/new">
-                    Add new
-                </Link>
-            </div>
-            <div className="my-sizing">
-                <table className="table-responsive table-hover">
-                    <thead>
-                        <tr className="table-primary">
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Surname</th>
-                            <th>email</th>
-                            <th>pesel</th>
-                            <th>phone</th>
-                            <th>address</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    {loading && (
-                        <tbody>
-                            <tr>
-                                <td>Loading...</td>
-                            </tr>
-                        </tbody>
-                    )}
-                    <tbody>
-                        {users.map((u) => (
-                            <tr key={u.id}>
-                                <td>{u.id}</td>
-                                <td>{u.name}</td>
-                                <td>{u.surname}</td>
-                                <td>{u.email}</td>
-                                <td>{u.pesel}</td>
-                                <td>{u.phone}</td>
-                                <td>{u.address}</td>
-                                <td>
-                                    <Link to={"/admin/users/" + u.id}>Edit</Link>
-                                    &nbsp;
-                                    <button onClick={(ev) => onDelete(u)}>
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    );
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = users.slice(indexOfFirstItem, indexOfLastItem);
+
+  return (
+    <div className={styles["bg-image"] + " d-flex flex-column"}>
+      <div>
+        <h1 className="text-white">Students</h1>
+        <Link className="btn mb-2" to="/admin/users/new">
+          Add new
+        </Link>
+
+      </div>
+      <div className="my-sizing">
+        <table className="table-responsive table-hover">
+          <thead>
+            <tr className="table-primary">
+              <th>ID</th>
+              <th>Name</th>
+              <th>Surname</th>
+              <th>Email</th>
+              <th>Pesel</th>
+              <th>Phone</th>
+              <th>Address</th>
+              <th></th>
+            </tr>
+          </thead>
+          {loading && (
+            <tbody>
+              <tr>
+                <td>Loading...</td>
+              </tr>
+            </tbody>
+          )}
+          {!loading && (
+            <tbody>
+              {currentItems.map((user) => (
+                <tr key={user.id}>
+                  <td>{user.id}</td>
+                  <td>{user.name}</td>
+                  <td>{user.surname}</td>
+                  <td>{user.email}</td>
+                  <td>{user.pesel}</td>
+                  <td>{user.phone}</td>
+                  <td>{user.address}</td>
+                  <td>
+                    <Link to={"/admin/users/" + user.id}>Edit</Link>
+                    &nbsp;
+                    <button onClick={() => onDelete(user)}>Delete</button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+        <Pagination
+          activePage={currentPage}
+          itemsCountPerPage={itemsPerPage}
+          totalItemsCount={totalItems}
+          pageRangeDisplayed={5}
+          onChange={handlePageChange}
+          itemClass="page-item"
+          linkClass="page-link"
+        />
+      </div>
+    </div>
+  );
 }
