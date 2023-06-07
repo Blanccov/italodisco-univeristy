@@ -16,35 +16,18 @@ export default function ApplicationForm() {
         recruitment_id: Number(id),
         subject: "",
         score: "",
-        result: "",
-        result_id: "",
     });
-    const [recruitments, setRecruitments] = useState([]);
     const [subjects, setSubjects] = useState([]);
     const [addedScores, setAddedScores] = useState([]);
 
     useEffect(() => {
         setLoading(true);
-        axiosClient
-            .get(`/recruitments`)
-            .then(({ data }) => {
-                setLoading(false);
-                setRecruitments(data.data);
-                console.log(recruitments);
-            })
-            .catch((error) => {
-                setLoading(false);
-                console.log("Error fetching departments:", error);
-            });
-
-            console.log(scores)
 
         axiosClient
             .post(`scores/uniqueSubjects`, scores)
             .then(({ data }) => {
                 setLoading(false);
                 setSubjects(data);
-                console.log(recruitments.id);
             })
             .catch((error) => {
                 setLoading(false);
@@ -58,7 +41,6 @@ export default function ApplicationForm() {
         const recruId = {
             recruitment_id: id,
         };
-        console.log(recruId);
 
         axiosClient
             .post(`/applications/applyForRecruitment`, recruId)
@@ -69,8 +51,7 @@ export default function ApplicationForm() {
                 const response = err.response;
                 console.log(err);
                 if (response && response.status === 400) {
-                    setErrors(response.data.errors);
-
+                    setErrors(response.data.error);
                 }
             });
     };
@@ -78,22 +59,50 @@ export default function ApplicationForm() {
     const onSubmit = (ev) => {
         ev.preventDefault();
 
-        console.log(scores)
+        console.log(scores);
         axiosClient
             .post(`/scores/addScore`, scores)
             .then((response) => {
                 const { data } = response.data;
                 setNotification("Score was succesfully added");
-                console.log(data);
+                let resultId = data.result_id; // Zmienna lokalna resultId
+                console.log(resultId);
+
+                axiosClient
+                    .get(`/scores?filters[result_id][$eq]=${resultId}`)
+                    .then((response) => {
+                        const { data } = response.data;
+                        console.log(data);
+                        setNotification("Score was succesfully added");
+
+                        // Sprawdź, czy już istnieje addedScore z tym samym result_id
+                        const isScoreAdded = addedScores.some(
+                            (score) => score.result_id === resultId
+                        );
+
+                        if (!isScoreAdded) {
+                            // Filtruj dane, aby user_id wynosiło 5 i dodaj subject
+                            const filteredData = data
+                                .filter((score) => score.user_id === user.id)
+                                .map((score) => ({
+                                    ...score,
+                                    subject: scores.subject,
+                                }));
+
+                            setAddedScores([...addedScores, ...filteredData]);
+                        }
+                    })
+                    .catch((err) => {
+                        const response = err.response;
+                        console.log(err);
+                        if (response && response.status === 422) {
+                            setErrors(response.data.errors);
+                        }
+                    });
             })
             .catch((err) => {
-                const response = err.response;
-                console.log(err);
-                if (response && response.status === 422) {
-                    setErrors(response.data.errors);
-                }
+                // bledy
             });
-
     };
 
     return (
@@ -103,11 +112,11 @@ export default function ApplicationForm() {
             <div>{loading && <div>loading</div>}</div>
             {errors && (
                 <div>
-                    {Object.keys(errors).map((key) => (
-                        <p key={key} className="text-danger">
-                            {errors[key][0]}
-                        </p>
-                    ))}
+
+                        <h3 className="text-white fw-bold shadow">
+                           {errors}
+                        </h3>
+
                 </div>
             )}
             {!loading && (

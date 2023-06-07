@@ -43,7 +43,8 @@ export default function RecruitmentShow() {
                             className="card border-dark m-3 my-card"
                             key={u.id}
                         >
-                            <div className="card-header">{u.departament}</div>
+                            <div className="card-header">Start date: {u.start_date}</div>
+                            <div className="card-header">End date: {u.end_date}</div>
                             <div className="card-body">
                                 <h4 className="card-title">{u.name}</h4>
                                 <p className="card-text">{u.description}</p>

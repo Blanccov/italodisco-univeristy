@@ -21,7 +21,7 @@ class Kernel extends ConsoleKernel
  */
     protected function schedule(Schedule $schedule): void
         {
-            $schedule->call('App\Services\ApplicationService@processRecruitmentResults')->everyMinute();
+            $schedule->call('App\Services\ApplicationService@processRecruitmentResults')->daily();
             $schedule->call('App\Services\RecruitmentService@checkAndReopenRecruitment')->daily();
 
         }
