@@ -57,15 +57,19 @@ class ScoreService
 
     }
 
-
-
-
-public function uniqueSubjects()
+    public function uniqueSubjects(Request $request)
     {
-        $results = Result::select('subject')->distinct()->get();
-        return $results;
+        $recruitmentId = $request->input('recruitment_id');
 
+        $results = Result::select('subject')
+                        ->where('recruitment_id', $recruitmentId)
+                        ->distinct()
+                        ->get();
+
+        return $results;
     }
+
+
 
 
 }

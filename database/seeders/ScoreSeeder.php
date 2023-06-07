@@ -13,8 +13,21 @@ class ScoreSeeder extends Seeder
      */
     public function run(): void
     {
-        Score::factory()
-        ->count(25)
-        ->create();
+        $scoreData = [];
+
+        for ($userId = 2; $userId <= 27; $userId++) {
+            for ($i = 0; $i < 3; $i++) {
+                $resultId = mt_rand(1, 20);
+                $score = mt_rand(30, 100);
+
+                $scoreData[] = [
+                    'user_id' => $userId,
+                    'result_id' => $resultId,
+                    'score' => $score,
+                ];
+            }
+        }
+
+        Score::insert($scoreData);
     }
 }

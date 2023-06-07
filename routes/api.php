@@ -40,7 +40,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('users/getAcceptedStudentsList', [UserController::class, 'getAcceptedStudentsList']);
 
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
-    Route::get('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);
+    Route::post('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);
 
     Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
     Route::post('recruitments/getRecruitmentsByDepartmentWithDate', [RecruitmentController::class, 'getRecruitmentsByDepartmentWithDate']);

@@ -12,12 +12,12 @@ export default function ApplicationForm() {
     const [errors, setErrors] = useState(null);
     const { setNotification } = useStateContext();
     const [scores, setScores] = useState({
-        id: user.id,
-        recruitment_id: id,
+        id: null,
+        recruitment_id: Number(id),
         subject: "",
-        score: null,
-        result: null,
-        result_id: null,
+        score: "",
+        result: "",
+        result_id: "",
     });
     const [recruitments, setRecruitments] = useState([]);
     const [subjects, setSubjects] = useState([]);
@@ -37,8 +37,10 @@ export default function ApplicationForm() {
                 console.log("Error fetching departments:", error);
             });
 
+            console.log(scores)
+
         axiosClient
-            .get(`scores/uniqueSubjects`)
+            .post(`scores/uniqueSubjects`, scores)
             .then(({ data }) => {
                 setLoading(false);
                 setSubjects(data);
@@ -76,6 +78,7 @@ export default function ApplicationForm() {
     const onSubmit = (ev) => {
         ev.preventDefault();
 
+        console.log(scores)
         axiosClient
             .post(`/scores/addScore`, scores)
             .then((response) => {

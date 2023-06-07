@@ -27,8 +27,8 @@ class DatabaseSeeder extends Seeder
             StatusSeeder::class,
             RecruitmentSeeder::class,
             ResultSeeder::class,
-            ApplicationSeeder::class,
             ScoreSeeder::class,
+            ApplicationSeeder::class,
         ]);
     }
 }
