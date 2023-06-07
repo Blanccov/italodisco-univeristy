@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
 use App\Http\Controllers\Api\V1\RecruitmentController;
 use App\Http\Controllers\Api\V1\ScoreController;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,6 +25,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
+
     Route::get('user', [AuthController::class, 'user']);
     Route::get('logout', [AuthController::class, 'logout']);
 
@@ -37,12 +37,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);
+    Route::get('users/getAcceptedStudentsList', [UserController::class, 'getAcceptedStudentsList']);
 
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
+    Route::get('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);
 
     Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
     Route::post('recruitments/getRecruitmentsByDepartmentWithDate', [RecruitmentController::class, 'getRecruitmentsByDepartmentWithDate']);
     Route::post('recruitments/checkAndReopenRecruitment', [RecruitmentController::class, 'checkAndReopenRecruitment']);
+    Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
 
 
     Route::apiResource('results', ResultController::class);
@@ -51,4 +54,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('applications', ApplicationController::class);
     Route::apiResource('statuses', StatusController::class);
     Route::apiResource('recruitments', RecruitmentController::class);
+    Route::apiResource('scores', ScoreController::class);
 });

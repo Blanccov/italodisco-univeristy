@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+}
+html,
+body,
+#root,
+#defaultLayout,
+#guestLayout {
+    min-height: 100vh;
+    min-width: 100%;
+}
+
+@import "bootswatch/dist/lux/bootstrap.min.css";
+
+.navbar {
+    align-items: start;
+    // margin-left: 50%;
+}
+
+.btn {
+    background-color: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    &:hover {
+        background-color: #fff;
+        color: #443735;
+        border-color: #443735;
+    }
+}
+.my-form {
+    color: black;
+    border: 2px solid #fff;
+    backdrop-filter: blur(5px);
+    padding: 3rem;
+    overflow-y: auto;
+    max-height: 80vh;
+}
+
+.table,
+.table-responsive {
+    background-color: #96724d;
+    color: white;
+    th {
+        padding: 1.5rem;
+        background-color: #695c4f;
+        color: white;
+        border-top: 2px solid #443735;
+    }
+    td {
+        border-top: 2px solid #443735;
+        padding: 1.5rem 0;
+    }
+
+    &-sm {
+        th {
+            padding: 0.7rem;
+            background-color: #695c4f;
+            color: white;
+            border-top: 2px solid #443735;
+        }
+        td {
+            border-top: 2px solid #443735;
+        }
+    }
+}
+
+.accordion-button {
+    background-color: #443735;
+    color: white;
+}
+.accordion-body {
+    background-color: #443735;
+    overflow-x: scroll;
+    max-height: 60vh;
+}
+
+.accordion {
+    max-height: 80vh;
+}
+
+.my-link {
+    color: white;
+    text-decoration: none;
+    &:hover {
+        color: wheat;
+    }
+}
+
+.my-sizing {
+    height: 62vh;
+}
+
+.table-responsive {
+    background-color: #96724d;
+}
+
+.alert {
+    position: absolute;
+    left: 4rem;
+    right: 4rem;
+}
+.center {
+    text-align: center;
+}
+
+.my-card {
+    max-width: 20rem;
+}
+.container {
+    height: 80vh;
+}

@@ -155,6 +155,7 @@ public function showApplications()
     $applications = Application::where('user_id', $user->id)->get();
 
     $data = [];
+    $scores = [];
 
     foreach ($applications as $application) {
         $recruitment = Recruitment::find($application->recruitment_id);
@@ -162,19 +163,19 @@ public function showApplications()
 
         $score = 0;
 
-        if ($status->id == 3 || $status->id == 4) {
-            $results = Result::where('recruitment_id', $recruitment->id)->get();
+        $results = Result::where('recruitment_id', $recruitment->id)->get();
 
-            foreach ($results as $result) {
-                $scoreRecord = Score::where('result_id', $result->id)
-                    ->where('user_id', $user->id)
-                    ->first();
+        foreach ($results as $result) {
+            $scoreRecord = Score::where('result_id', $result->id)
+                ->where('user_id', $user->id)
+                ->first();
 
-                if ($scoreRecord) {
-                    $score += $scoreRecord->score * $result->balance;
-                }
+            if ($scoreRecord) {
+                $score += $scoreRecord->score * $result->balance;
             }
         }
+
+        $scores[] = $score;
 
         $data[] = [
             'application_id' => $application->id,
@@ -187,8 +188,27 @@ public function showApplications()
         ];
     }
 
-    return response()->json(['applications' => $data]);
+    // Sortowanie aplikacji według wyniku w kolejności malejącej
+    usort($data, function ($a, $b) {
+        return $b['score'] - $a['score'];
+    });
+
+    // Pobranie trzech najlepszych wyników
+    $topApplications = array_slice($data, 0, 3);
+
+    // Sumowanie trzech najlepszych wyników
+    $totalScore = array_sum($scores);
+
+    // Dodanie pola 'total_score' do każdej aplikacji w tablicy
+    foreach ($topApplications as &$application) {
+        $application['total_score'] = $totalScore;
+    }
+
+    return response()->json(['applications' => $topApplications]);
 }
+
+
+
 
 public function rejectApplication(Request $request)
 {

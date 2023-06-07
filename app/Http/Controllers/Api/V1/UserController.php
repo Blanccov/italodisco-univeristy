@@ -16,7 +16,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        return new UserCollection(User::filter()->get());
+        return new UserCollection(User::filter()->all());
     }
 
     public function store(StoreUserRequest $request)
@@ -45,6 +45,9 @@ class UserController extends Controller
     }
     public function getAcceptedStudents(Request $request){
         return (new UserService())->getAcceptedStudents($request);
+    }
+    public function getAcceptedStudentsList(){
+        return (new UserService())->getAcceptedStudentsList();
     }
 
 }

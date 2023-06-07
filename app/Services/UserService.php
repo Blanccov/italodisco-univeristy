@@ -19,7 +19,7 @@ class UserService
             ->orWhere('surname', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('pesel', 'LIKE', '%' . $searchTerm . '%')
             ->orWhere('email', 'LIKE', '%' . $searchTerm . '%')
-            ->orWhere('phone_number', 'LIKE', '%' . $searchTerm . '%')
+            ->orWhere('phone', 'LIKE', '%' . $searchTerm . '%')
             ->get();
 
         return response()->json(['users' => $users]);
@@ -37,6 +37,18 @@ class UserService
             ->get();
 
         return response()->json(['accepted_students' => $acceptedStudents]);
+    }
+
+    public function getAcceptedStudentsList()
+    {
+
+        $acceptedStudents = Application::join('users', 'applications.user_id', '=', 'users.id')
+        ->join('recruitments', 'applications.recruitment_id', '=', 'recruitments.id')
+        ->where('applications.status_id', 3)
+        ->select('users.id', 'users.name', 'users.surname', 'users.email', 'users.pesel', 'users.phone', 'users.address', 'recruitments.name as recruitment_name')
+        ->get();
+
+    return response()->json(['accepted_students' => $acceptedStudents]);
     }
 
 

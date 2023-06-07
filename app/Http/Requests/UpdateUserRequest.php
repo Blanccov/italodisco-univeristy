@@ -12,6 +12,13 @@ class UpdateUserRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+
+        // $user = $this->user();
+        // if ($user->tokenCan('user:update')) {
+        //     return true;
+        // }
+
+        // return false;
     }
 
     /**

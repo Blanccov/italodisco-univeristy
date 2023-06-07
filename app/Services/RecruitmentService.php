@@ -63,5 +63,11 @@ public function checkAndReopenRecruitment()
     return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);
 }
 
+public function getDepartments()
+{
+    $departments = Recruitment::select('departament')->distinct()->get('department');
+    return $departments;
+}
+
 
 }
