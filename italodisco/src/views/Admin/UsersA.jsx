@@ -85,9 +85,7 @@ export default function UsersA() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <button onClick={handleSearch} className="btn">
-            Search
-          </button>
+
         </div>
       </div>
       <div className="my-sizing">

@@ -4,11 +4,10 @@ import styles from "./About.module.scss";
 export default function About() {
     return (
         <div className={styles["bg-image"]}>
-            <div className="container">
-                <div className="row">
-                    <div className="col"></div>
-                    <div className="col"></div>
-                    <div className="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0 ">
+            <div class="container">
+                <div class="row row-cols-2">
+                    <div class="col">Column</div>
+                    <div class="col">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">About univeristy</h4>
@@ -61,8 +60,7 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-100"></div>
-                    <div className="col-sm-6 col-md-5 offset-md-2 col-lg-6 offset-lg-0">
+                    <div class="col">
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">How to recruitment</h4>
@@ -81,8 +79,21 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                    <div className="col"></div>
-                    <div className="col"></div>
+                    <div class="col">Column</div>
+                    <div class="col">Column</div>
+                    <div class="col">
+                    <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Check recruitments!</h4>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    Card subtitle
+                                </h6>
+                                <p class="card-text">
+
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

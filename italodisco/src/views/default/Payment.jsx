@@ -50,25 +50,34 @@ export default function Payment() {
             });
     };
 
+    const onDelete = () => {
+        if (!window.confirm("Are you sure you want to resignation?")) {
+            return;
+        }
+
+        const app = { application_id: id };
+        console.log(app);
+
+        axiosClient.post(`/applications/rejectApplication`, app).then(() => {
+            navigate("/applications");
+        });
+    };
+
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <h1 className="text-white">
                 application for: {application.recruitment_name}
             </h1>
 
-            {errors && (
-                <h4 className="text-danger">
-                    wrong deposit amount
-                </h4>
-            )}
+            {errors && <h4 className="text-danger">wrong deposit amount</h4>}
 
             {!loading && (
                 <div className="my-form">
-                    <h2>Status: {application.status_name}</h2>
-                    <h3>Your points: {application.score}</h3>
+                    <h2>Status: <u>{application.status_name}</u></h2>
+                    <h3>Your points: <u>{application.score}</u></h3>
                     {application.status_id == 1 && (
                         <form onSubmit={onSubmit}>
-                            <h3>Amount to pay: {application.amount}</h3>
+                            <h3>Amount to pay: <u>{application.amount}</u></h3>
                             <input
                                 placeholder="amount"
                                 onChange={(ev) =>
@@ -85,6 +94,11 @@ export default function Payment() {
                                 Pay
                             </button>
                         </form>
+                    )}
+                    {application.status_id == 1 && (
+                        <button className="mt-3" onClick={onDelete}>
+                            Resignation from recruitment
+                        </button>
                     )}
                 </div>
             )}

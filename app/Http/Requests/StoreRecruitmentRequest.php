@@ -27,16 +27,10 @@ class StoreRecruitmentRequest extends FormRequest
             'description' => ['required'],
             'places' => ['required', 'numeric'],
             'amount' => ['required', 'numeric'],
-            'startDate' => ['required', 'date'],
-            'endDate' => ['required', 'date']
+            'start_date' => ['required', 'date'],
+            'end_date' => ['required', 'date']
         ];
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'start_date'=>$this->startDate,
-            'end_date'=>$this->endDate,
-        ]);
-    }
+
 }
