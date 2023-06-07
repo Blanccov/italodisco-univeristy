@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Application;
 use App\Models\Status;
 use App\Models\Recruitment;
+use Illuminate\Support\Facades\DB;
 
 
 class UserService
@@ -41,15 +42,16 @@ class UserService
 
     public function getAcceptedStudentsList()
     {
+        $users = User::select('users.id', 'users.name', 'users.surname', 'users.email')
+                ->join('Applications', 'Users.id', '=', 'Applications.user_id')
+                ->where('Applications.status_id', 3)
+                ->distinct()
+                ->get();
 
-        $acceptedStudents = Application::join('users', 'applications.user_id', '=', 'users.id')
-        ->join('recruitments', 'applications.recruitment_id', '=', 'recruitments.id')
-        ->where('applications.status_id', 3)
-        ->select('users.id', 'users.name', 'users.surname', 'users.email', 'users.pesel', 'users.phone', 'users.address', 'recruitments.name as recruitment_name')
-        ->get();
-
-    return response()->json(['accepted_students' => $acceptedStudents]);
+        return response()->json(['accepted_students' => $users]);
     }
+
+
 
 
 }

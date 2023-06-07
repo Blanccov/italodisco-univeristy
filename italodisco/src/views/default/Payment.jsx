@@ -95,7 +95,7 @@ export default function Payment() {
                             </button>
                         </form>
                     )}
-                    {application.status_id == 1 && (
+                    {application.status_id !==5 && (
                         <button className="mt-3" onClick={onDelete}>
                             Resignation from recruitment
                         </button>

@@ -67,9 +67,6 @@ export default function StudentsListA() {
     <div className={styles["bg-image"] + " d-flex flex-column"}>
       <div>
         <h1 className="text-white">Students</h1>
-        <Link className="btn mb-2" to="/admin/users/new">
-          Add new
-        </Link>
         <div className="mb-2">
         <input
           type="text"

@@ -19,6 +19,7 @@ export default function ApplicationForm() {
     });
     const [subjects, setSubjects] = useState([]);
     const [addedScores, setAddedScores] = useState([]);
+    const [subjectBalance, setSubjectBalance] = useState(0);
 
     useEffect(() => {
         setLoading(true);
@@ -28,6 +29,10 @@ export default function ApplicationForm() {
             .then(({ data }) => {
                 setLoading(false);
                 setSubjects(data);
+                console.log(data);
+                if (data.subject === "physics") {
+                    setSubjectBalance(data.balance);
+                }
             })
             .catch((error) => {
                 setLoading(false);
@@ -65,7 +70,7 @@ export default function ApplicationForm() {
             .then((response) => {
                 const { data } = response.data;
                 setNotification("Score was succesfully added");
-                let resultId = data.result_id; // Zmienna lokalna resultId
+                let resultId = data.result_id;
                 console.log(resultId);
 
                 axiosClient
@@ -75,13 +80,11 @@ export default function ApplicationForm() {
                         console.log(data);
                         setNotification("Score was succesfully added");
 
-                        // Sprawdź, czy już istnieje addedScore z tym samym result_id
                         const isScoreAdded = addedScores.some(
                             (score) => score.result_id === resultId
                         );
 
                         if (!isScoreAdded) {
-                            // Filtruj dane, aby user_id wynosiło 5 i dodaj subject
                             const filteredData = data
                                 .filter((score) => score.user_id === user.id)
                                 .map((score) => ({
@@ -112,11 +115,7 @@ export default function ApplicationForm() {
             <div>{loading && <div>loading</div>}</div>
             {errors && (
                 <div>
-
-                        <h3 className="text-white fw-bold shadow">
-                           {errors}
-                        </h3>
-
+                    <h3 className="text-white fw-bold shadow">{errors}</h3>
                 </div>
             )}
             {!loading && (
@@ -124,12 +123,17 @@ export default function ApplicationForm() {
                     <div>
                         <select
                             value={scores.subject}
-                            onChange={(ev) =>
+                            onChange={(ev) => {
+                                const selectedSubject = ev.target.value;
                                 setScores({
                                     ...scores,
-                                    subject: ev.target.value,
-                                })
-                            }
+                                    subject: selectedSubject,
+                                });
+                                const selectedSubjectBalance = subjects.find(
+                                    (subject) => subject.subject === selectedSubject
+                                )?.balance;
+                                setSubjectBalance(selectedSubjectBalance);
+                            }}
                         >
                             <option value="">Select Subject</option>
                             {subjects.map((subject) => (
@@ -153,6 +157,7 @@ export default function ApplicationForm() {
                         />
                     </div>
                     <div>
+                        <p>Balance: {subjectBalance}</p>
                         <button className="btn btn-outline-primary mt-2">
                             Add scores
                         </button>

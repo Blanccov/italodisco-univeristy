@@ -61,7 +61,7 @@ class ScoreService
     {
         $recruitmentId = $request->input('recruitment_id');
 
-        $results = Result::select('subject')
+        $results = Result::select('subject', 'balance')
                         ->where('recruitment_id', $recruitmentId)
                         ->distinct()
                         ->get();

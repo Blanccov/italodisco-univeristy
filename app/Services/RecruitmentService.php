@@ -28,8 +28,8 @@ class RecruitmentService
     $currentDate = now()->toDateString();
 
     $recruitments = Recruitment::where('departament', $departament)
-        ->where('start_date', '<=', $currentDate)
-        ->where('end_date', '>=', $currentDate)
+        ->where('start_date', '<', $currentDate)
+        ->where('end_date', '>', $currentDate)
         ->get();
 
     if ($recruitments->isEmpty()) {

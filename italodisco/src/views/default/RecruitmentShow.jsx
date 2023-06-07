@@ -33,9 +33,6 @@ export default function RecruitmentShow() {
     return (
         <div className={styles["bg-image"]}>
             <div className="my-sizing">
-                <Link className="btn mb-2" to="/recruitments/new">
-                    Add new
-                </Link>
                 {errors && <h1 className="text-white">{errors}</h1>}
                 <div className="d-flex flex-row flex-wrap">
                     {recruitment.map((u) => (
