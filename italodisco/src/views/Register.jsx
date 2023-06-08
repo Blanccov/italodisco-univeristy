@@ -56,7 +56,7 @@ export default function Register() {
                         {errors && (
                             <div>
                                 {Object.keys(errors).map((key) => (
-                                    <p key={key}>{errors[key][0]}</p>
+                                    <p key={key} className="text-danger">{errors[key][0]}</p>
                                 ))}
                             </div>
                         )}
@@ -74,6 +74,7 @@ export default function Register() {
                                     placeholder="Enter Name"
                                     id="Name"
                                     ref={nameRef}
+                                    required
                                 />
                             </div>
                             <div className="form-group ms-2">
@@ -89,6 +90,7 @@ export default function Register() {
                                     placeholder="Enter Surname"
                                     id="Surname"
                                     ref={surnameRef}
+                                    required
                                 />
                             </div>
                         </div>
@@ -97,6 +99,7 @@ export default function Register() {
                                 <label
                                     className="col-form-label mt-4 text-white"
                                     htmlFor="Pesel"
+                                    required
                                 >
                                     Pesel
                                 </label>
@@ -106,6 +109,7 @@ export default function Register() {
                                     placeholder="Enter pesel"
                                     id="Pesel"
                                     ref={peselRef}
+                                    required
                                 />
                             </div>
                             <div className="form-group ms-2">
@@ -121,6 +125,7 @@ export default function Register() {
                                     placeholder="Enter phone"
                                     id="Phone"
                                     ref={phoneRef}
+                                    required
                                 />
                             </div>
                         </div>
@@ -138,6 +143,7 @@ export default function Register() {
                                 id="Address"
                                 rows={2}
                                 ref={addressRef}
+                                required
                             />
                         </div>
 
@@ -155,6 +161,7 @@ export default function Register() {
                                 aria-describedby="emailHelp"
                                 placeholder="Enter email"
                                 ref={emailRef}
+                                required
                             />
                             <small
                                 id="emailHelp"
@@ -177,6 +184,7 @@ export default function Register() {
                                 id="Password"
                                 placeholder="Password"
                                 ref={passwordRef}
+                                required
                             />
                         </div>
                         <button

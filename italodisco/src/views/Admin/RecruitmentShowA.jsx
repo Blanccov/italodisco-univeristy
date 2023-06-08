@@ -8,10 +8,6 @@ export default function RecruitmentShowA() {
     const { departament } = useParams();
     const [recruitment, setRecruitment] = useState([]);
     // const [loading, setLoding] = useState(false);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalItems, setTotalItems] = useState(0);
-    const itemsPerPage = 5;
-
     useEffect(() => {
         getRecruitment();
     }, []);
@@ -32,13 +28,8 @@ export default function RecruitmentShowA() {
             .then(({ data }) => {
                 setRecruitment(data.data);
                 console.log(data.data.length)
-                setTotalItems(data.data.length);
             })
             .catch(() => {});
-    };
-
-    const handlePageChange = (pageNumber) => {
-        setCurrentPage(pageNumber);
     };
 
     return (
@@ -68,15 +59,6 @@ export default function RecruitmentShowA() {
                         </div>
                     ))}
                 </div>
-                <Pagination
-                    activePage={currentPage}
-                    itemsCountPerPage={itemsPerPage}
-                    totalItemsCount={totalItems}
-                    pageRangeDisplayed={5}
-                    onChange={handlePageChange}
-                    itemClass="page-item"
-                    linkClass="page-link"
-                />
             </div>
         </div>
     );

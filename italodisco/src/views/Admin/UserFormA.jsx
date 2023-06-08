@@ -131,7 +131,7 @@ export default function UserFormA() {
                         }
                         placeholder="Phone"
                     />
-                    <input
+                    <textarea
                         value={user.address}
                         onChange={(ev) =>
                             setUser({ ...user, address: ev.target.value })

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('pesel')->unique();
-            $table->string('phone')->unique();
+            $table->string('phone');
             $table->string('address');
             // $table->rememberToken();
             // $table->timestamps();

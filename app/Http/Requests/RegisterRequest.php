@@ -24,9 +24,9 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'max:50'],
             'surname' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'unique:users,email'].$this->user()->id,
+            'email' => ['required', 'email', 'unique:users,email'],
             'password' => ['required', 'min:8'],
-            'pesel' => ['required', 'size:11', 'unique:users,pesel'].$this->user()->id,
+            'pesel' => ['required', 'size:11', 'unique:users,pesel'],
             'phone' => ['required'],
             'address' => ['required'],
             'role_id' => ['required', 'numeric']

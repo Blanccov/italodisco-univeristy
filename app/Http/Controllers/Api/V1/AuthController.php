@@ -16,33 +16,50 @@ use App\Models\Role;
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
-    {
-        $basicRoles = [1, 2];  // 1 - guest, 2 - user
+{
+    $basicRoles = [1, 2];  // 1 - guest, 2 - user
 
-        $user = new User();
+    $user = User::where('email', $request->input('email'))
+                ->orWhere('pesel', $request->input('pesel'))
+                ->first();
 
-        $user->name = $request->input('name');
-        $user->surname = $request->input('surname');
-        $user->phone = $request->input('phone');
-        $user->pesel = $request->input('pesel');
-        $user->address = $request->input('address');
-        $user->role_id = $request->input('role_id');
-        $user->email = $request->input('email');
-        $user->password = Hash::make($request->input('password'));
-
-        $user->save();
-
-        $user->roles($basicRoles);
-
-        return $user;
-
-        //        return User::create([
-        //            'first_name' => $request->input('first_name'),
-        //            'last_name' => $request->input('last_name'),
-        //            'email' => $request->input('email'),
-        //            'password' => Hash::make($request->input('password'))
-        //        ]);
+    if ($user) {
+        return response([
+            'error' => 'An account with the same email or PESEL already exists'
+        ], Response::HTTP_BAD_REQUEST); // 400
     }
+
+    $user = new User();
+
+    $user->name = $request->input('name');
+    $user->surname = $request->input('surname');
+    $user->phone = $request->input('phone');
+    $user->pesel = $request->input('pesel');
+    $user->address = $request->input('address');
+    $user->role_id = $request->input('role_id');
+    $user->email = $request->input('email');
+    $user->password = Hash::make($request->input('password'));
+
+    if (strlen($user->pesel) !== 11) {
+        return response([
+            'error' => 'Invalid PESEL length (must be 11 characters)'
+        ], Response::HTTP_BAD_REQUEST); // 400
+    }
+
+    if (strlen($request->input('password')) <= 8) {
+        return response([
+            'error' => 'Password must be longer than 8 characters'
+        ], Response::HTTP_BAD_REQUEST); // 400
+    }
+
+    $user->save();
+
+    $user->roles($basicRoles);
+
+    return $user;
+}
+
+
 
     public function login(LoginRequest $request)
     {
