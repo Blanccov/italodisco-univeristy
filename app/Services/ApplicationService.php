@@ -77,6 +77,7 @@ public function processRecruitmentResults()
             if ($statusId == 1 || $statusId == 2) {
                 $results = Result::where('recruitment_id', $recruitment->id)->get();
                 $totalScore = 0;
+                $userScores = [];
 
                 foreach ($results as $result) {
                     $scoreRecord = Score::where('result_id', $result->id)
@@ -86,9 +87,15 @@ public function processRecruitmentResults()
                     if ($scoreRecord) {
                         $score = $scoreRecord->score;
                         $balanceMultiplier = $result->balance;
-                        $totalScore += $score * $balanceMultiplier;
+                        $userScores[] = $score * $balanceMultiplier;
                     }
                 }
+
+                rsort($userScores);
+
+                $bestScores = array_slice($userScores, 0, 3);
+
+                $totalScore = array_sum($bestScores);
 
                 $usersScores[$userId] = $totalScore;
             }
@@ -119,6 +126,7 @@ public function processRecruitmentResults()
 
     return response()->json(['message' => 'Processed applications for finished recruitments.']);
 }
+
 
 
 public function makePaymentForRecruitment(Request $request)
