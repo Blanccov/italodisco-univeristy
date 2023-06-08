@@ -116,6 +116,7 @@ export default function StudentsA() {
             </tbody>
           )}
         </table>
+      </div>
         <Pagination
           activePage={currentPage}
           itemsCountPerPage={itemsPerPage}
@@ -124,8 +125,7 @@ export default function StudentsA() {
           onChange={handlePageChange}
           itemClass="page-item"
           linkClass="page-link"
-        />
-      </div>
+          />
     </div>
   );
 }

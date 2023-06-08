@@ -42,7 +42,7 @@ class UserService
 
     public function getAcceptedStudentsList()
     {
-        $users = User::select('users.id', 'users.name', 'users.surname', 'users.email')
+        $users = User::select('users.id', 'users.name', 'users.surname', 'users.email', 'users.phone', 'users.pesel', 'users.address')
                 ->join('Applications', 'Users.id', '=', 'Applications.user_id')
                 ->where('Applications.status_id', 3)
                 ->distinct()

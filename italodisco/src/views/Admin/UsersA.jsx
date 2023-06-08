@@ -130,6 +130,7 @@ export default function UsersA() {
             </tbody>
           )}
         </table>
+      </div>
         <Pagination
           activePage={currentPage}
           itemsCountPerPage={itemsPerPage}
@@ -139,7 +140,6 @@ export default function UsersA() {
           itemClass="page-item"
           linkClass="page-link"
         />
-      </div>
     </div>
   );
 }

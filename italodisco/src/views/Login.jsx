@@ -41,7 +41,7 @@ export default function Login() {
                     }
                 }
                 if(response && response.status === 401){
-                    setErrors("Email or password is wrong!");
+                    setErrors(response.data.error);
                 }
             });
 
