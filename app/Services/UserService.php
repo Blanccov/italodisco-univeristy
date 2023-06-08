@@ -61,18 +61,22 @@ class UserService
         'new_password' => 'nullable|string|min:8',
         'current_password' => 'required_with:new_password|string',
         'confirm_password' => 'required_with:new_password|same:new_password',
+        'pesel' => 'required|string|unique:users,pesel,'.$user->id,
     ], [
         'new_password.min' => 'The new password must be at least 8 characters long.',
         'confirm_password.same' => 'The confirmation of the new password does not match.',
+        'email.unique' => 'The email address is already taken.',
+        'pesel.unique' => 'The PESEL number is already taken.',
     ]);
 
     if (!Hash::check($request->input('current_password'), $user->password)) {
-        return response()->json(['errors' => 'The current password is incorrect.'], 422);
+        return response()->json(['error' => 'The current password is incorrect.'], 422);
     }
 
     $user->name = $request->input('name');
     $user->surname = $request->input('surname');
     $user->email = $request->input('email');
+    $user->pesel = $request->input('pesel');
 
     if ($request->has('new_password')) {
         $newPassword = $request->input('new_password');
@@ -88,6 +92,7 @@ class UserService
 
     return response()->json(['message' => 'The user profile has been updated.']);
 }
+
 
 
 
