@@ -33,6 +33,13 @@ class ApplicationService
         return response()->json(['error' => 'Nie możesz aplikować na ten kierunek.'], 400);
     }
 
+    $existingApplicationsCount = Application::where('user_id', $user->id)
+        ->count();
+
+    if ($existingApplicationsCount >= 3) {
+        return response()->json(['error' => 'Osiągnąłeś limit 3 aplikacji na ten kierunek.'], 400);
+    }
+
     $existingApplication = Application::where('user_id', $user->id)
         ->where('recruitment_id', $recruitmentId)
         ->first();
@@ -50,6 +57,7 @@ class ApplicationService
 
     return response()->json(['message' => 'Wniosek został pomyślnie złożony.']);
 }
+
 
 
 public function processRecruitmentResults()
@@ -207,27 +215,5 @@ public function showApplications()
     return response()->json(['applications' => $topApplications]);
 }
 
-
-
-
-public function rejectApplication(Request $request)
-{
-    $user = Auth::user();
-    $applicationId = $request->input('application_id');
-
-    $application = Application::where('id', $applicationId)
-        ->where('user_id', $user->id)
-        ->where('status_id', '!=', 4)
-        ->first();
-
-    if (!$application) {
-        return response()->json(['error' => 'Nie znaleziono aplikacji do odrzucenia lub aplikacja ma już status 4 (odrzucona).'], 404);
-    }
-
-    $application->status_id = 5;
-    $application->save();
-
-    return response()->json(['message' => 'Aplikacja została odrzucona.']);
-}
 
 }

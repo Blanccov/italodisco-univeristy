@@ -84,7 +84,4 @@ class ApplicationController extends Controller
     public function showApplications(){
        return (new ApplicationService())->showApplications();
     }
-    public function rejectApplication(Request $request){
-        return (new ApplicationService())->rejectApplication($request);
-    }
 }

@@ -33,7 +33,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('applications/processRecruitmentResults', [ApplicationController::class, 'processRecruitmentResults']);
     Route::post('applications/makePaymentForRecruitment', [ApplicationController::class, 'makePaymentForRecruitment']);
     Route::get('applications/showApplications', [ApplicationController::class, 'showApplications']);
-    Route::post('applications/rejectApplication', [ApplicationController::class, 'rejectApplication']);
 
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);

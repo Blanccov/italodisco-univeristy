@@ -19,6 +19,7 @@ import StudentsA from "./views/Admin/StudentsA";
 import StudentsListA from "./views/Admin/StudentsListA";
 import Payment from "./views/default/Payment";
 import Subject from "./views/Admin/Subjects";
+import Profile from "./views/default/Profile";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,14 @@ const router = createBrowserRouter([
                 path: "/about",
                 element: <About />,
             },
+            {
+                path: "/applications/payment/:id",
+                element: <Payment key="payment" />
+            },
+            {
+                path: "/profile",
+                element: <Profile />
+            }
 
         ],
     },
@@ -103,10 +112,7 @@ const router = createBrowserRouter([
                 path: "/admin/students",
                 element: <StudentsListA />,
             },
-            {
-                path: "/applications/payment/:id",
-                element: <Payment key="payment" />
-            }
+
         ],
     },
     {

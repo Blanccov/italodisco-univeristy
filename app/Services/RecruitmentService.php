@@ -58,10 +58,16 @@ public function checkAndReopenRecruitment()
                 'end_date' => now()->addMonth()->toDateString(),
             ]);
         }
+
+        // Usunięcie aplikacji o statusie 4
+        Application::where('recruitment_id', $recruitment->id)
+            ->where('status_id', 4)
+            ->delete();
     }
 
     return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);
 }
+
 
 public function getDepartments()
 {
