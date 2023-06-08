@@ -1,12 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import styles from "./Recruitment.module.scss";
+import axiosClient from "../../axios-client";
 
 export default function Subject() {
+    const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState(null);
     const [subject, setSubject] = useState({
         id: null,
         subject: "",
         balance: "",
         recruitment_id: "",
     });
+    const [currentSub, setCurrentSub] = useState([]);
+
+    useEffect(() => {
+        axiosClient
+            .get(`/results`, {})
+            .then(({ data }) => {
+                const filteredSubjects = data.data.filter(
+                    (subject) => subject.recruitment_id === 1
+                );
+                setCurrentSub(filteredSubjects);
+                console.log(currentSub);
+                navigate("/admin/recruitments/");
+            })
+            .catch((err) => {
+                const response = err.response;
+                console.log(err);
+                if (response && response.status === 422) {
+                    setErrors(response.data.errors);
+                }
+            });
+    }, []);
 
     const onSubmit = (ev) => {
         ev.preventDefault();
@@ -15,7 +40,7 @@ export default function Subject() {
             axiosClient
                 .post(`/results`, subject)
                 .then(() => {
-                    setNotification("subject was succesfully updated");
+                    // setNotification("subject was succesfully updated");
                     navigate("/admin/recruitments/");
                 })
                 .catch((err) => {
@@ -57,6 +82,7 @@ export default function Subject() {
                         <input
                             type="number"
                             max="1"
+                            min="0"
                             step="0.25"
                             value={subject.balance}
                             onChange={(ev) =>
@@ -75,6 +101,17 @@ export default function Subject() {
                     </div>
                 </form>
             )}
+            <div>
+                <table className="bg-white m-3 border">
+                {currentSub.map((u) => (
+                    <tr key={u.id} className="">
+                        <td>{u.subject}</td>
+                        <td>{u.balance}</td>
+                        <button onClick={(ev) => onDelete(u)}>Delete</button>
+                    </tr>
+                ))}
+                    </table>
+            </div>
         </div>
     );
 }
