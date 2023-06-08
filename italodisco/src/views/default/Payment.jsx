@@ -55,10 +55,7 @@ export default function Payment() {
             return;
         }
 
-        const app = { application_id: id };
-        console.log(app);
-
-        axiosClient.post(`/applications/rejectApplication`, app).then(() => {
+        axiosClient.delete(`/applications/${id}`).then(() => {
             navigate("/applications");
         });
     };
