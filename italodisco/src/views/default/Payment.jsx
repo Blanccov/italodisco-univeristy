@@ -27,13 +27,12 @@ export default function Payment() {
                 setLoading(false);
             });
     }, []);
-    console.log(application.amount);
+
 
     const [amount, setAmount] = useState([]);
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        console.log(amount);
 
         axiosClient
             .post(`/applications/makePaymentForRecruitment`, amount)

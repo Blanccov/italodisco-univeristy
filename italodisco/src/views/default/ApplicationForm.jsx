@@ -29,7 +29,6 @@ export default function ApplicationForm() {
       .then(({ data }) => {
         setLoading(false);
         setSubjects(data);
-        console.log(data);
         if (data.subject === "physics") {
           setSubjectBalance(data.balance);
         }
@@ -65,20 +64,17 @@ export default function ApplicationForm() {
   const onSubmit = (ev) => {
     ev.preventDefault();
 
-    console.log(scores);
     axiosClient
       .post(`/scores/addScore`, scores)
       .then((response) => {
         const { data } = response.data;
         setNotification("Score was successfully added");
         let resultId = data.result_id;
-        console.log(resultId);
 
         axiosClient
           .get(`/scores?filters[result_id][$eq]=${resultId}`)
           .then((response) => {
             const { data } = response.data;
-            console.log(data);
             setNotification("Score was successfully added");
 
             const isScoreAdded = addedScores.some(
@@ -106,7 +102,6 @@ export default function ApplicationForm() {
             }
             if (response && response.status === 400) {
               setErrors(response.data.errors);
-              console.log("chuj")
             }
           });
       })

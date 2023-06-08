@@ -28,7 +28,6 @@ export default function RecruitmentFormA() {
             .get(`/recruitments/getDepartments`)
             .then(({ data }) => {
                 setLoading(false);
-                console.log("Departments:", data);
                 setDepartaments(data);
             })
             .catch((error) => {
@@ -50,12 +49,10 @@ export default function RecruitmentFormA() {
                     setLoading(false);
                 });
         }, []);
-        console.log(recruitment);
     }
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        console.log(recruitment);
         if (recruitment.id) {
             axiosClient
                 .patch(`/recruitments/${recruitment.id}`, recruitment)
@@ -93,7 +90,6 @@ export default function RecruitmentFormA() {
         const month = String(currentDate.getMonth() + 1).padStart(2, '0');
         const day = String(currentDate.getDate()).padStart(2, '0');
         const formattedDate = `${year}-${month}-${day}`;
-        console.log(formattedDate)
 
         const stopRecruitment = {
           end_date: formattedDate,

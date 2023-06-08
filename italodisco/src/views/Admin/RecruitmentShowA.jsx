@@ -27,7 +27,6 @@ export default function RecruitmentShowA() {
             .get(`/recruitments?filters[departament][$eq]=${departament}`)
             .then(({ data }) => {
                 setRecruitment(data.data);
-                console.log(data.data.length)
             })
             .catch(() => {});
     };

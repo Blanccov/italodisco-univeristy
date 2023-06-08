@@ -15,7 +15,6 @@ export default function RecruitmentShow() {
 
     const getRecruitment = () => {
         const dep = { departament };
-        console.log(dep);
         axiosClient
             .post(`/recruitments/getRecruitmentsByDepartmentWithDate`, dep)
             .then(({ data }) => {

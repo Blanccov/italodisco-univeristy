@@ -8,7 +8,7 @@ export default function Profile() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
-    const { setNotification } = useStateContext();
+    const { setNotification, setToken } = useStateContext();
     const [user, setUser] = useState({
         id: null,
         name: "",
@@ -35,14 +35,28 @@ export default function Profile() {
                 setLoading(false);
             });
 
-            if (!currentPassword) {
-                setErrors({
-                    currentPassword: ["Current Password is required"],
-                });
-                return;
-            }
-
+        if (!currentPassword) {
+            setErrors({
+                currentPassword: ["Current Password is required"],
+            });
+            return;
+        }
     }, []);
+
+    const onDelete = () => {
+        if (!window.confirm("Are you sure you want to delete this user?")) {
+            return;
+          }
+
+        axiosClient
+            .get(`/users?filters[email][$eq]=${user.email}`)
+            .then(({ data }) => {
+                const userId = data.data[0].id;
+                axiosClient.delete(`/users/${userId}`).then(() => {
+                    setToken(null)
+                });
+            });
+    };
 
     const onSubmit = (ev) => {
         ev.preventDefault();
@@ -66,7 +80,6 @@ export default function Profile() {
             });
             return;
         }
-
 
         const requestData = {
             name: user.name,
@@ -304,6 +317,9 @@ export default function Profile() {
                     </form>
                 )}
             </div>
+            <button className="btn btn-danger m-3" onClick={(ev) => onDelete()}>
+                Delete account
+            </button>
         </div>
     );
 }

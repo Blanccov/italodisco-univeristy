@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import Card from "../../UX/Card";
 import axiosClient from "../../axios-client";
 import styles from "./Recruitment.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useStateContext } from "../../context/ContextProvider";
 
 export default function Appliacations() {
     const [applications, setApplications] = useState([]);
     const [loading, setLoading] = useState(false);
+    const { user } = useStateContext;
+    const navigate = useNavigate();
 
     useEffect(() => {
         getRecruitment();
@@ -58,7 +61,7 @@ export default function Appliacations() {
                         </Card>
                     ))}
             </div>
-            <Link className="btn m-2" to="/recruitments">
+            <Link className="btn m-5" to="/recruitments">
                 Add new
             </Link>
         </div>
