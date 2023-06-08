@@ -35,8 +35,12 @@ class RecruitmentController extends Controller
      */
     public function store(StoreRecruitmentRequest $request)
     {
-        return new RecruitmentResource(Recruitment::create($request->all()));
+        $recruitment = Recruitment::create($request->all());
+        return response()->json([
+            'id' => $recruitment->id,
+        ], 201);
     }
+
 
     /**
      * Display the specified resource.

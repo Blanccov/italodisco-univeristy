@@ -88,7 +88,7 @@ const router = createBrowserRouter([
                 element: <RecruitmentFormA key="recruitmentCreate" />,
             },
             {
-                path: "/admin/recruitments/subjects",
+                path: "/admin/recruitments/new/:id",
                 element: <Subject key="subject" />,
             },
             {

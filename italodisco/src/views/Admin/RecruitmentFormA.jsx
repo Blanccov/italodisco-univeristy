@@ -63,8 +63,8 @@ export default function RecruitmentFormA() {
             axiosClient
                 .patch(`/recruitments/${recruitment.id}`, recruitment)
                 .then(() => {
-                    setNotification("recruitment was succesfully updated");
-                    navigate("/admin/recruitments/");
+                    setNotification("Recruitment was successfully updated");
+                    navigate("/admin/recruitments/new/" + recruitment.id);
                 })
                 .catch((err) => {
                     const response = err.response;
@@ -73,13 +73,12 @@ export default function RecruitmentFormA() {
                         setErrors(response.data.errors);
                     }
                 });
-                console.log(recruitment);
         } else {
             axiosClient
                 .post(`/recruitments/`, recruitment)
-                .then(() => {
-                    setNotification("recruitment was succesfully created");
-                    navigate("/admin/recruitments");
+                .then(({ data }) => {
+                    setNotification("Recruitment was successfully created");
+                    navigate("/admin/recruitments/new/" + data.id);
                 })
                 .catch((err) => {
                     const response = err.response;
@@ -90,6 +89,7 @@ export default function RecruitmentFormA() {
                 });
         }
     };
+
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>

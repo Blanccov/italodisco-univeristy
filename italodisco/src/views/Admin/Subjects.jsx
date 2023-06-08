@@ -1,28 +1,34 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Recruitment.module.scss";
 import axiosClient from "../../axios-client";
+import { useParams } from "react-router-dom";
 
 export default function Subject() {
+    const { id } = useParams();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
     const [subject, setSubject] = useState({
         id: null,
         subject: "",
         balance: "",
-        recruitment_id: "",
+        recruitment_id: Number(id),
     });
     const [currentSub, setCurrentSub] = useState([]);
 
     useEffect(() => {
+        fetchData();
+    }, []);
+
+    const fetchData = () => {
+        setLoading(true);
         axiosClient
             .get(`/results`, {})
             .then(({ data }) => {
                 const filteredSubjects = data.data.filter(
-                    (subject) => subject.recruitment_id === 1
+                    (subject) => subject.recruitment_id == id
                 );
                 setCurrentSub(filteredSubjects);
-                console.log(currentSub);
-                navigate("/admin/recruitments/");
+                setLoading(false);
             })
             .catch((err) => {
                 const response = err.response;
@@ -30,18 +36,18 @@ export default function Subject() {
                 if (response && response.status === 422) {
                     setErrors(response.data.errors);
                 }
+                setLoading(false);
             });
-    }, []);
+    };
 
     const onSubmit = (ev) => {
         ev.preventDefault();
         console.log(subject);
-        if (subject.id) {
             axiosClient
                 .post(`/results`, subject)
                 .then(() => {
-                    // setNotification("subject was succesfully updated");
-                    navigate("/admin/recruitments/");
+                    fetchData();
+                    // setNotification("subject was successfully updated");
                 })
                 .catch((err) => {
                     const response = err.response;
@@ -50,13 +56,28 @@ export default function Subject() {
                         setErrors(response.data.errors);
                     }
                 });
-        }
+    };
+
+    const onDelete = (subjectToDelete) => {
+        axiosClient
+            .delete(`/results/${subjectToDelete.id}`)
+            .then(() => {
+                fetchData();
+                // setNotification("subject was successfully deleted");
+            })
+            .catch((err) => {
+                const response = err.response;
+                console.log(err);
+                if (response && response.status === 422) {
+                    setErrors(response.data.errors);
+                }
+            });
     };
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <h1 className="text-white">Add subjects</h1>
-            <div>{loading && <div>loading</div>}</div>
+            <div>{loading && <div>Loading</div>}</div>
             {errors && (
                 <div>
                     {Object.keys(errors).map((key) => (
@@ -91,7 +112,7 @@ export default function Subject() {
                                     balance: ev.target.value,
                                 })
                             }
-                            placeholder="Subject Balance"
+                            placeholder="Balance"
                         />
                     </div>
                     <div>
@@ -103,14 +124,18 @@ export default function Subject() {
             )}
             <div>
                 <table className="bg-white m-3 border">
-                {currentSub.map((u) => (
-                    <tr key={u.id} className="">
-                        <td>{u.subject}</td>
-                        <td>{u.balance}</td>
-                        <button onClick={(ev) => onDelete(u)}>Delete</button>
-                    </tr>
-                ))}
-                    </table>
+                    {currentSub.map((u) => (
+                        <tr key={u.id} className="">
+                            <td>{u.subject}</td>
+                            <td>{u.balance}</td>
+                            <td>
+                                <button onClick={() => onDelete(u)}>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </table>
             </div>
         </div>
     );

@@ -44,7 +44,7 @@ export default function RecruitmentShowA() {
     return (
         <div className={styles["bg-image"]}>
             <div className="my-sizing">
-                <Link className="btn mb-2" to="/admin/recruitments/subjects">
+                <Link className="btn mb-2" to="/admin/recruitments/new">
                     Add new
                 </Link>
                 <div className="d-flex flex-row flex-wrap">
