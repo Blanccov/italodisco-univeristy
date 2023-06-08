@@ -19,12 +19,12 @@ class Kernel extends ConsoleKernel
     /**
  * Define the application's command schedule.
  */
-    protected function schedule(Schedule $schedule): void
-        {
-            $schedule->call('App\Services\ApplicationService@processRecruitmentResults')->daily();
-            $schedule->call('App\Services\RecruitmentService@checkAndReopenRecruitment')->daily();
+    // protected function schedule(Schedule $schedule): void
+    //     {
+    //         $schedule->call('App\Services\ApplicationService@processRecruitmentResults')->daily();
+    //         $schedule->call('App\Services\RecruitmentService@checkAndReopenRecruitment')->daily();
 
-        }
+    //     }
 
     /**
      * Register the commands for the application.

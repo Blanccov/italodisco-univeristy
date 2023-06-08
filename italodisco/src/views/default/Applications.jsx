@@ -10,7 +10,14 @@ export default function Appliacations() {
 
     useEffect(() => {
         getRecruitment();
+        getProcessRecruitemnts();
     }, []);
+
+    const getProcessRecruitemnts = () => {
+        axiosClient.get("/applications/processRecruitmentResults");
+
+        axiosClient.get("/recruitments/checkAndReopenRecruitment");
+    };
 
     const getRecruitment = () => {
         setLoading(true);
@@ -23,8 +30,8 @@ export default function Appliacations() {
             .catch(() => {
                 setLoading(false);
             });
-        };
-        console.log(applications)
+    };
+    console.log(applications);
 
     return (
         <div className={styles["bg-image"]}>
@@ -37,18 +44,19 @@ export default function Appliacations() {
             )}
 
             <div className="my-sizing d-flex flex-wrap w-100 ">
-                {applications && applications.map((r) => (
-                    <Card
-                        key={r.application_id}
-                        style={{
-                            backgroundImage: `url("images/bookphoto.jpg")`,
-                        }}
-                        to={"/applications/payment/" + r.application_id}
-                        p={r.status_name}
-                    >
-                        {r.recruitment_name}
-                    </Card>
-                ))}
+                {applications &&
+                    applications.map((r) => (
+                        <Card
+                            key={r.application_id}
+                            style={{
+                                backgroundImage: `url("images/bookphoto.jpg")`,
+                            }}
+                            to={"/applications/payment/" + r.application_id}
+                            p={r.status_name}
+                        >
+                            {r.recruitment_name}
+                        </Card>
+                    ))}
             </div>
             <Link className="btn m-2" to="/recruitments">
                 Add new

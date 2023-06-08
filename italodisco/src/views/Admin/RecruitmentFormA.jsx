@@ -22,8 +22,6 @@ export default function RecruitmentFormA() {
     });
     const [departaments, setDepartaments] = useState([]);
 
-
-
     useEffect(() => {
         setLoading(true);
         axiosClient
@@ -39,7 +37,6 @@ export default function RecruitmentFormA() {
             });
     }, []);
 
-
     if (id) {
         useEffect(() => {
             setLoading(true);
@@ -53,7 +50,7 @@ export default function RecruitmentFormA() {
                     setLoading(false);
                 });
         }, []);
-        console.log(recruitment)
+        console.log(recruitment);
     }
 
     const onSubmit = (ev) => {
@@ -90,6 +87,30 @@ export default function RecruitmentFormA() {
         }
     };
 
+    const handleStop = () => {
+        const currentDate = new Date();
+        const year = currentDate.getFullYear();
+        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+        const day = String(currentDate.getDate()).padStart(2, '0');
+        const formattedDate = `${year}-${month}-${day}`;
+        console.log(formattedDate)
+
+        const stopRecruitment = {
+          end_date: formattedDate,
+          places: 0,
+        };
+
+        axiosClient
+          .patch(`/recruitments/${id}`, stopRecruitment)
+          .then(() => {
+            setNotification("Recruitment was successfully stopped");
+            navigate("/admin/recruitments");
+          })
+          .catch((error) => {
+            // Obsługa błędu żądania
+          });
+      };
+
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
@@ -110,97 +131,106 @@ export default function RecruitmentFormA() {
                 </div>
             )}
             {!loading && (
-                <form onSubmit={onSubmit} className="my-form">
-                    <div>
-                        <input
-                            value={recruitment.name}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    name: ev.target.value,
-                                })
-                            }
-                            placeholder="Name"
-                        />
-                        <select
-                            value={recruitment.departament}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    departament: ev.target.value,
-                                })
-                            }
-                        >
-                            <option value="">Select Department</option>
-                            {departaments.map((department) => (
-                                <option
-                                    key={department.departament}
-                                    value={department.departament}
-                                >
-                                    {department.departament}
-                                </option>
-                            ))}
-                        </select>
+                <>
+                    <form onSubmit={onSubmit} className="my-form">
+                        <div>
+                            <input
+                                value={recruitment.name}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        name: ev.target.value,
+                                    })
+                                }
+                                placeholder="Name"
+                            />
+                            <select
+                                value={recruitment.departament}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        departament: ev.target.value,
+                                    })
+                                }
+                            >
+                                <option value="">Select Department</option>
+                                {departaments.map((department) => (
+                                    <option
+                                        key={department.departament}
+                                        value={department.departament}
+                                    >
+                                        {department.departament}
+                                    </option>
+                                ))}
+                            </select>
 
-                        <input
-                            value={recruitment.description}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    description: ev.target.value,
-                                })
-                            }
-                            placeholder="Description"
-                        />
-                        <input
-                            value={recruitment.places}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    places: ev.target.value,
-                                })
-                            }
-                            placeholder="Places"
-                        />
-                        <input
-                            value={recruitment.amount}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    amount: ev.target.value,
-                                })
-                            }
-                            placeholder="Amount"
-                        />
-                        <input
-                        type="date"
-                            value={recruitment.start_date}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    start_date: ev.target.value,
-                                })
-                            }
-                            placeholder="Start Date (YYYY-MM-DD)"
-                        />
-                        <input
-                            type="date"
-                            value={recruitment.end_date}
-                            onChange={(ev) =>
-                                setRecruitment({
-                                    ...recruitment,
-                                    end_date: ev.target.value,
-                                })
-                            }
-                            placeholder="End Date (YYYY-MM-DD)"
-                        />
-                    </div>
-                    <div>
-                        <button className="btn btn-outline-primary w-50 mt-3">
-                            Save
-                        </button>
-                    </div>
-                </form>
+                            <input
+                                value={recruitment.description}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        description: ev.target.value,
+                                    })
+                                }
+                                placeholder="Description"
+                            />
+                            <input
+                                value={recruitment.places}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        places: ev.target.value,
+                                    })
+                                }
+                                placeholder="Places"
+                            />
+                            <input
+                                value={recruitment.amount}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        amount: ev.target.value,
+                                    })
+                                }
+                                placeholder="Amount"
+                            />
+                            <input
+                                type="date"
+                                value={recruitment.start_date}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        start_date: ev.target.value,
+                                    })
+                                }
+                                placeholder="Start Date (YYYY-MM-DD)"
+                            />
+                            <input
+                                type="date"
+                                value={recruitment.end_date}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        end_date: ev.target.value,
+                                    })
+                                }
+                                placeholder="End Date (YYYY-MM-DD)"
+                            />
+                        </div>
+                        <div>
+                            <button className="btn btn-outline-primary w-50 mt-3">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                    <button
+                        type="button"
+                        onClick={handleStop}
+                        className="btn btn-danger m-3"
+                    >
+                        Stop Recruiting for this Recruitment{" "}
+                    </button>
+                </>
             )}
         </div>
     );

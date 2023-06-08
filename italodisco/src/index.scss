@@ -22,12 +22,25 @@ body,
     background-color: transparent;
     border: 2px solid #fff;
     color: #fff;
+
     &:hover {
         background-color: #fff;
         color: #443735;
         border-color: #443735;
     }
+
+    &.btn-danger {
+        border-color: #6e1515;
+        background-color: white;
+        color: #6e1515;
+        font-weight: bold;
+        font-size: 1.2rem;
+        &:hover{
+            background-color: #8f1b1b;
+        }
+    }
 }
+
 .my-form {
     color: black;
     border: 2px solid #fff;

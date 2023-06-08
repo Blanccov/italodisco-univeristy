@@ -48,11 +48,11 @@ const router = createBrowserRouter([
                 path: "/applications/:id",
                 element: <ApplicationForm key="applicationUpdate" />,
             },
-
             {
                 path: "/about",
                 element: <About />,
             },
+
         ],
     },
     {
@@ -120,6 +120,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />,
+            },
+            {
+                path: "/guest/about",
+                element: <About />,
             },
         ],
     },
