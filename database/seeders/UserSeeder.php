@@ -15,10 +15,6 @@ class UserSeeder extends Seeder
     public function run(): void
     {
 
-        // User::factory()
-        //     ->count(25)
-        //     ->create();
-
         User::insert(
             [
                 [
@@ -109,7 +105,56 @@ class UserSeeder extends Seeder
                     'name' => 'Charlotte', 'surname' => 'Young', 'email' => 'charlotteyoung@example.com', 'password' => Hash::make('password'),
                     'pesel' => "01234567897", 'phone' => '012345678', 'address' => 'Pine Lane 123, 90123 Town', 'role_id' => 2
                 ],
-
+                [
+                    'name' => 'Liam',
+                    'surname' => 'Wilson',
+                    'email' => 'liamwilson@example.com',
+                    'password' => Hash::make('password'),
+                    'pesel' => '12345678912',
+                    'phone' => '123456780',
+                    'address' => 'Chestnut Avenue 234, 56789 Hamlet',
+                    'role_id' => 2
+                ],
+                [
+                    'name' => 'Victoria',
+                    'surname' => 'Thompson',
+                    'email' => 'victoriathompson@example.com',
+                    'password' => Hash::make('password'),
+                    'pesel' => '23456789023',
+                    'phone' => '234567895',
+                    'address' => 'Willow Road 345, 67890 City',
+                    'role_id' => 2
+                ],
+                [
+                    'name' => 'Henry',
+                    'surname' => 'Garcia',
+                    'email' => 'henrygarcia@example.com',
+                    'password' => Hash::make('password'),
+                    'pesel' => '34567890132',
+                    'phone' => '345678900',
+                    'address' => 'Birch Lane 456, 78901 Town',
+                    'role_id' => 2
+                ],
+                [
+                    'name' => 'Sofia',
+                    'surname' => 'Martinez',
+                    'email' => 'sofiamartinez@example.com',
+                    'password' => Hash::make('password'),
+                    'pesel' => '45678901243',
+                    'phone' => '456789010',
+                    'address' => 'Elm Avenue 567, 89012 Village',
+                    'role_id' => 2
+                ],
+                [
+                    'name' => 'Lucas',
+                    'surname' => 'Robinson',
+                    'email' => 'lucasrobinson@example.com',
+                    'password' => Hash::make('password'),
+                    'pesel' => '56789012354',
+                    'phone' => '567890120',
+                    'address' => 'Maple Road 678, 90123 Hamlet',
+                    'role_id' => 2
+                ]
             ]
         );
 
