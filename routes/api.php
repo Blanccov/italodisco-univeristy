@@ -37,6 +37,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('users/searchUsers', [UserController::class, 'searchUsers']);
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);
     Route::get('users/getAcceptedStudentsList', [UserController::class, 'getAcceptedStudentsList']);
+    Route::patch('users/updateUserProfile', [UserController::class, 'updateUserProfile']);
 
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
     Route::post('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);

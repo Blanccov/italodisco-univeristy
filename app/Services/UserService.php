@@ -5,10 +5,8 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Application;
-use App\Models\Status;
-use App\Models\Recruitment;
-use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserService
 {
@@ -50,6 +48,49 @@ class UserService
 
         return response()->json(['accepted_students' => $users]);
     }
+
+
+    public function updateUserProfile(Request $request)
+{
+    $user = Auth::user();
+
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'surname' => 'required|string|max:255',
+        'email' => 'required|email|unique:users,email,'.$user->id,
+        'new_password' => 'nullable|string|min:8',
+        'current_password' => 'required_with:new_password|string',
+        'confirm_password' => 'required_with:new_password|same:new_password',
+    ], [
+        'new_password.min' => 'The new password must be at least 8 characters long.',
+        'confirm_password.same' => 'The confirmation of the new password does not match.',
+    ]);
+
+    if (!Hash::check($request->input('current_password'), $user->password)) {
+        return response()->json(['errors' => 'The current password is incorrect.'], 422);
+    }
+
+    $user->name = $request->input('name');
+    $user->surname = $request->input('surname');
+    $user->email = $request->input('email');
+
+    if ($request->has('new_password')) {
+        $newPassword = $request->input('new_password');
+
+        if (strlen($newPassword) < 8) {
+            return response()->json(['errors' => 'The new password must be at least 8 characters long.'], 422);
+        }
+
+        $user->password = Hash::make($newPassword);
+    }
+
+    $user->save();
+
+    return response()->json(['message' => 'The user profile has been updated.']);
+}
+
+
+
 
 
 

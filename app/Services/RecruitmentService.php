@@ -28,7 +28,7 @@ class RecruitmentService
     $currentDate = now()->toDateString();
 
     $recruitments = Recruitment::where('departament', $departament)
-        ->where('start_date', '<', $currentDate)
+        ->where('start_date', '<=', $currentDate)
         ->where('end_date', '>', $currentDate)
         ->get();
 
@@ -74,6 +74,8 @@ public function getDepartments()
     $departments = Recruitment::select('departament')->distinct()->get('department');
     return $departments;
 }
+
+
 
 
 }

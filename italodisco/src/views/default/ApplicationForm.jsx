@@ -51,6 +51,7 @@ export default function ApplicationForm() {
       .post(`/applications/applyForRecruitment`, recruId)
       .then(() => {
         setNotification("User was successfully created");
+        navigate("/applications")
       })
       .catch((err) => {
         const response = err.response;

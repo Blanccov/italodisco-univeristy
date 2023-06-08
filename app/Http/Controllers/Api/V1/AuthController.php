@@ -42,13 +42,13 @@ class AuthController extends Controller
 
     if (strlen($user->pesel) !== 11) {
         return response([
-            'error' => 'Invalid PESEL length (must be 11 characters)'
+            'errors' => 'Invalid PESEL length (must be 11 characters)'
         ], Response::HTTP_BAD_REQUEST); // 400
     }
 
-    if (strlen($request->input('password')) <= 8) {
+    if (strlen($request->input('password')) < 8) {
         return response([
-            'error' => 'Password must be longer than 8 characters'
+            'errors' => 'Password must be longer than 8 characters'
         ], Response::HTTP_BAD_REQUEST); // 400
     }
 

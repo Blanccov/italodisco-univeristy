@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
 import styles from "./Sign.module.scss"
@@ -13,6 +13,8 @@ export default function Register() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const [errors, setErrors] = useState(null);
+    const navigate = useNavigate();
+    const { setNotification } = useStateContext();
 
     const { setUser, setToken } = useStateContext();
 
@@ -36,6 +38,8 @@ export default function Register() {
             .then(({ data }) => {
                 setUser(data.user);
                 setToken(data.token);
+                navigate("/login")
+                setNotification("Account is created")
             })
             .catch((err) => {
                 const response = err.response;
@@ -111,6 +115,12 @@ export default function Register() {
                                     ref={peselRef}
                                     required
                                 />
+                                <small
+                                id="emailHelp"
+                                className="form-text text-muted"
+                            >
+                                Pesel has need to 11 characters
+                            </small>
                             </div>
                             <div className="form-group ms-2">
                                 <label
@@ -186,6 +196,12 @@ export default function Register() {
                                 ref={passwordRef}
                                 required
                             />
+                            <small
+                                id="emailHelp"
+                                className="form-text text-muted"
+                            >
+                                Password has need to more or equal 8 characters
+                            </small>
                         </div>
                         <button
                             className="btn btn-secondary mt-5 w-100"
