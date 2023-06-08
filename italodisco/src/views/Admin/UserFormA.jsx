@@ -68,7 +68,6 @@ export default function UserFormA() {
                     }
                 });
         }
-        console.log(user)
     };
 
     return (

@@ -42,7 +42,6 @@ export default function Subject() {
 
     const onSubmit = (ev) => {
         ev.preventDefault();
-        console.log(subject);
             axiosClient
                 .post(`/results`, subject)
                 .then(() => {
