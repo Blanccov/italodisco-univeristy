@@ -22,21 +22,13 @@ class StoreApplicationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'recrutimentId' => ['required', 'numeric'],
-            'userId' => ['required', 'numeric'],
-            'statusId' => ['required', 'numeric'],
-            'submissionDate' => ['required', 'date']
-
+            'recruitment_id' => ['required', 'numeric'],
+            'user_id' => ['required', 'numeric'],
+            'status_id' => ['required', 'numeric'],
+            'submission_date' => ['required', 'date'],
+            'pdf' => ['required', 'file', 'mimes:pdf'], // Validation rule for the PDF field
         ];
     }
 
-    protected function prepareForValidation()
-    {
-        $this->merge([
-            'recrutiment_id' => $this->recrutimentId,
-            'user_id' => $this->userId,
-            'status_id' => $this->statusId,
-            'submission_date' => $this->submissionDate
-        ]);
-    }
+
 }
