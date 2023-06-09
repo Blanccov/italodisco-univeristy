@@ -4,17 +4,17 @@ import styles from "./About.module.scss";
 export default function About() {
     return (
         <div className={styles["bg-image"]}>
-            <div class="container">
-                <div class="row row-cols-2">
-                    <div class="col">Column</div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">About univeristy</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">
+            <div className="container">
+                <div className="row row-cols-2">
+                    <div className="col">Column</div>
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body">
+                                <h4 className="card-title">About univeristy</h4>
+                                <h6 className="card-subtitle mb-2 text-muted">
                                     Card subtitle
                                 </h6>
-                                <p class="card-text">
+                                <p className="card-text">
                                     Italodisco University to jedna z najbardziej
                                     renomowanych i innowacyjnych uczelni na
                                     świecie. Nazwana na cześć znanego artysty
@@ -60,14 +60,14 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">How to recruitment</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">
+                    <div className="col">
+                        <div className="card">
+                            <div className="card-body">
+                                <h4 className="card-title">How to recruitment</h4>
+                                <h6 className="card-subtitle mb-2 text-muted">
                                     Card subtitle
                                 </h6>
-                                <p class="card-text">
+                                <p className="card-text">
                                     Jeśli chcesz aplikować na naszej wspaniałej
                                     uczelni, pierwsze musisz założyć konto w
                                     zakładce "Register", a następnie się
@@ -79,16 +79,16 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                    <div class="col">Column</div>
-                    <div class="col">Column</div>
-                    <div class="col">
-                    <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Check recruitments!</h4>
-                                <h6 class="card-subtitle mb-2 text-muted">
+                    <div className="col">Column</div>
+                    <div className="col">Column</div>
+                    <div className="col">
+                    <div className="card">
+                            <div className="card-body">
+                                <h4 className="card-title">Check recruitments!</h4>
+                                <h6 className="card-subtitle mb-2 text-muted">
                                     Card subtitle
                                 </h6>
-                                <p class="card-text">
+                                <p className="card-text">
 
                                 </p>
                             </div>

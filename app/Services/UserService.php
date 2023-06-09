@@ -82,7 +82,7 @@ class UserService
         $newPassword = $request->input('new_password');
 
         if (strlen($newPassword) < 8) {
-            return response()->json(['errors' => 'The new password must be at least 8 characters long.'], 422);
+            return response()->json(['error' => 'The new password must be at least 8 characters long.'], 422);
         }
 
         $user->password = Hash::make($newPassword);

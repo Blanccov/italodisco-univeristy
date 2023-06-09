@@ -19,7 +19,7 @@ class RecruitmentController extends Controller
      */
     public function index()
     {
-        return new RecruitmentCollection(Recruitment::filter()->paginate(5));
+        return new RecruitmentCollection(Recruitment::filter()->get());
     }
 
     /**

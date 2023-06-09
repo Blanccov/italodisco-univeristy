@@ -8,6 +8,7 @@ export default function Profile() {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState(null);
+    const [error, setError] = useState(null);
     const { setNotification, setToken } = useStateContext();
     const [user, setUser] = useState({
         id: null,
@@ -64,6 +65,7 @@ export default function Profile() {
 
         if (user.newPassword !== user.confirmPassword) {
             setErrors({ confirmPassword: ["Passwords do not match"] });
+            setError(null);
             return;
         }
 
@@ -71,6 +73,7 @@ export default function Profile() {
             setErrors({
                 newPassword: ["Password must be at least 8 characters long"],
             });
+            setError(null);
             return;
         }
 
@@ -78,6 +81,7 @@ export default function Profile() {
             setErrors({
                 confirmPassword: ["Confirm New Password is required"],
             });
+            setError(null);
             return;
         }
 
@@ -101,7 +105,7 @@ export default function Profile() {
             .catch((err) => {
                 const response = err.response;
                 if (response && response.status === 422) {
-                    setErrors(response.data.errors);
+                    setError(response.data.error);
                 }
             });
     };
@@ -117,6 +121,11 @@ export default function Profile() {
                     {Object.keys(errors).map((key) => (
                         <p key={key}>{errors[key]}</p>
                     ))}
+                </div>
+            )}
+            {error && (
+                <div className="text-danger">
+                    {error}
                 </div>
             )}
             <div>

@@ -208,7 +208,7 @@ export default function Register() {
                             Register
                         </button>
                         <p>
-                            Have account?
+                            Have account? &nbsp;
                              <Link className="my-link" to="/login">Login</Link>
                         </p>
                     </fieldset>

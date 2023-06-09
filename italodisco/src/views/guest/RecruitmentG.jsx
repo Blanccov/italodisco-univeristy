@@ -3,7 +3,7 @@ import Card from "../../UX/Card";
 import axiosClient from "../../axios-client";
 import styles from "./Recruitment.module.scss";
 
-export default function Recruitment() {
+export default function RecruitmentG() {
     const [recruitments, setRecruitments] = useState([]);
     const [loading, setLoading] = useState(false);
 
@@ -41,7 +41,7 @@ export default function Recruitment() {
                         style={{
                             backgroundImage: `url("/images/bookphoto.jpg")`,
                         }}
-                        to={"/recruitments/" + r.departament}
+                        to={"/guest/recruitments/" + r.departament}
                     >
                         {r.departament}
                     </Card>

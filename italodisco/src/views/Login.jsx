@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import axiosClient from "../axios-client";
 import { useStateContext } from "../context/ContextProvider";
-import styles from "./Sign.module.scss"
+import styles from "./Sign.module.scss";
 
 export default function Login() {
     const emailRef = useRef();
@@ -38,76 +38,74 @@ export default function Login() {
                         });
                     }
                 }
-                if(response && response.status === 401){
+                if (response && response.status === 401) {
                     setErrors(response.data.error);
                 }
             });
-
     };
 
     return (
         <div className={styles["bg-image"]}>
-                        <div className="my-form">
-                            <form onSubmit={onSubmit}>
-                                <fieldset>
-                                    <legend className="text-white ">
-                                        Login
-                                    </legend>
-                                    {errors && (
-                                        <div className="text-danger">
-                                            {errors}
-                                        </div>
-                                    )}
+            <div className="my-form">
+                <form onSubmit={onSubmit}>
+                    <fieldset>
+                        <legend className="text-white ">Login</legend>
+                        {errors && <div className="text-danger">{errors}</div>}
 
-                                    <div className="form-group">
-                                        <label
-                                            htmlFor="email"
-                                            className="form-label mt-4 text-white "
-                                        >
-                                            Email address
-                                        </label>
-                                        <input
-                                            type="email"
-                                            className="form-control"
-                                            id="email"
-                                            aria-describedby="emailHelp"
-                                            placeholder="Enter email"
-                                            ref={emailRef}
-                                            required
-                                        />
-                                        <small
-                                            id="emailHelp"
-                                            className="form-text text-muted"
-                                        >
-                                            We'll never share your email with
-                                            anyone else.
-                                        </small>
-                                    </div>
-                                    <div className="form-group">
-                                        <label
-                                            htmlFor="password"
-                                            className="form-label mt-4 text-white"
-                                        >
-                                            Password
-                                        </label>
-                                        <input
-                                            type="password"
-                                            className="form-control "
-                                            id="password"
-                                            placeholder="Password"
-                                            ref={passwordRef}
-                                            required
-                                        />
-                                    </div>
-                                    <button
-                                        className="btn btn-secondary mt-5 w-100"
-                                        type="submit"
-                                    >
-                                        Login
-                                    </button>
-                                </fieldset>
-                            </form>
+                        <div className="form-group">
+                            <label
+                                htmlFor="email"
+                                className="form-label mt-4 text-white "
+                            >
+                                Email address
+                            </label>
+                            <input
+                                type="email"
+                                className="form-control"
+                                id="email"
+                                aria-describedby="emailHelp"
+                                placeholder="Enter email"
+                                ref={emailRef}
+                                required
+                            />
+                            <small
+                                id="emailHelp"
+                                className="form-text text-muted"
+                            >
+                                We'll never share your email with anyone else.
+                            </small>
                         </div>
-                    </div>
+                        <div className="form-group">
+                            <label
+                                htmlFor="password"
+                                className="form-label mt-4 text-white"
+                            >
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                className="form-control "
+                                id="password"
+                                placeholder="Password"
+                                ref={passwordRef}
+                                required
+                            />
+                        </div>
+                        <button
+                            className="btn btn-secondary mt-5 w-100"
+                            type="submit"
+                        >
+                            Login
+                        </button>
+                        <p>
+                            Don't have account yet? &nbsp;
+                            <Link className="my-link" to="/register">
+                                Register
+                            </Link>
+                        </p>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
     );
 }

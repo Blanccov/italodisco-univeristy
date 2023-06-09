@@ -13,9 +13,9 @@ export default function AdminLayout() {
     // if (user.role_id === 3) {
     //     return <Navigate to="/admin/users" />;
     // }
-    // if (user.role_id === 2) {
-    //     return <Navigate to="/recruitments" />;
-    // }
+    if (user.role_id === 2) {
+        return <Navigate to="*" />;
+    }
 
     const onLogout = (ev) => {
         ev.preventDefault();

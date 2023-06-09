@@ -23,6 +23,8 @@ use App\Http\Controllers\Api\V1\ScoreController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
+Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -42,10 +44,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
     Route::post('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);
 
-    Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
     Route::post('recruitments/getRecruitmentsByDepartmentWithDate', [RecruitmentController::class, 'getRecruitmentsByDepartmentWithDate']);
     Route::get('recruitments/checkAndReopenRecruitment', [RecruitmentController::class, 'checkAndReopenRecruitment']);
-    Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
 
 
     Route::apiResource('results', ResultController::class);

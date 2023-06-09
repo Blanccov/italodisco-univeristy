@@ -6,4 +6,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    table{
+        th{
+            font-size: 1.3rem;
+        }
+        td{
+            font-size: 1.2rem;
+        }
+    }
 }

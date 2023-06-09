@@ -180,9 +180,9 @@ export default function ApplicationForm() {
         <table>
           <thead>
             <tr>
-              <th>Subject</th>
-              <th>Score</th>
-              <th>Result</th>
+              <th><u>Subject</u></th>
+              <th><u>Score</u></th>
+              <th><u>Result</u></th>
             </tr>
           </thead>
           <tbody>

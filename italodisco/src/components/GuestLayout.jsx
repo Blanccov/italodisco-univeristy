@@ -47,46 +47,14 @@ export default function GuestLayout() {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/users">
-                                    Users{" "}
+                                <Link className="nav-link" to="/guest/recruitments">
+                                    Recruitments
                                 </Link>
-                            </li>
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    Pricing
-                                </a>
                             </li>
                             <li className="nav-item">
                                 <Link className="nav-link" to="/guest/about">
                                     About
                                 </Link>
-                            </li>
-                            <li className="nav-item dropdown">
-                                <a
-                                    className="nav-link dropdown-toggle"
-                                    data-bs-toggle="dropdown"
-                                    href="#"
-                                    role="button"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    Dropdown
-                                </a>
-                                <div className="dropdown-menu">
-                                    <a className="dropdown-item" href="#">
-                                        Action
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Another action
-                                    </a>
-                                    <a className="dropdown-item" href="#">
-                                        Something else here
-                                    </a>
-                                    <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#">
-                                        Separated link
-                                    </a>
-                                </div>
                             </li>
                         </ul>
                         <div className="d-flex">

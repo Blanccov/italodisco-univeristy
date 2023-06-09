@@ -20,6 +20,8 @@ import StudentsListA from "./views/Admin/StudentsListA";
 import Payment from "./views/default/Payment";
 import Subject from "./views/Admin/Subjects";
 import Profile from "./views/default/Profile";
+import RecruitmentG from "./views/guest/RecruitmentG";
+import RecruitmentShowG from "./views/guest/RecruitmentShowG";
 
 const router = createBrowserRouter([
     {
@@ -130,6 +132,14 @@ const router = createBrowserRouter([
             {
                 path: "/guest/about",
                 element: <About />,
+            },
+            {
+                path: "/guest/recruitments",
+                element: <RecruitmentG />,
+            },
+            {
+                path: "/guest/recruitments/:departament",
+                element: <RecruitmentShowG />,
             },
         ],
     },
