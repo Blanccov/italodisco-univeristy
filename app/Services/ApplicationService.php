@@ -48,25 +48,15 @@ class ApplicationService
         return response()->json(['error' => 'Już złożyłeś wniosek na ten kierunek.'], 400);
     }
 
-    $pdf = $request->file('pdf');
-
-    if (!$pdf) {
-        return response()->json(['error' => 'Brak pliku PDF.'], 400);
-    }
-
-    $pdfPath = $pdf->store('pdfs'); // Przechowuje plik PDF w folderze 'pdfs' (można dostosować ścieżkę według własnych potrzeb)
-
     $application = new Application();
     $application->recruitment_id = $recruitmentId;
     $application->user_id = $user->id;
     $application->status_id = 1;
     $application->submission_date = $currentDate;
-    $application->pdf = $pdfPath; // Zapisuje ścieżkę do pliku PDF w kolumnie 'pdf'
     $application->save();
 
     return response()->json(['message' => 'Wniosek został pomyślnie złożony.']);
 }
-
 
 
 

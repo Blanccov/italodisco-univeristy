@@ -120,6 +120,32 @@ public function downloadApplicationPdf(Request $request)
     return response($pdfContents, 200)->header('Content-Type', 'application/pdf');
 }
 
+public function uploadPdf(Request $request)
+{
+    if (Auth::check()) {
+        $user = Auth::user();
+
+        $request->validate([
+            'pdf' => 'required|mimes:pdf',
+        ]);
+
+        $pdf = $request->file('pdf');
+
+        $pdfPath = $pdf->store('pdfs');
+
+        $userApplications = Application::where('user_id', $user->id)->get();
+
+        foreach ($userApplications as $application) {
+            $application->pdf = $pdfPath;
+            $application->save();
+        }
+
+        return response()->json(['message' => 'PDF uploaded successfully']);
+    }
+
+    return response()->json(['error' => 'User not authenticated']);
+}
+
 
 
 

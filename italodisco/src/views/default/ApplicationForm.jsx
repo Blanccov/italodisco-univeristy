@@ -20,7 +20,6 @@ export default function ApplicationForm() {
   const [subjects, setSubjects] = useState([]);
   const [addedScores, setAddedScores] = useState([]);
   const [subjectBalance, setSubjectBalance] = useState(0);
-  const [pdf, setPdf] = useState(null);
 
   useEffect(() => {
     setLoading(true);
@@ -42,26 +41,19 @@ export default function ApplicationForm() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
-    if (!window.confirm("Are you sure you have entered all the details?")) {
-      return;
-    }
+    if (!window.confirm("Are you sure u have entered all the details?")) {
+        return;
+      }
 
     const recruId = {
       recruitment_id: id,
     };
 
-    const formData = new FormData();
-    formData.append("pdf", pdf); // Dodaj przesłany plik PDF do FormData
-
-    console.log(formData)
-
     axiosClient
-      .post(`/applications/applyForRecruitment`, formData, {
-        headers: { "Content-Type": "multipart/form-data" }, // Ustaw nagłówek 'Content-Type' na 'multipart/form-data'
-      })
+      .post(`/applications/applyForRecruitment`, recruId)
       .then(() => {
         setNotification("User was successfully created");
-        navigate("/applications");
+        navigate("/applications")
       })
       .catch((err) => {
         const response = err.response;
@@ -71,7 +63,6 @@ export default function ApplicationForm() {
         }
       });
   };
-
 
   const onSubmit = (ev) => {
     ev.preventDefault();
@@ -125,20 +116,20 @@ export default function ApplicationForm() {
               setErrors(response.data.errors);
             }
           });
-      });
+      })
   };
 
-  const handleFileChange = (ev) => {
-    const file = ev.target.files[0];
-    setPdf(file);
-  };
 
   return (
     <div className={styles["bg-image"] + " d-flex flex-column"}>
       {scores.id && <h1 className="text-white">Update scores</h1>}
       {!scores.id && <h1 className="text-white">New scores</h1>}
       <div>{loading && <div>loading</div>}</div>
-      {errors && <div className="text-white">{errors}</div>}
+      {errors && (
+                <div className="text-white">
+                    {errors}
+                </div>
+            )}
       {!loading && (
         <form onSubmit={onSubmit} className="my-form my-margin">
           <div>
@@ -164,9 +155,9 @@ export default function ApplicationForm() {
               ))}
             </select>
             <input
-              type="number"
-              max="100"
-              min="0"
+            type="number"
+            max="100"
+            min="0"
               value={scores.score}
               onChange={(ev) =>
                 setScores({
@@ -179,11 +170,6 @@ export default function ApplicationForm() {
           </div>
           <div>
             <p>Balance: {subjectBalance}</p>
-            <input
-              type="file"
-              accept="application/pdf"
-              onChange={handleFileChange} // Obsługa zmiany pliku PDF
-            />
             <button className="btn btn-outline-primary mt-2">
               Add scores
             </button>
@@ -194,15 +180,9 @@ export default function ApplicationForm() {
         <table>
           <thead>
             <tr>
-              <th>
-                <u>Subject</u>
-              </th>
-              <th>
-                <u>Score</u>
-              </th>
-              <th>
-                <u>Result</u>
-              </th>
+              <th><u>Subject</u></th>
+              <th><u>Score</u></th>
+              <th><u>Result</u></th>
             </tr>
           </thead>
           <tbody>
