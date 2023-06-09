@@ -47,22 +47,26 @@ export default function Appliacations() {
             )}
 
             <div className="my-sizing d-flex flex-wrap w-100 my-margin">
-                <Link className="btn m-5" to="/recruitments">
-                    Add new
-                </Link>
-                {applications &&
-                    applications.map((r) => (
-                        <Card
-                            key={r.application_id}
-                            style={{
-                                backgroundImage: `url("images/bookphoto.jpg")`,
-                            }}
-                            to={"/applications/payment/" + r.application_id}
-                            p={r.status_name}
-                        >
-                            {r.recruitment_name}
-                        </Card>
-                    ))}
+                <div>
+                    <Link className="btn m-5" to="/recruitments">
+                        Add new
+                    </Link>
+                </div>
+                <div className="d-flex flex-wrap">
+                    {applications &&
+                        applications.map((r) => (
+                            <Card
+                                key={r.application_id}
+                                style={{
+                                    backgroundImage: `url("images/bookphoto.jpg")`,
+                                }}
+                                to={"/applications/payment/" + r.application_id}
+                                p={r.status_name}
+                            >
+                                {r.recruitment_name}
+                            </Card>
+                        ))}
+                </div>
             </div>
         </div>
     );

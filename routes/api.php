@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\PdfController;
 use App\Http\Controllers\Api\V1\RecruitmentController;
 use App\Http\Controllers\Api\V1\ScoreController;
 /*
@@ -26,10 +27,14 @@ Route::post('login', [AuthController::class, 'login']);
 Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
 Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
 
+
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('user', [AuthController::class, 'user']);
     Route::get('logout', [AuthController::class, 'logout']);
+
+    Route::get('/generate-pdf', [PdfController::class, 'generatePdf']);
 
     Route::post('applications/applyForRecruitment', [ApplicationController::class, 'applyForRecruitment']);
     Route::get('applications/processRecruitmentResults', [ApplicationController::class, 'processRecruitmentResults']);
