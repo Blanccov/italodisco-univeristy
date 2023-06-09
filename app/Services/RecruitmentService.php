@@ -51,7 +51,7 @@ public function checkAndReopenRecruitment()
 
     foreach ($recruitments as $recruitment) {
         $acceptedCount = Application::where('recruitment_id', $recruitment->id)
-            ->where('status_id', 3)
+            ->whereIn('status_id', [3, 4])
             ->count();
 
         $availableSpots = $recruitment->places - $acceptedCount;
@@ -63,11 +63,6 @@ public function checkAndReopenRecruitment()
                 'end_date' => now()->addMonth()->toDateString(),
             ]);
         }
-
-        // Usunięcie aplikacji o statusie 4
-        Application::where('recruitment_id', $recruitment->id)
-            ->where('status_id', 4)
-            ->delete();
     }
 
     return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);

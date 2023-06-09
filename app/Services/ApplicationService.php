@@ -104,7 +104,8 @@ public function processRecruitmentResults()
         arsort($usersScores);
 
         $places = $recruitment->places;
-        $acceptedUsers = array_slice(array_keys($usersScores), 0, $places);
+        $acceptedUsersCount = 0;
+        $acceptedUsers = [];
 
         foreach ($applications as $application) {
             $userId = $application->user_id;
@@ -116,7 +117,19 @@ public function processRecruitmentResults()
                 if (in_array($userId, $acceptedUsers)) {
                     $application->status_id = 3;
                 } else {
-                    $application->status_id = 4;
+                    $userHasLowestScore = false;
+                    if (isset($usersScores[$userId])) {
+                        $userScore = $usersScores[$userId];
+                        $userHasLowestScore = $userScore === min($usersScores);
+                    }
+
+                    if ($userHasLowestScore && $acceptedUsersCount < $places) {
+                        $application->status_id = 3;
+                        $acceptedUsersCount++;
+                        $acceptedUsers[] = $userId;
+                    } else {
+                        $application->status_id = 4;
+                    }
                 }
             }
 
@@ -126,6 +139,7 @@ public function processRecruitmentResults()
 
     return response()->json(['message' => 'Processed applications for finished recruitments.']);
 }
+
 
 
 
@@ -171,7 +185,6 @@ public function showApplications()
     $applications = Application::where('user_id', $user->id)->get();
 
     $data = [];
-    $scores = [];
 
     foreach ($applications as $application) {
         $recruitment = Recruitment::find($application->recruitment_id);

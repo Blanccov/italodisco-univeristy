@@ -20,19 +20,19 @@ class RecruitmentSeeder extends Seeder
         Recruitment::insert(
             [
                 [
-                    'name' => "Computer Science", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "120", "amount" => "3", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
+                    'name' => "Computer Science", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "2", "amount" => "120", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
                 ],
                 [
-                    'name' => "Physics", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "80", "amount" => "3", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
+                    'name' => "Physics", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "2", "amount" => "80", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
                 ],
                 [
-                    'name' => "Chemistry", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "60", "amount" => "3", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
+                    'name' => "Chemistry", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "2", "amount" => "60", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
                 ],
                 [
-                    'name' => "Mathematics", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "90", "amount" => "3", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
+                    'name' => "Mathematics", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "90", "amount" => "90", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
                 ],
                 [
-                    'name' => "Biology", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "70", "amount" => "3", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
+                    'name' => "Biology", "departament" => "College of Natural Sciences", "description" => "(Some description in English)", "places" => "70", "amount" => "70", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
                 ],
                 [
                     'name' => "History", "departament" => "College of Humanities", "description" => "(Some description in English)", "places" => "80", "amount" => "70", "start_date" => "2023-04-07", "end_date" => "2023-05-07"
