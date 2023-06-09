@@ -41,6 +41,9 @@ export default function ApplicationForm() {
 
   const handleSubmit = (ev) => {
     ev.preventDefault();
+    if (!window.confirm("Are you sure u have entered all the details?")) {
+        return;
+      }
 
     const recruId = {
       recruitment_id: id,
@@ -70,6 +73,7 @@ export default function ApplicationForm() {
         const { data } = response.data;
         setNotification("Score was successfully added");
         let resultId = data.result_id;
+        console.log(resultId);
 
         axiosClient
           .get(`/scores?filters[result_id][$eq]=${resultId}`)
@@ -77,11 +81,19 @@ export default function ApplicationForm() {
             const { data } = response.data;
             setNotification("Score was successfully added");
 
-            const isScoreAdded = addedScores.some(
+            const existingScoreIndex = addedScores.findIndex(
               (score) => score.result_id === resultId
             );
 
-            if (!isScoreAdded) {
+            if (existingScoreIndex !== -1) {
+              const updatedScores = [...addedScores];
+              updatedScores[existingScoreIndex] = {
+                ...data[0],
+                subject: scores.subject,
+                balance: subjectBalance,
+              };
+              setAddedScores(updatedScores);
+            } else {
               const filteredData = data
                 .filter((score) => score.user_id === user.id)
                 .map((score) => ({
@@ -98,17 +110,15 @@ export default function ApplicationForm() {
             console.log(err);
             if (response && response.status === 400) {
               setErrors(response.data.errors);
-              console.log(response.data.errors)
+              console.log(response.data.errors);
             }
             if (response && response.status === 400) {
               setErrors(response.data.errors);
             }
           });
       })
-      .catch((err) => {
-        // obsługa błędów
-      });
   };
+
 
   return (
     <div className={styles["bg-image"] + " d-flex flex-column"}>
