@@ -28,25 +28,24 @@ class PdfController extends Controller
             )
             ->get();
 
-        // Generuj zawartość PDF
         $html = '<html><body>';
         $html = '<h1>Accepted students</h1>';
         $html .= '<table>';
         $html .= '<tr><th>Department</th><th>Name</th><th>Email</th><th>PESEL</th><th>Phone</th><th>Address</th><th>Recruitment Name</th></tr>';
 
-        $currentDepartament = null; // Aktualnie przetwarzany departament
+        $currentDepartament = null;
 
         foreach ($users as $user) {
             if ($user->departament != $currentDepartament) {
-                // Wyświetl nazwę nowego departamentu
+
                 $html .= '<tr><td colspan="7"><strong>' . $user->departament . '</strong></td></tr>';
-                $html .= '<tr><td colspan="7">-------------------</td></tr>'; // Ścianka oddzielająca dane
+                $html .= '<tr><td colspan="7">-------------------</td></tr>';
                 $currentDepartament = $user->departament;
             }
 
-            // Wyświetl dane użytkownika
+
             $html .= '<tr>';
-            $html .= '<td></td>'; // Puste pole dla departamentu
+            $html .= '<td></td>';
             $html .= '<td>' . $user->name . ' ' . $user->surname . '</td>';
             $html .= '<td>' . $user->email . '</td>';
             $html .= '<td>' . $user->pesel . '</td>';
@@ -59,17 +58,13 @@ class PdfController extends Controller
         $html .= '</table>';
         $html .= '</body></html>';
 
-        // Inicjalizuj obiekt Dompdf
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
 
-        // Renderuj PDF
         $dompdf->render();
 
-        // Generuj nazwę pliku PDF
         $filename = 'users_recruitments.pdf';
 
-        // Zapisz lub pobierz plik PDF
         return $dompdf->stream($filename);
     }
 }

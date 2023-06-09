@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import axiosClient from "../../axios-client";
 import styles from "./Users.module.scss";
 import Pagination from "react-js-pagination";
+import ListDownload from "../../UX/ListDownload";
 
 export default function StudentsListA() {
   const [users, setUsers] = useState([]);
@@ -118,6 +119,7 @@ export default function StudentsListA() {
             </tbody>
           )}
         </table>
+      <ListDownload />
       </div>
         <Pagination
           activePage={currentPage}
