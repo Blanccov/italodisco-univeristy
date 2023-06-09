@@ -23,21 +23,26 @@ class RecruitmentService
 
 
     public function getRecruitmentsByDepartmentWithDate(Request $request)
-{
-    $departament = $request->input('departament');
-    $currentDate = now()->toDateString();
+    {
+        $departament = $request->input('departament');
+        $currentDate = now()->toDateString();
+        $userId = auth()->user()->id;
 
-    $recruitments = Recruitment::where('departament', $departament)
-        ->where('start_date', '<=', $currentDate)
-        ->where('end_date', '>=', $currentDate)
-        ->get();
+        $userApplications = Application::where('user_id', $userId)->pluck('recruitment_id')->toArray();
 
-    if ($recruitments->isEmpty()) {
-        return response()->json(['error' => 'Brak rekrutacji dla podanego departamentu.'], 404);
+        $recruitments = Recruitment::where('departament', $departament)
+            ->where('start_date', '<=', $currentDate)
+            ->where('end_date', '>', $currentDate)
+            ->whereNotIn('id', $userApplications)
+            ->get();
+
+        if ($recruitments->isEmpty()) {
+            return response()->json(['error' => 'Brak dostępnych rekrutacji dla podanego departamentu.'], 404);
+        }
+
+        return response()->json(['recruitments' => $recruitments]);
     }
 
-    return response()->json(['recruitments' => $recruitments]);
-}
 
 public function checkAndReopenRecruitment()
 {
@@ -46,7 +51,7 @@ public function checkAndReopenRecruitment()
 
     foreach ($recruitments as $recruitment) {
         $acceptedCount = Application::where('recruitment_id', $recruitment->id)
-            ->where('status_id', 3)
+            ->whereIn('status_id', [3, 4])
             ->count();
 
         $availableSpots = $recruitment->places - $acceptedCount;
@@ -62,6 +67,15 @@ public function checkAndReopenRecruitment()
 
     return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);
 }
+
+
+public function getDepartments()
+{
+    $departments = Recruitment::select('departament')->distinct()->get('department');
+    return $departments;
+}
+
+
 
 
 }

@@ -11,7 +11,7 @@ class UpdateRecruitmentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -30,8 +30,8 @@ class UpdateRecruitmentRequest extends FormRequest
                 'description' => ['required'],
                 'places' => ['required', 'numeric'],
                 'amount' => ['required', 'integer'],
-                'startDate' => ['required', 'date'],
-                'endDate' => ['required', 'date']
+                'start_date' => ['required', 'date'],
+                'end_date' => ['required', 'date']
             ];
         }else{
             return [
@@ -40,22 +40,10 @@ class UpdateRecruitmentRequest extends FormRequest
                 'description' => ['sometimes', 'required'],
                 'places' => ['sometimes', 'required', 'numeric'],
                 'amount' => ['sometimes', 'required', 'integer'],
-                'startDate' => ['sometimes', 'required', 'date'],
-                'endDate' => ['sometimes', 'required', 'date']
+                'start_date' => ['sometimes', 'required', 'date'],
+                'end_date' => ['sometimes', 'required', 'date']
             ];
         }
     }
-    protected function prepareForValidation()
-    {
-        if($this->startDate){
-            $this->merge([
-                'start_date' => $this->startDate
-            ]);
-        }
 
-        if($this->endDate){
-            $this->merge([
-                'end_date' => $this->endDate
-            ]);
-        }
-}}
+}

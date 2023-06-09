@@ -16,6 +16,7 @@ class Recruitment extends Model
         'departament',
         'description',
         'places',
+        'amount',
         'start_date',
         'end_date'
     ];
@@ -29,6 +30,11 @@ class Recruitment extends Model
 
     public function roles(){
         return $this->belongsTo(Role::class);
+    }
+
+    public function result()
+    {
+        return $this->hasOne(Result::class, 'recruitment_id');
     }
 
     public $timestamps = false;

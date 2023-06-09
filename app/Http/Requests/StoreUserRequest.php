@@ -24,12 +24,14 @@ class StoreUserRequest extends FormRequest
         return [
             'name' => ['required', 'max:50'],
             'surname' => ['required', 'max:50'],
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => ['required', 'email', 'unique:users,email,'],
+            // 'email' => ['required', 'email', 'unique:users,email,' . $this->user()->id],
             'password' => ['required', 'min:8'],
-            'pesel' => ['required', 'size:11', 'unique:users,pesel'],
+            'pesel' => ['required', 'size:11', 'unique:users,pesel,'],
+            // 'pesel' => ['required', 'size:11', 'unique:users,pesel,' . $this->user()->id],
             'phone' => ['required', 'unique:users,phone'],
             'address' => ['required'],
-            'roleId' => ['required', 'numeric']
+            'roleId' => ['required', 'numeric'],
         ];
     }
 

@@ -27,24 +27,15 @@ class UpdateResultRequest extends FormRequest
                 return [
                     'subject' => ['required'],
                     'balance' => ['required', 'numeric'],
-                    'recruitmentId' =>['numeric', 'required'],
+                    'recruitment_id' =>['numeric', 'required'],
                 ];
             }else{
                 return [
                     'subject' => ['sometimes','required'],
                     'balance' => ['sometimes', 'required', 'numeric'],
-                    'recruitmentId' =>['sometimes','numeric', 'required'],
+                    'recruitment_id' =>['sometimes','numeric', 'required'],
 
                 ];
             }
-    }
-
-    protected function prepareForValidation()
-    {
-        if($this->userId){
-            $this->merge([
-                'user_id' => $this->userId
-            ]);
-        }
     }
 }

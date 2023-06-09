@@ -1,0 +1,26 @@
+.bg-image {
+    background: url(/images/headerphoto.jpg);
+    height: 100vh;
+    object-fit: cover;
+    // background-position: bottom;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    p {
+        color: grey;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        input{
+            margin: .3rem;
+        }
+        button{
+            margin-top: .3rem;
+        }
+    }
+}
+
+textarea {
+    resize: none;
+}

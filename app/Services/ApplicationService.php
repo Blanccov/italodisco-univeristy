@@ -33,6 +33,13 @@ class ApplicationService
         return response()->json(['error' => 'Nie możesz aplikować na ten kierunek.'], 400);
     }
 
+    $existingApplicationsCount = Application::where('user_id', $user->id)
+        ->count();
+
+    if ($existingApplicationsCount >= 3) {
+        return response()->json(['error' => 'Osiągnąłeś limit 3 aplikacji na ten kierunek.'], 400);
+    }
+
     $existingApplication = Application::where('user_id', $user->id)
         ->where('recruitment_id', $recruitmentId)
         ->first();
@@ -52,6 +59,7 @@ class ApplicationService
 }
 
 
+
 public function processRecruitmentResults()
 {
     $currentDate = Carbon::now();
@@ -69,6 +77,7 @@ public function processRecruitmentResults()
             if ($statusId == 1 || $statusId == 2) {
                 $results = Result::where('recruitment_id', $recruitment->id)->get();
                 $totalScore = 0;
+                $userScores = [];
 
                 foreach ($results as $result) {
                     $scoreRecord = Score::where('result_id', $result->id)
@@ -78,9 +87,15 @@ public function processRecruitmentResults()
                     if ($scoreRecord) {
                         $score = $scoreRecord->score;
                         $balanceMultiplier = $result->balance;
-                        $totalScore += $score * $balanceMultiplier;
+                        $userScores[] = $score * $balanceMultiplier;
                     }
                 }
+
+                rsort($userScores);
+
+                $bestScores = array_slice($userScores, 0, 3);
+
+                $totalScore = array_sum($bestScores);
 
                 $usersScores[$userId] = $totalScore;
             }
@@ -89,7 +104,8 @@ public function processRecruitmentResults()
         arsort($usersScores);
 
         $places = $recruitment->places;
-        $acceptedUsers = array_slice(array_keys($usersScores), 0, $places);
+        $acceptedUsersCount = 0;
+        $acceptedUsers = [];
 
         foreach ($applications as $application) {
             $userId = $application->user_id;
@@ -101,7 +117,19 @@ public function processRecruitmentResults()
                 if (in_array($userId, $acceptedUsers)) {
                     $application->status_id = 3;
                 } else {
-                    $application->status_id = 4;
+                    $userHasLowestScore = false;
+                    if (isset($usersScores[$userId])) {
+                        $userScore = $usersScores[$userId];
+                        $userHasLowestScore = $userScore === min($usersScores);
+                    }
+
+                    if ($userHasLowestScore && $acceptedUsersCount < $places) {
+                        $application->status_id = 3;
+                        $acceptedUsersCount++;
+                        $acceptedUsers[] = $userId;
+                    } else {
+                        $application->status_id = 4;
+                    }
                 }
             }
 
@@ -111,6 +139,8 @@ public function processRecruitmentResults()
 
     return response()->json(['message' => 'Processed applications for finished recruitments.']);
 }
+
+
 
 
 public function makePaymentForRecruitment(Request $request)
@@ -162,19 +192,25 @@ public function showApplications()
 
         $score = 0;
 
-        if ($status->id == 3 || $status->id == 4) {
-            $results = Result::where('recruitment_id', $recruitment->id)->get();
+        $results = Result::where('recruitment_id', $recruitment->id)->get();
 
-            foreach ($results as $result) {
-                $scoreRecord = Score::where('result_id', $result->id)
-                    ->where('user_id', $user->id)
-                    ->first();
+        $scoreArray = [];
 
-                if ($scoreRecord) {
-                    $score += $scoreRecord->score * $result->balance;
-                }
+        foreach ($results as $result) {
+            $scoreRecord = Score::where('result_id', $result->id)
+                ->where('user_id', $user->id)
+                ->first();
+
+            if ($scoreRecord) {
+                $scoreArray[] = $scoreRecord->score * $result->balance;
             }
         }
+
+        rsort($scoreArray);
+
+        $topScores = array_slice($scoreArray, 0, 3);
+
+        $score = array_sum($topScores);
 
         $data[] = [
             'application_id' => $application->id,
@@ -184,30 +220,16 @@ public function showApplications()
             'status_name' => $status->status,
             'score' => $score,
             'amount' => $recruitment->amount,
+            'total_score' => $score,
         ];
     }
 
-    return response()->json(['applications' => $data]);
+    $response = [
+        'applications' => $data,
+    ];
+
+    return response()->json($response);
 }
 
-public function rejectApplication(Request $request)
-{
-    $user = Auth::user();
-    $applicationId = $request->input('application_id');
-
-    $application = Application::where('id', $applicationId)
-        ->where('user_id', $user->id)
-        ->where('status_id', '!=', 4)
-        ->first();
-
-    if (!$application) {
-        return response()->json(['error' => 'Nie znaleziono aplikacji do odrzucenia lub aplikacja ma już status 4 (odrzucona).'], 404);
-    }
-
-    $application->status_id = 5;
-    $application->save();
-
-    return response()->json(['message' => 'Aplikacja została odrzucona.']);
-}
 
 }
