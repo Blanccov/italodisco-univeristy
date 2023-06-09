@@ -70,7 +70,7 @@ export default function Payment() {
             {!loading && (
                 <div className="my-form">
                     <h2>Status: <u>{application.status_name}</u></h2>
-                    <h3>Your points: <u>{application.score}</u></h3>
+                    <h3>Your points: <u>{application.total_score}</u></h3>
                     {application.status_id == 1 && (
                         <form onSubmit={onSubmit}>
                             <h3>Amount to pay: <u>{application.amount}</u></h3>

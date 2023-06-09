@@ -22,6 +22,10 @@ class Result extends Model
         return $this->belongsToMany(User::class, 'scores');
     }
 
+    public function recruitments()
+    {
+        return $this->belongsTo(Recruitment::class, 'result_id');
+    }
 
     public $timestamps = false;
 }

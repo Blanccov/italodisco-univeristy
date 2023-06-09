@@ -32,5 +32,10 @@ class Recruitment extends Model
         return $this->belongsTo(Role::class);
     }
 
+    public function result()
+    {
+        return $this->hasOne(Result::class, 'recruitment_id');
+    }
+
     public $timestamps = false;
 }
