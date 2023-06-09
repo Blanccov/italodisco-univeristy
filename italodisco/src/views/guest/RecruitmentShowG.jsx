@@ -31,9 +31,9 @@ export default function RecruitmentShowG() {
 
     return (
         <div className={styles["bg-image"]}>
-            <div className="my-sizing">
+            <div className="my-sizing my-margin">
                 {errors && <h1 className="text-white">{errors}</h1>}
-                <div className="d-flex flex-row flex-wrap">
+                <div className="d-flex flex-row flex-wrap ">
                     {recruitment.map((u) => (
                         <div
                             className="card border-dark m-3 my-card"

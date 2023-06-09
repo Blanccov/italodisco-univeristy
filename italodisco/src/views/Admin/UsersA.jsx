@@ -73,7 +73,7 @@ export default function UsersA() {
 
   return (
     <div className={styles["bg-image"] + " d-flex flex-column"}>
-      <div>
+      <div className="my-margin">
         <h1 className="text-white">Users</h1>
         <Link className="btn mb-2" to="/admin/users/new">
           Add new

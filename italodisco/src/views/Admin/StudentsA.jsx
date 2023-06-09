@@ -67,7 +67,7 @@ export default function StudentsA() {
       <div>
         <h1 className="text-white">Students</h1>
       </div>
-      <div className="my-sizing">
+      <div className="my-sizing my-margin">
         <input
           type="text"
           placeholder="Search students..."

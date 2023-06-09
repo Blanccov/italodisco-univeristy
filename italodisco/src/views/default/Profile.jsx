@@ -47,14 +47,14 @@ export default function Profile() {
     const onDelete = () => {
         if (!window.confirm("Are you sure you want to delete this user?")) {
             return;
-          }
+        }
 
         axiosClient
             .get(`/users?filters[email][$eq]=${user.email}`)
             .then(({ data }) => {
                 const userId = data.data[0].id;
                 axiosClient.delete(`/users/${userId}`).then(() => {
-                    setToken(null)
+                    setToken(null);
                 });
             });
     };
@@ -111,219 +111,220 @@ export default function Profile() {
     };
 
     return (
-        <div className={styles["bg-image"] + " d-flex flex-column"}>
-            {user.id && (
-                <h1 className="text-white">Update Profile: {user.name}</h1>
-            )}
+        <div className={styles["bg-image"] + " d-flex flex-column "}>
             <div>{loading && <div>loading</div>}</div>
-            {errors && (
-                <div className="text-danger">
-                    {Object.keys(errors).map((key) => (
-                        <p key={key}>{errors[key]}</p>
-                    ))}
-                </div>
-            )}
-            {error && (
-                <div className="text-danger">
-                    {error}
-                </div>
-            )}
-            <div>
+
+            <div className=" my-margin">
+                {user.id && (
+                    <h1 className="text-white">Update Profile: {user.name}</h1>
+                )}
                 {!loading && (
-                    <form
-                        onSubmit={onSubmit}
-                        className="my-form d-flex flex-column"
-                    >
-                        <fieldset>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="name"
-                                    className="form-label text-white"
-                                >
-                                    Name
-                                </label>
-                                <input
-                                    value={user.name}
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            name: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="Name"
-                                    id="name"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="surname"
-                                    className="form-label text-white"
-                                >
-                                    Surname
-                                </label>
-                                <input
-                                    value={user.surname}
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            surname: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="Surname"
-                                    id="surname"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="email"
-                                    className="form-label text-white"
-                                >
-                                    Email
-                                </label>
-                                <input
-                                    value={user.email}
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            email: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="Email"
-                                    id="email"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="currentPassword"
-                                    className="form-label text-white"
-                                >
-                                    Current Password
-                                </label>
-                                <input
-                                    type="password"
-                                    value={currentPassword}
-                                    onChange={(ev) =>
-                                        setCurrentPassword(ev.target.value)
-                                    }
-                                    placeholder="Current Password"
-                                    id="currentPassword"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="newPassword"
-                                    className="form-label text-white"
-                                >
-                                    New Password
-                                </label>
-                                <input
-                                    type="password"
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            newPassword: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="New Password"
-                                    id="newPassword"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            {user.newPassword && (
+                    <div className="my-margin">
+                        <form
+                            onSubmit={onSubmit}
+                            className="my-form d-flex flex-column "
+                        >
+                            {errors && (
+                                <div className="text-danger">
+                                    {Object.keys(errors).map((key) => (
+                                        <p key={key}>{errors[key]}</p>
+                                    ))}
+                                </div>
+                            )}
+                            {error && (
+                                <div className="text-danger">{error}</div>
+                            )}
+                            <fieldset>
                                 <div className="form-group">
                                     <label
-                                        htmlFor="confirmPassword"
+                                        htmlFor="name"
                                         className="form-label text-white"
                                     >
-                                        Confirm New Password
+                                        Name
+                                    </label>
+                                    <input
+                                        value={user.name}
+                                        onChange={(ev) =>
+                                            setUser({
+                                                ...user,
+                                                name: ev.target.value,
+                                            })
+                                        }
+                                        placeholder="Name"
+                                        id="name"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="surname"
+                                        className="form-label text-white"
+                                    >
+                                        Surname
+                                    </label>
+                                    <input
+                                        value={user.surname}
+                                        onChange={(ev) =>
+                                            setUser({
+                                                ...user,
+                                                surname: ev.target.value,
+                                            })
+                                        }
+                                        placeholder="Surname"
+                                        id="surname"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="email"
+                                        className="form-label text-white"
+                                    >
+                                        Email
+                                    </label>
+                                    <input
+                                        value={user.email}
+                                        onChange={(ev) =>
+                                            setUser({
+                                                ...user,
+                                                email: ev.target.value,
+                                            })
+                                        }
+                                        placeholder="Email"
+                                        id="email"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="currentPassword"
+                                        className="form-label text-white"
+                                    >
+                                        Current Password
+                                    </label>
+                                    <input
+                                        type="password"
+                                        value={currentPassword}
+                                        onChange={(ev) =>
+                                            setCurrentPassword(ev.target.value)
+                                        }
+                                        placeholder="Current Password"
+                                        id="currentPassword"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="newPassword"
+                                        className="form-label text-white"
+                                    >
+                                        New Password
                                     </label>
                                     <input
                                         type="password"
                                         onChange={(ev) =>
                                             setUser({
                                                 ...user,
-                                                confirmPassword:
-                                                    ev.target.value,
+                                                newPassword: ev.target.value,
                                             })
                                         }
-                                        placeholder="Confirm New Password"
-                                        id="confirmPassword"
+                                        placeholder="New Password"
+                                        id="newPassword"
                                         className="form-control mb-3"
                                     />
                                 </div>
-                            )}
-                            <div className="form-group">
-                                <label
-                                    htmlFor="pesel"
-                                    className="form-label text-white"
+                                {user.newPassword && (
+                                    <div className="form-group">
+                                        <label
+                                            htmlFor="confirmPassword"
+                                            className="form-label text-white"
+                                        >
+                                            Confirm New Password
+                                        </label>
+                                        <input
+                                            type="password"
+                                            onChange={(ev) =>
+                                                setUser({
+                                                    ...user,
+                                                    confirmPassword:
+                                                        ev.target.value,
+                                                })
+                                            }
+                                            placeholder="Confirm New Password"
+                                            id="confirmPassword"
+                                            className="form-control mb-3"
+                                        />
+                                    </div>
+                                )}
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="pesel"
+                                        className="form-label text-white"
+                                    >
+                                        Pesel
+                                    </label>
+                                    <input
+                                        value={user.pesel}
+                                        onChange={(ev) =>
+                                            setUser({
+                                                ...user,
+                                                pesel: ev.target.value,
+                                            })
+                                        }
+                                        placeholder="Pesel"
+                                        id="pesel"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="phone"
+                                        className="form-label text-white"
+                                    >
+                                        Phone
+                                    </label>
+                                    <input
+                                        value={user.phone}
+                                        onChange={(ev) =>
+                                            setUser({
+                                                ...user,
+                                                phone: ev.target.value,
+                                            })
+                                        }
+                                        placeholder="Phone"
+                                        id="phone"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <div className="form-group">
+                                    <label
+                                        htmlFor="address"
+                                        className="form-label text-white"
+                                    >
+                                        Address
+                                    </label>
+                                    <textarea
+                                        value={user.address}
+                                        onChange={(ev) =>
+                                            setUser({
+                                                ...user,
+                                                address: ev.target.value,
+                                            })
+                                        }
+                                        placeholder="Address"
+                                        id="address"
+                                        className="form-control mb-3"
+                                    />
+                                </div>
+                                <button
+                                    className="btn btn-outline-primary"
+                                    disabled={!currentPassword}
                                 >
-                                    Pesel
-                                </label>
-                                <input
-                                    value={user.pesel}
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            pesel: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="Pesel"
-                                    id="pesel"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="phone"
-                                    className="form-label text-white"
-                                >
-                                    Phone
-                                </label>
-                                <input
-                                    value={user.phone}
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            phone: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="Phone"
-                                    id="phone"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <div className="form-group">
-                                <label
-                                    htmlFor="address"
-                                    className="form-label text-white"
-                                >
-                                    Address
-                                </label>
-                                <textarea
-                                    value={user.address}
-                                    onChange={(ev) =>
-                                        setUser({
-                                            ...user,
-                                            address: ev.target.value,
-                                        })
-                                    }
-                                    placeholder="Address"
-                                    id="address"
-                                    className="form-control mb-3"
-                                />
-                            </div>
-                            <button
-                                className="btn btn-outline-primary"
-                                disabled={!currentPassword}
-                            >
-                                Save
-                            </button>
-                        </fieldset>
-                    </form>
+                                    Save
+                                </button>
+                            </fieldset>
+                        </form>
+                    </div>
                 )}
             </div>
             <button className="btn btn-danger m-3" onClick={(ev) => onDelete()}>

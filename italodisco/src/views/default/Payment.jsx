@@ -68,7 +68,7 @@ export default function Payment() {
             {errors && <h4 className="text-danger">wrong deposit amount</h4>}
 
             {!loading && (
-                <div className="my-form">
+                <div className="my-form my-margin">
                     <h2>Status: <u>{application.status_name}</u></h2>
                     <h3>Your points: <u>{application.total_score}</u></h3>
                     {application.status_id == 1 && (

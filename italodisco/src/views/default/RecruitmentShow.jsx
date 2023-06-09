@@ -31,7 +31,7 @@ export default function RecruitmentShow() {
 
     return (
         <div className={styles["bg-image"]}>
-            <div className="my-sizing">
+            <div className="my-sizing my-margin">
                 {errors && <h1 className="text-white">{errors}</h1>}
                 <div className="d-flex flex-row flex-wrap">
                     {recruitment.map((u) => (

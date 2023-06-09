@@ -46,7 +46,10 @@ export default function Appliacations() {
                 </div>
             )}
 
-            <div className="my-sizing d-flex flex-wrap w-100 ">
+            <div className="my-sizing d-flex flex-wrap w-100 my-margin">
+                <Link className="btn m-5" to="/recruitments">
+                    Add new
+                </Link>
                 {applications &&
                     applications.map((r) => (
                         <Card
@@ -61,9 +64,6 @@ export default function Appliacations() {
                         </Card>
                     ))}
             </div>
-            <Link className="btn m-5" to="/recruitments">
-                Add new
-            </Link>
         </div>
     );
 }

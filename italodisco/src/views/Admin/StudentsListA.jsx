@@ -76,7 +76,7 @@ export default function StudentsListA() {
         />
         </div>
       </div>
-      <div className="my-sizing">
+      <div className="my-sizing my-margin">
         <table className="table-responsive table-hover">
           <thead>
             <tr className="table-primary">

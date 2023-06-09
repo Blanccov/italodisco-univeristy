@@ -8,8 +8,9 @@ body,
 #guestLayout {
     min-height: 100vh;
     min-width: 100%;
-    background-color: #96724d;
+    background-color: #493a2b;
 }
+
 
 @import "bootswatch/dist/lux/bootstrap.min.css";
 
@@ -35,7 +36,7 @@ body,
         color: #6e1515;
         font-weight: bold;
         font-size: 1.2rem;
-        &:hover{
+        &:hover {
             background-color: #8f1b1b;
         }
     }
@@ -123,4 +124,19 @@ body,
 }
 .container {
     height: 80vh;
+}
+
+.nav-item {
+    z-index: 1;
+}
+
+.my-margin{
+    @media (max-width: 991px){
+
+        margin-top: 25rem;
+    }
+    @media (max-height: 600px){
+
+        margin-top: 5rem;
+    }
 }

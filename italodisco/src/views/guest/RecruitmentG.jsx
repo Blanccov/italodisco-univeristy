@@ -34,7 +34,7 @@ export default function RecruitmentG() {
                 </div>
             )}
 
-            <div className="my-sizing d-flex  flex-wrap w-100 ">
+            <div className="my-sizing d-flex  flex-wrap w-100 my-margin">
                 {recruitments.map((r, index) => (
                     <Card
                     key={index}

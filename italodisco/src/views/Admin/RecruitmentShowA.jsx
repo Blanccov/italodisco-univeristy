@@ -33,7 +33,7 @@ export default function RecruitmentShowA() {
 
     return (
         <div className={styles["bg-image"]}>
-            <div className="my-sizing">
+            <div className="my-sizing my-margin">
                 <Link className="btn mb-2" to="/admin/recruitments/new">
                     Add new
                 </Link>

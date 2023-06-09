@@ -74,11 +74,6 @@ export default function DefaultLayout() {
                                 </a>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/admin/users">
-                                    Users
-                                </Link>
-                            </li>
-                            <li className="nav-item">
                                 <Link className="nav-link" to="/recruitments">
                                     Recruitment
                                 </Link>

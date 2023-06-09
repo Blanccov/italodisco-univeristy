@@ -5,8 +5,8 @@ export default function About() {
     return (
         <div className={styles["bg-image"]}>
             <div className="container">
-                <div className="row row-cols-2">
-                    <div className="col">Column</div>
+                <div className="row row-cols-2 my-margin">
+                    <div className="col"></div>
                     <div className="col">
                         <div className="card">
                             <div className="card-body">
@@ -63,7 +63,9 @@ export default function About() {
                     <div className="col">
                         <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">How to recruitment</h4>
+                                <h4 className="card-title">
+                                    How to recruitment
+                                </h4>
                                 <h6 className="card-subtitle mb-2 text-muted">
                                     Card subtitle
                                 </h6>
@@ -79,17 +81,44 @@ export default function About() {
                             </div>
                         </div>
                     </div>
-                    <div className="col">Column</div>
-                    <div className="col">Column</div>
+                    <div className="col"></div>
+                    <div className="col"></div>
                     <div className="col">
-                    <div className="card">
+                        <div className="card">
                             <div className="card-body">
-                                <h4 className="card-title">Check recruitments!</h4>
+                                <h4 className="card-title">
+                                    Check recruitments!
+                                </h4>
+                                <h5 className="card-subtitle mb-2 text-muted">
+                                    Contact us!
+                                </h5>
                                 <h6 className="card-subtitle mb-2 text-muted">
-                                    Card subtitle
+                                    Phone:
                                 </h6>
                                 <p className="card-text">
-
+                                    If you prefer to contact us by phone, please
+                                    dial +XX XXX XXX XXX. Our recruitment team
+                                    is available Monday through Friday from 9:00
+                                    AM to 5:00 PM and will be happy to provide
+                                    you with any necessary information.
+                                </p>
+                                <h6 className="card-subtitle mb-2 text-muted">
+                                    Address:
+                                </h6>
+                                <p className="card-text">
+                                    If you would like to visit us in person or
+                                    send postal mail, here is our address:
+                                    [University Address] [Postal Code, City]
+                                    [Country]
+                                </p>
+                                <h6 className="card-subtitle mb-2 text-muted">
+                                    Email:
+                                </h6>
+                                <p className="card-text">
+                                    Email: Alternatively, you can reach us via
+                                    email. Simply send your message to [email
+                                    address], and our recruitment team will
+                                    strive to respond as quickly as possible.
                                 </p>
                             </div>
                         </div>

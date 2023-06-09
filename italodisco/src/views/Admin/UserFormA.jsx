@@ -87,7 +87,7 @@ export default function UserFormA() {
                 </div>
             )}
             {!loading && (
-                <form onSubmit={onSubmit} className="my-form">
+                <form onSubmit={onSubmit} className="my-form my-margin">
                     <input
                         value={user.name}
                         onChange={(ev) =>

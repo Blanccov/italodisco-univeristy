@@ -87,7 +87,7 @@ export default function Subject() {
                 </div>
             )}
             {!loading && (
-                <form onSubmit={onSubmit} className="my-form">
+                <form onSubmit={onSubmit} className="my-form my-margin">
                     <div>
                         <input
                             value={subject.subject}

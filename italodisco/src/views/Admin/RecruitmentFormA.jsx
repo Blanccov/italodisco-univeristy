@@ -128,7 +128,7 @@ export default function RecruitmentFormA() {
             )}
             {!loading && (
                 <>
-                    <form onSubmit={onSubmit} className="my-form">
+                    <form onSubmit={onSubmit} className="my-form my-margin">
                         <div>
                             <input
                                 value={recruitment.name}

@@ -131,7 +131,7 @@ export default function ApplicationForm() {
                 </div>
             )}
       {!loading && (
-        <form onSubmit={onSubmit} className="my-form">
+        <form onSubmit={onSubmit} className="my-form my-margin">
           <div>
             <select
               value={scores.subject}
