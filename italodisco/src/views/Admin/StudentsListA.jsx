@@ -31,7 +31,7 @@ export default function StudentsListA() {
     setLoading(true);
     const params = {
       page: currentPage,
-      searchTerm: searchTerm
+      searchTerm: searchTerm,
     };
 
     axiosClient
@@ -46,7 +46,6 @@ export default function StudentsListA() {
       });
   };
 
-
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
@@ -54,6 +53,26 @@ export default function StudentsListA() {
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
   };
+
+  const downloadPdf = (userId) => {
+    axiosClient
+      .post("/users/downloadApplicationPdf", { user_id: userId }, { responseType: 'blob' })
+      .then((response) => {
+        const blob = new Blob([response.data], { type: 'application/pdf' });
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', `applicationUser${userId}.pdf`);
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.error('Error downloading PDF:', error);
+      });
+  };
+
 
   const filteredUsers = users.filter((user) => {
     const fullName = `${user.name} ${user.surname}`.toLowerCase();
@@ -69,12 +88,12 @@ export default function StudentsListA() {
       <div>
         <h1 className="text-white">Students</h1>
         <div className="mb-2">
-        <input
-          type="text"
-          placeholder="Search students..."
-          value={searchTerm}
-          onChange={handleSearch}
-        />
+          <input
+            type="text"
+            placeholder="Search students..."
+            value={searchTerm}
+            onChange={handleSearch}
+          />
         </div>
       </div>
       <div className="my-sizing my-margin">
@@ -113,23 +132,27 @@ export default function StudentsListA() {
                     <Link to={"/admin/users/" + user.id}>Edit</Link>
                     &nbsp;
                     <button onClick={() => onDelete(user)}>Delete</button>
+                    &nbsp;
+                    <button onClick={() => downloadPdf(user.id)}>
+                      Download PDF
+                    </button>
                   </td>
                 </tr>
               ))}
             </tbody>
           )}
         </table>
-      <ListDownload />
+        <ListDownload />
       </div>
-        <Pagination
-          activePage={currentPage}
-          itemsCountPerPage={itemsPerPage}
-          totalItemsCount={totalItems}
-          pageRangeDisplayed={5}
-          onChange={handlePageChange}
-          itemClass="page-item"
-          linkClass="page-link"
-        />
+      <Pagination
+        activePage={currentPage}
+        itemsCountPerPage={itemsPerPage}
+        totalItemsCount={totalItems}
+        pageRangeDisplayed={5}
+        onChange={handlePageChange}
+        itemClass="page-item"
+        linkClass="page-link"
+      />
     </div>
   );
 }

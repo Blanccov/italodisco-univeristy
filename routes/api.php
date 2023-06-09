@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('users/getAcceptedStudents', [UserController::class, 'getAcceptedStudents']);
     Route::get('users/getAcceptedStudentsList', [UserController::class, 'getAcceptedStudentsList']);
     Route::patch('users/updateUserProfile', [UserController::class, 'updateUserProfile']);
+    Route::post('users/downloadApplicationPdf', [UserController::class, 'downloadApplicationPdf']);
 
     Route::post('scores/addScore', [ScoreController::class, 'addScore']);
     Route::post('scores/uniqueSubjects', [ScoreController::class, 'uniqueSubjects']);

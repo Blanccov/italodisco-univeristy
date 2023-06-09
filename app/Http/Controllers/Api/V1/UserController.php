@@ -52,5 +52,8 @@ class UserController extends Controller
     public function updateUserProfile(Request $request){
         return (new UserService())->updateUserProfile($request);
     }
+    public function downloadApplicationPdf(Request $request){
+        return (new UserService())->downloadApplicationPdf($request);
+    }
 
 }

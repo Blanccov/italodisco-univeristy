@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Application;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserService
 {
@@ -93,7 +94,31 @@ class UserService
     return response()->json(['message' => 'The user profile has been updated.']);
 }
 
+public function downloadApplicationPdf(Request $request)
+{
+    $userId = $request->input('user_id');
 
+    $application = Application::where('user_id', $userId)->first();
+
+    if (!$application) {
+        return response()->json(['error' => 'Application not found'], 404);
+    }
+
+    $pdfPath = $application->pdf;
+
+    if (!$pdfPath) {
+        return response()->json(['error' => 'PDF not found for the application'], 404);
+    }
+
+    if (str_contains($pdfPath, "\0")) {
+        return response()->json(['error' => 'Invalid PDF path'], 400);
+    }
+
+    $pdfContents = Storage::disk('local')->get($pdfPath);
+
+
+    return response($pdfContents, 200)->header('Content-Type', 'application/pdf');
+}
 
 
 
