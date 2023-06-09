@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UserSeeder extends Seeder
 {
@@ -157,6 +158,25 @@ class UserSeeder extends Seeder
                 ]
             ]
         );
+        //pętla do dodatkwocyh userów
+
+        for ($i = 0; $i < 30; $i++) {
+            $name = Str::random(5);
+            $surname = Str::random(5);
+            $email = Str::lower($name) . '@example.com';
+            $pesel = str_pad($i, 11, '0', STR_PAD_LEFT);
+
+            User::insert([
+                'name' => $name,
+                'surname' => $surname,
+                'email' => $email,
+                'password' => Hash::make('password'),
+                'pesel' => $pesel,
+                'phone' => '123456789',
+                'address' => 'Fake Address',
+                'role_id' => 2
+            ]);
+        }
 
     }
 }

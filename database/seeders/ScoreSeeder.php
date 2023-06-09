@@ -15,7 +15,7 @@ class ScoreSeeder extends Seeder
     {
         $scoreData = [];
 
-        for ($userId = 1; $userId <= 27; $userId++) {
+        for ($userId = 1; $userId <= 57; $userId++) { //tu podać ilość użytkowników
             for ($i = 0; $i < 3; $i++) {
                 $resultId = mt_rand(1, 20);
                 $score = mt_rand(30, 100);
