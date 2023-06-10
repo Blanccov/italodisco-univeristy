@@ -102,9 +102,7 @@ export default function RecruitmentFormA() {
             setNotification("Recruitment was successfully stopped");
             navigate("/admin/recruitments");
           })
-          .catch((error) => {
-            // Obsługa błędu żądania
-          });
+
       };
 
 

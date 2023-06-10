@@ -6,7 +6,7 @@ import { Link, useParams } from "react-router-dom";
 export default function RecruitmentShow() {
     const { departament } = useParams();
     const [recruitment, setRecruitment] = useState([]);
-    // const [loading, setLoding] = useState(false);
+    const [loading, setLoding] = useState(false);
     const [errors, setErrors] = useState(null);
 
     useEffect(() => {
@@ -14,13 +14,16 @@ export default function RecruitmentShow() {
     }, []);
 
     const getRecruitment = () => {
+        setLoding(true);
         const dep = { departament };
         axiosClient
             .post(`/recruitments/getRecruitmentsByDepartmentWithDate`, dep)
             .then(({ data }) => {
                 setRecruitment(data.recruitments);
+                setLoding(false)
             })
             .catch((err) => {
+                setLoding(false)
                 const response = err.response;
                 console.log(err);
                 if (response && response.status === 404) {
@@ -31,6 +34,13 @@ export default function RecruitmentShow() {
 
     return (
         <div className={styles["bg-image"]}>
+             {loading && (
+                <div className="center">
+                    <div>
+                        <div className="text-white display-4">Loading...</div>
+                    </div>
+                </div>
+            )}
             <div className="my-sizing my-margin">
                 {errors && <h1 className="text-white">{errors}</h1>}
                 <div className="d-flex flex-row flex-wrap">

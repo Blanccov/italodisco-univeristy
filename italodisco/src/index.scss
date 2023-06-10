@@ -11,7 +11,6 @@ body,
     background-color: #493a2b;
 }
 
-
 @import "bootswatch/dist/lux/bootstrap.min.css";
 
 .navbar {
@@ -130,13 +129,11 @@ body,
     z-index: 1;
 }
 
-.my-margin{
-    @media (max-width: 991px){
-
+.my-margin {
+    @media (max-width: 991px) {
         margin-top: 25rem;
     }
-    @media (max-height: 600px){
-
+    @media (max-height: 600px) {
         margin-top: 5rem;
     }
 }

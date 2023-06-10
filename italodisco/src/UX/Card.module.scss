@@ -20,8 +20,9 @@
     margin-bottom: 4px;
     $breakpoint-tablet: 768px;
     $breakpoint-laptop: 1145px;
-    @media (max-width: $breakpoint-laptop) {
+    @media (max-width: 550px) {
         width: 300px;
+        min-width: 300px;
     }
 }
 
@@ -34,6 +35,10 @@
     font-size: 1.5rem;
     font-weight: 700;
     color: #fff;
+    @media (max-width: 550px) {
+        font-size: 1.3rem;
+        right: 80px;
+    }
 }
 .container .card p {
     z-index: 99;
