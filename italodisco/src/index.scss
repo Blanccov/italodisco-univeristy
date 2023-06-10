@@ -154,6 +154,7 @@ $navbar-bg-color-gray: linear-gradient(to top, #352716fb 0%, #5c543ef5 100%); //
     height: 100%;
     background: $navbar-bg-color-gray;
     padding: 25rem;
+    padding-bottom: 6rem;
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
