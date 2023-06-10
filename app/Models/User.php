@@ -56,7 +56,7 @@ class User extends Authenticatable
     }
 
     public function scores(){
-        return $this->belongsToMany(Result::class, 'scores');
+        return $this->hasMany(Score::class, 'scores');
     }
 
     public function roles(){

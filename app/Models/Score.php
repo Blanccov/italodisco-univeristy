@@ -17,5 +17,9 @@ class Score extends Model
         'score',
     ];
 
+    public function users(){
+        return $this->belongsTo(User::class);
+    }
+
     public $timestamps = false;
 }

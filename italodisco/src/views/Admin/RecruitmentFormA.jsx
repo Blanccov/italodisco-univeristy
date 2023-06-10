@@ -87,46 +87,45 @@ export default function RecruitmentFormA() {
     const handleStop = () => {
         const currentDate = new Date();
         const year = currentDate.getFullYear();
-        const month = String(currentDate.getMonth() + 1).padStart(2, '0');
-        const day = String(currentDate.getDate()).padStart(2, '0');
+        const month = String(currentDate.getMonth() + 1).padStart(2, "0");
+        const day = String(currentDate.getDate()).padStart(2, "0");
         const formattedDate = `${year}-${month}-${day}`;
 
         const stopRecruitment = {
-          end_date: formattedDate,
-          places: 0,
+            end_date: formattedDate,
+            places: 0,
         };
 
-        axiosClient
-          .patch(`/recruitments/${id}`, stopRecruitment)
-          .then(() => {
+        axiosClient.patch(`/recruitments/${id}`, stopRecruitment).then(() => {
             setNotification("Recruitment was successfully stopped");
             navigate("/admin/recruitments");
-          })
-
-      };
-
+        });
+    };
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
-            {recruitment.id && (
-                <h1 className="text-white">
-                    Update recruitment: {recruitment.name}
-                </h1>
-            )}
-            {!recruitment.id && <h1 className="text-white">New recruitment</h1>}
             <div>{loading && <div>loading</div>}</div>
-            {errors && (
-                <div>
-                    {Object.keys(errors).map((key) => (
-                        <p key={key} className="text-danger">
-                            {errors[key][0]}
-                        </p>
-                    ))}
-                </div>
-            )}
+
             {!loading && (
                 <>
                     <form onSubmit={onSubmit} className="my-form my-margin">
+                        {recruitment.id && (
+                            <h1 className="text-white">
+                                Update recruitment: {recruitment.name}
+                            </h1>
+                        )}
+                        {!recruitment.id && (
+                            <h1 className="text-white">New recruitment</h1>
+                        )}
+                        {errors && (
+                            <div>
+                                {Object.keys(errors).map((key) => (
+                                    <p key={key} className="text-danger">
+                                        {errors[key][0]}
+                                    </p>
+                                ))}
+                            </div>
+                        )}
                         <div>
                             <input
                                 value={recruitment.name}
@@ -217,13 +216,15 @@ export default function RecruitmentFormA() {
                             </button>
                         </div>
                     </form>
-                    <button
-                        type="button"
-                        onClick={handleStop}
-                        className="btn btn-danger m-3"
-                    >
-                        Stop Recruiting for this Recruitment{" "}
-                    </button>
+                    {id && (
+                        <button
+                            type="button"
+                            onClick={handleStop}
+                            className="btn btn-danger m-3"
+                        >
+                            Stop Recruiting for this Recruitment{" "}
+                        </button>
+                    )}
                 </>
             )}
         </div>

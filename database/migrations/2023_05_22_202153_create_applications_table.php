@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('statuses')->onDelete('cascade');
-            $table->binary('pdf')->nullable(); // Dodana kolumna dla pliku PDF
+            $table->binary('pdf')->nullable();
             $table->date('submission_date');
             // $table->timestamps();
         });

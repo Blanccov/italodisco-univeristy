@@ -61,6 +61,7 @@ export default function ApplicationForm() {
                 if (response && response.status === 400) {
                     setErrors(response.data.error);
                 }
+
             });
     };
 
@@ -108,10 +109,7 @@ export default function ApplicationForm() {
                     console.log(err);
                     if (response && response.status === 400) {
                         setErrors(response.data.errors);
-                        console.log(response.data.errors);
-                    }
-                    if (response && response.status === 400) {
-                        setErrors(response.data.errors);
+                        console.log(response.data.error);
                     }
                 });
         });
@@ -120,9 +118,10 @@ export default function ApplicationForm() {
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <div>{loading && <div>loading</div>}</div>
-            {errors && <div className="text-white">{errors}</div>}
+
             {!loading && (
                 <form onSubmit={onSubmit} className="my-form my-margin">
+                    {errors && <h5 className="text-danger">{errors}</h5>}
                     {scores.id && <h1 className="text-white">Update scores</h1>}
                     {!scores.id && <h1 className="text-white">New scores</h1>}
                     <div>

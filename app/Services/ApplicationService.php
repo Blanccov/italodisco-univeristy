@@ -24,20 +24,20 @@ class ApplicationService
     $recruitment = Recruitment::find($recruitmentId);
 
     if (!$recruitment) {
-        return response()->json(['error' => 'Kierunek rekrutacyjny nie istnieje.'], 404);
+        return response()->json(['error' => 'Recruitment does not exist.'], 404);
     }
 
     $currentDate = Carbon::now();
 
     if ($currentDate->isBefore($recruitment->start_date) || $currentDate->isAfter($recruitment->end_date)) {
-        return response()->json(['error' => 'Nie możesz aplikować na ten kierunek.'], 400);
+        return response()->json(['error' => 'You cannot apply for this recruitment.'], 400);
     }
 
     $existingApplicationsCount = Application::where('user_id', $user->id)
         ->count();
 
     if ($existingApplicationsCount >= 3) {
-        return response()->json(['error' => 'Osiągnąłeś limit 3 aplikacji na ten kierunek.'], 400);
+        return response()->json(['error' => 'You have reached the limit of 3 applications for this recruitment.'], 400);
     }
 
     $existingApplication = Application::where('user_id', $user->id)
@@ -45,7 +45,7 @@ class ApplicationService
         ->first();
 
     if ($existingApplication) {
-        return response()->json(['error' => 'Już złożyłeś wniosek na ten kierunek.'], 400);
+        return response()->json(['error' => 'You have already submitted an application for this recruitment.'], 400);
     }
 
     $application = new Application();
@@ -55,7 +55,7 @@ class ApplicationService
     $application->submission_date = $currentDate;
     $application->save();
 
-    return response()->json(['message' => 'Wniosek został pomyślnie złożony.']);
+    return response()->json(['message' => 'The application has been successfully submitted.']);
 }
 
 
@@ -151,13 +151,13 @@ public function makePaymentForRecruitment(Request $request)
     $recruitment = Recruitment::find($recruitmentId);
 
     if (!$recruitment) {
-        return response()->json(['error' => 'Kierunek rekrutacyjny nie istnieje.'], 404);
+        return response()->json(['error' => 'Recruitment does not exist.'], 404);
     }
 
     $currentDate = Carbon::now();
 
     if ($currentDate->isAfter($recruitment->end_date)) {
-        return response()->json(['error' => 'Nie możesz dokonać wpłaty po zakończeniu rekrutacji.'], 400);
+        return response()->json(['error' => 'You cannot make a payment after the recruitment has ended.'], 400);
     }
 
     $application = Application::where('recruitment_id', $recruitmentId)
@@ -165,18 +165,18 @@ public function makePaymentForRecruitment(Request $request)
         ->first();
 
     if (!$application) {
-        return response()->json(['error' => 'Brak złożonych wniosków dla danego kierunku.'], 400);
+        return response()->json(['error' => 'No submitted applications for the given recruitment.'], 400);
     }
 
     if ($amount !== $recruitment->amount) {
         echo $amount;
-        return response()->json(['error' => 'Nieprawidłowa kwota wpłaty.'], 400);
+        return response()->json(['error' => 'Invalid payment amount.'], 400);
     }
 
     $application->status_id = 2;
     $application->save();
 
-    return response()->json(['message' => 'Płatność została pomyślnie zrealizowana.']);
+    return response()->json(['message' => 'Payment has been successfully processed.']);
 }
 
 public function showApplications()

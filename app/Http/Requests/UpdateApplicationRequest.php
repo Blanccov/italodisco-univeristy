@@ -43,27 +43,5 @@ class UpdateApplicationRequest extends FormRequest
             ];
         }
     }
-    protected function prepareForValidation()
-    {
-        if($this->recruitmentId){
-            $this->merge([
-                'recrutiment_id' => $this->recrutimentId
-            ]);
-        }
-        if($this->userId){
-            $this->merge([
-                'user_id' => $this->userId
-            ]);
-        }
-        if($this->statusId){
-            $this->merge([
-                'status_id' => $this->statusId
-            ]);
-        }
-        if($this->submissionDate){
-            $this->merge([
-                'submission_date' => $this->submissionDate
-            ]);
-        }
-    }
+
 }

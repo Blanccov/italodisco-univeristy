@@ -72,22 +72,23 @@ export default function UserFormA() {
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
-            {user.id && (
-                <h1 className="text-white">Update User: {user.name}</h1>
-            )}
-            {!user.id && <h1 className="text-white">New User</h1>}
             <div>{loading && <div>loading</div>}</div>
-            {errors && (
-                <div>
-                    {Object.keys(errors).map((key) => (
-                        <p key={key} className="text-danger">
-                            {errors[key][0]}
-                        </p>
-                    ))}
-                </div>
-            )}
+
             {!loading && (
                 <form onSubmit={onSubmit} className="my-form my-margin">
+                    {user.id && (
+                        <h1 className="text-white">Update User: {user.name}</h1>
+                    )}
+                    {!user.id && <h1 className="text-white">New User</h1>}
+                    {errors && (
+                        <div>
+                            {Object.keys(errors).map((key) => (
+                                <p key={key} className="text-danger fw-bold">
+                                    {errors[key][0]}
+                                </p>
+                            ))}
+                        </div>
+                    )}
                     <input
                         value={user.name}
                         onChange={(ev) =>

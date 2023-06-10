@@ -8,6 +8,7 @@ import ListDownload from "../../UX/ListDownload";
 export default function StudentsListA() {
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [errors, setErrors] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalItems, setTotalItems] = useState(0);
     const [searchTerm, setSearchTerm] = useState("");
@@ -34,6 +35,7 @@ export default function StudentsListA() {
 
     useEffect(() => {
         getUsers();
+        setErrors(null)
     }, [currentPage]);
 
     const onDelete = (user) => {
@@ -93,8 +95,12 @@ export default function StudentsListA() {
                 document.body.removeChild(link);
                 window.URL.revokeObjectURL(url);
             })
-            .catch((error) => {
-                console.error("Error downloading PDF:", error);
+            .catch((err) => {
+                const response = err.response;
+                console.log(err);
+                if (response && response.status === 404) {
+                    setErrors("User doesn't has PDF file");
+                }
             });
     };
 
@@ -111,6 +117,13 @@ export default function StudentsListA() {
         <div className={styles["bg-image"] + " d-flex flex-column"}>
             <div className=" my-margin">
                 <h1 className="text-white">Students</h1>
+                {errors && (
+                    <div>
+                        <p className="text-danger">
+                            {errors}
+                        </p>
+                    </div>
+                )}
                 <div className="mb-2">
                     <input
                         type="text"

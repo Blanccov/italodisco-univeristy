@@ -28,7 +28,6 @@ export default function Payment() {
             });
     }, []);
 
-
     const [amount, setAmount] = useState([]);
 
     const onSubmit = (ev) => {
@@ -61,19 +60,26 @@ export default function Payment() {
 
     return (
         <div className={styles["bg-image"] + " d-flex flex-column"}>
-            <h1 className="text-white">
-                application for: {application.recruitment_name}
-            </h1>
-
-            {errors && <h4 className="text-danger">wrong deposit amount</h4>}
-
             {!loading && (
                 <div className="my-form my-margin">
-                    <h2>Status: <u>{application.status_name}</u></h2>
-                    <h3>Your points: <u>{application.total_score}</u></h3>
+                    <h1 className="text-white">
+                        application for: {application.recruitment_name}
+                    </h1>
+
+                    {errors && (
+                        <h4 className="text-danger">wrong deposit amount</h4>
+                    )}
+                    <h2>
+                        Status: <u>{application.status_name}</u>
+                    </h2>
+                    <h3>
+                        Your points: <u>{application.total_score}</u>
+                    </h3>
                     {application.status_id == 1 && (
                         <form onSubmit={onSubmit}>
-                            <h3>Amount to pay: <u>{application.amount}</u></h3>
+                            <h3>
+                                Amount to pay: <u>{application.amount}</u>
+                            </h3>
                             <input
                                 placeholder="amount"
                                 onChange={(ev) =>
@@ -91,7 +97,7 @@ export default function Payment() {
                             </button>
                         </form>
                     )}
-                    {application.status_id !==5 && (
+                    {application.status_id !== 5 && (
                         <button className="mt-3" onClick={onDelete}>
                             Resignation from recruitment
                         </button>
