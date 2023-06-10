@@ -22,9 +22,9 @@ class StoreRecruitmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required'],
-            'departament' => ['required'],
-            'description' => ['required'],
+            'name' => ['required', 'max:50'],
+            'departament' => ['required', 'max:50'],
+            'description' => ['required', 'max:255'],
             'places' => ['required', 'numeric'],
             'amount' => ['required', 'numeric'],
             'start_date' => ['required', 'date'],

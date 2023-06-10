@@ -25,19 +25,19 @@ class UpdateRecruitmentRequest extends FormRequest
 
         if($method == 'PUT'){
             return [
-                'name' => ['required'],
-                'departament' => ['required'],
-                'description' => ['required'],
+                'name' => ['required', 'max:50'],
+                'departament' => ['required', 'max:50'],
+                'description' => ['required', 'max:255'],
                 'places' => ['required', 'numeric'],
-                'amount' => ['required', 'integer'],
+                'amount' => ['required', 'numeric'],
                 'start_date' => ['required', 'date'],
                 'end_date' => ['required', 'date']
             ];
         }else{
             return [
-                'name' => ['sometimes', 'required'],
-                'departament' => ['sometimes', 'required'],
-                'description' => ['sometimes', 'required'],
+                'name' => ['sometimes', 'required', 'max:50'],
+                'departament' => ['sometimes', 'required', 'max:50'],
+                'description' => ['sometimes', 'required', 'max:255'],
                 'places' => ['sometimes', 'required', 'numeric'],
                 'amount' => ['sometimes', 'required', 'integer'],
                 'start_date' => ['sometimes', 'required', 'date'],

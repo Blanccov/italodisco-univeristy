@@ -26,7 +26,7 @@ class StoreApplicationRequest extends FormRequest
             'user_id' => ['required', 'numeric'],
             'status_id' => ['required', 'numeric'],
             'submission_date' => ['required', 'date'],
-            'pdf' => ['required', 'file', 'mimes:pdf'], // Validation rule for the PDF field
+            'pdf' => ['required', 'file', 'mimes:pdf'],
         ];
     }
 

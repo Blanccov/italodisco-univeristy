@@ -25,18 +25,20 @@ class UpdateApplicationRequest extends FormRequest
 
         if($method == 'PUT'){
             return [
-                'recrutimentId' => ['required', 'numeric'],
-                'userId' => ['required', 'numeric'],
-                'statusId' => ['required', 'numeric'],
-                'submissionDate' => ['required', 'date']
+                'recruitment_id' => ['required', 'numeric'],
+                'user_id' => ['required', 'numeric'],
+                'status_id' => ['required', 'numeric'],
+                'submission_date' => ['required', 'date'],
+                'pdf' => ['file', 'mimes:pdf'],
 
             ];
         }else{
             return [
-                'recrutimentId' => ['sometimes', 'required', 'numeric'],
-                'userId' => ['sometimes', 'required', 'numeric'],
-                'statusId' => ['sometimes', 'required', 'numeric'],
-                'submissionDate' => ['sometimes', 'required', 'date']
+                'recruitment_id' => ['sometimes','required', 'numeric'],
+                'user_id' => ['sometimes','required', 'numeric'],
+                'status_id' => ['sometimes','required', 'numeric'],
+                'submission_date' => ['sometimes','required', 'date'],
+                'pdf' => ['sometimes', 'file', 'mimes:pdf']
 
             ];
         }

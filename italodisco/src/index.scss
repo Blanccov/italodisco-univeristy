@@ -131,9 +131,61 @@ body,
 
 .my-margin {
     @media (max-width: 991px) {
-        margin-top: 25rem;
+        margin-top: 6rem;
     }
     @media (max-height: 600px) {
-        margin-top: 5rem;
+        margin-top: 6rem;
+    }
+}
+
+
+$navbar-bg-color-gray: linear-gradient(to top, #352716fb 0%, #5c543ef5 100%); // Kolor tła szarego
+
+.navbar-collapse {
+  position: relative;
+  z-index: 100;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: $navbar-bg-color-gray;
+    padding: 25rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border: 2px solid white;
+    margin-left: -5rem;
+  }
+
+  &.show::before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+.navbar-nav {
+  position: relative;
+  z-index: 1;
+}
+
+.backindex{
+    z-index: -5;
+}
+
+.table-responsive{
+    @media (max-width: 991px) {
+        border: 2px solid white;
+        td{
+            display: flex;
+            padding: 2rem;
+
+        }
+        th{
+            display: none;
+        }
     }
 }

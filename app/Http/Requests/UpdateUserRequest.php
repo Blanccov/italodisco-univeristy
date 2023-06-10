@@ -37,8 +37,8 @@ class UpdateUserRequest extends FormRequest
                 'email' => ['required', 'email'],
                 'password' => ['required', 'min:8'],
                 'pesel' => ['required', 'size:11'],
-                'phone' => ['required'],
-                'address' => ['required'],
+                'phone' => ['required', 'max:50'],
+                'address' => ['required', 'max:255'],
                 'roleId' => ['required', 'numeric']
             ];
         }else{

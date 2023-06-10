@@ -25,14 +25,14 @@ class UpdateResultRequest extends FormRequest
 
             if($method == 'PUT'){
                 return [
-                    'subject' => ['required'],
-                    'balance' => ['required', 'numeric'],
+                    'subject' => ['required', 'max:255'],
+                    'balance' => ['required', 'numeric', 'max:10'],
                     'recruitment_id' =>['numeric', 'required'],
                 ];
             }else{
                 return [
-                    'subject' => ['sometimes','required'],
-                    'balance' => ['sometimes', 'required', 'numeric'],
+                    'subject' => ['sometimes','required', 'max:255'],
+                    'balance' => ['sometimes', 'required', 'numeric', 'max:10'],
                     'recruitment_id' =>['sometimes','numeric', 'required'],
 
                 ];

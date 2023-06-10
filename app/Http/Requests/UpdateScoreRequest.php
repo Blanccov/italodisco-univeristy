@@ -27,13 +27,13 @@ class UpdateScoreRequest extends FormRequest
                 return [
                     'result_id' => ['required', 'numeric'],
                     'user_id' => ['required', 'numeric'],
-                     'score' =>['numeric', 'required'],
+                    'score' =>['numeric', 'required', 'max:3'],
                 ];
             }else{
                 return [
                     'result_id' => ['sometimes','required', 'numeric'],
                      'user_id' => ['sometimes','required', 'numeric'],
-                    'score' =>['sometimes','numeric', 'required'],
+                     'score' =>['numeric', 'required', 'max:3'],
 
                 ];
             }

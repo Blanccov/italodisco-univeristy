@@ -115,15 +115,18 @@ export default function Profile() {
             <div>{loading && <div>loading</div>}</div>
 
             <div className=" my-margin">
-                {user.id && (
-                    <h1 className="text-white">Update Profile: {user.name}</h1>
-                )}
                 {!loading && (
-                    <div className="my-margin">
+                    <div className="">
+
                         <form
                             onSubmit={onSubmit}
                             className="my-form d-flex flex-column "
                         >
+                            {user.id && (
+                            <h1 className="text-white">
+                                Update Profile: {user.name}
+                            </h1>
+                        )}
                             {errors && (
                                 <div className="text-danger">
                                     {Object.keys(errors).map((key) => (
@@ -326,10 +329,13 @@ export default function Profile() {
                         </form>
                     </div>
                 )}
+                <button
+                    className="btn btn-danger m-3"
+                    onClick={(ev) => onDelete()}
+                >
+                    Delete account
+                </button>
             </div>
-            <button className="btn btn-danger m-3" onClick={(ev) => onDelete()}>
-                Delete account
-            </button>
         </div>
     );
 }

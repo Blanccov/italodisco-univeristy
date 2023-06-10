@@ -30,7 +30,7 @@ class StoreUserRequest extends FormRequest
             'pesel' => ['required', 'size:11', 'unique:users,pesel,'],
             // 'pesel' => ['required', 'size:11', 'unique:users,pesel,' . $this->user()->id],
             'phone' => ['required', 'unique:users,phone'],
-            'address' => ['required'],
+            'address' => ['required', 'max:255'],
             'roleId' => ['required', 'numeric'],
         ];
     }

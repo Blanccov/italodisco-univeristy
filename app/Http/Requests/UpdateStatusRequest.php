@@ -25,11 +25,11 @@ class UpdateStatusRequest extends FormRequest
 
         if($method == 'PUT'){
             return [
-                'status' => ['required']
+                'status' => ['required', 'max:50']
             ];
         }else{
             return [
-                'status' => ['sometimes', 'required']
+                'status' => ['sometimes', 'required', 'max:50']
             ];
         }
     }

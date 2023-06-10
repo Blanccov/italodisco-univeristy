@@ -25,11 +25,11 @@ class UpdateRoleRequest extends FormRequest
 
        if($method == 'PUT'){
         return [
-            'name' => ['required']
+            'name' => ['required', 'max:50']
         ];
        }else{
         return [
-            'name' => ['sometimes', 'required']
+            'name' => ['sometimes', 'required', 'max:50']
         ];
        }
     }

@@ -22,8 +22,8 @@ class StoreResultRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subject' => ['required'],
-            'balance' => ['required', 'numeric'],
+            'subject' => ['required', 'max:255'],
+            'balance' => ['required', 'numeric', 'max:10'],
             'recruitment_id' =>['numeric', 'required'],
         ];
     }

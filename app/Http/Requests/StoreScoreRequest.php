@@ -24,7 +24,7 @@ class StoreScoreRequest extends FormRequest
         return [
             'result_id' => ['required', 'numeric'],
             'user_id' => ['required', 'numeric'],
-            'score' =>['numeric', 'required'],
+            'score' =>['numeric', 'required', 'max:3'],
         ];
     }
 }
