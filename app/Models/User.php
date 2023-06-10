@@ -54,6 +54,9 @@ class User extends Authenticatable
     public function recruitments(){
         return $this->belongsToMany(Recruitment::class, 'applications', 'statuses', 'recruitments', 'users');
     }
+    public function statuses(){
+        return $this->belongsToMany(Status::class, 'applications', 'statuses', 'recruitments', 'users');
+    }
 
     public function scores(){
         return $this->hasMany(Score::class, 'scores');
