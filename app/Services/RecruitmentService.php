@@ -15,7 +15,7 @@ class RecruitmentService
         $recruitments = Recruitment::where('departament', $departament)->get();
 
         if ($recruitments->isEmpty()) {
-            return response()->json(['error' => 'Brak rekruatacji dla podanego departamentu.'], 404);
+            return response()->json(['error' => 'No recruitments found for the specified department.'], 404);
         }
 
         return response()->json(['recruitments' => $recruitments]);
@@ -37,7 +37,7 @@ class RecruitmentService
             ->get();
 
         if ($recruitments->isEmpty()) {
-            return response()->json(['error' => 'Brak dostępnych rekrutacji dla podanego departamentu.'], 404);
+            return response()->json(['error' => 'No available recruitments found for the specified department.'], 404);
         }
 
         return response()->json(['recruitments' => $recruitments]);
@@ -65,7 +65,7 @@ public function checkAndReopenRecruitment()
         }
     }
 
-    return response()->json(['message' => 'Sprawdzono i otwarto ponownie rekrutacje.']);
+    return response()->json(['message' => 'Recruitments checked and reopened successfully.']);
 }
 
 

@@ -56,8 +56,8 @@ class UserService
     $user = Auth::user();
 
     $request->validate([
-        'name' => 'required|string|max:255',
-        'surname' => 'required|string|max:255',
+        'name' => 'required|string|max:50',
+        'surname' => 'required|string|max:50',
         'email' => 'required|email|unique:users,email,'.$user->id,
         'new_password' => 'nullable|string|min:8',
         'current_password' => 'required_with:new_password|string',

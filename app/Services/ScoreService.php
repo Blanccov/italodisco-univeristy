@@ -21,7 +21,7 @@ class ScoreService
         $recruitment = Recruitment::find($recruitmentId);
 
         if (!$recruitment) {
-            return response()->json(['error' => 'Kierunek rekrutacyjny nie istnieje.'], 404);
+            return response()->json(['error' => 'Recruitment direction does not exist.'], 404);
         }
 
         $result = Result::where('recruitment_id', $recruitmentId)
@@ -29,7 +29,7 @@ class ScoreService
             ->first();
 
         if (!$result) {
-            return response()->json(['error' => 'Wynik o podanym przedmiocie nie istnieje.'], 404);
+            return response()->json(['error' => 'Result for the specified subject does not exist.'], 404);
         }
 
         $score = Score::where('result_id', $result->id)
@@ -50,7 +50,7 @@ class ScoreService
         $balance = $result->balance * $scoreValue;
 
         return response()->json(['data' =>[
-            'message' => 'Wynik został dodany lub zaktualizowany.',
+            'message' => 'Score has been added or updated.',
             'result_id' => $result->id,
             'result' => $balance]
         ]);
