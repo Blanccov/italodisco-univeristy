@@ -8,4 +8,6 @@ call php artisan migrate:fresh --seed
 
 call php artisan key:generate
 
-code .
+start http://127.0.0.1:8000
+
+call php artisan serve
