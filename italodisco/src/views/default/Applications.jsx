@@ -44,15 +44,19 @@ export default function Applications() {
     const handleUpload = () => {
         if (selectedFile) {
             setUploading(true);
-            const formData = new FormData();
-            formData.append("pdf", selectedFile);
+            var formData = new FormData();
+            formData.append("pdf", new Blob ([selectedFile]));
+            // formData.append('my_field', 'my value');
+            // formData.append('my_buffer', new Blob(['some content']));
+            console.log(formData)
 
             axiosClient
-                .post("/users/uploadPdf", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                })
+                .post("/users/uploadPdf", formData)
+                // .post("/users/uploadPdf", formData, {
+                //     headers: {
+                //         "Content-Type": "multipart/form-data",
+                //     },
+                // })
                 .then((response) => {
                     console.log(response.data);
                     setUploading(false);

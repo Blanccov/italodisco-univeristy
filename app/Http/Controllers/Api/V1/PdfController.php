@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 
 class PdfController extends Controller
 {
-    public function generatePdf()
+    public function generatePdf(Request $request)
     {
         $users = DB::table('users')
             ->join('applications', 'users.id', '=', 'applications.user_id')
@@ -29,7 +31,7 @@ class PdfController extends Controller
             ->get();
 
         $html = '<html><body>';
-        $html = '<h1>Accepted students</h1>';
+        $html .= '<h1>Accepted students</h1>';
         $html .= '<table>';
         $html .= '<tr><th>Department</th><th>Name</th><th>Email</th><th>PESEL</th><th>Phone</th><th>Address</th><th>Recruitment Name</th></tr>';
 
@@ -37,12 +39,10 @@ class PdfController extends Controller
 
         foreach ($users as $user) {
             if ($user->departament != $currentDepartament) {
-
                 $html .= '<tr><td colspan="7"><strong>' . $user->departament . '</strong></td></tr>';
                 $html .= '<tr><td colspan="7">-------------------</td></tr>';
                 $currentDepartament = $user->departament;
             }
-
 
             $html .= '<tr>';
             $html .= '<td></td>';
@@ -60,11 +60,15 @@ class PdfController extends Controller
 
         $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
-
         $dompdf->render();
 
-        $filename = 'users_recruitments.pdf';
+        $output = $dompdf->output();
 
-        return $dompdf->stream($filename);
+        $response = new Response($output);
+        $response->header('Content-Type', 'application/pdf');
+        $response->header('Access-Control-Allow-Origin', $request->header('Origin'));
+        $response->header('Access-Control-Allow-Credentials', 'true');
+
+        return $response;
     }
 }

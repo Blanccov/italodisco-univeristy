@@ -3,7 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
-
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +17,12 @@ use App\Models\User;
 |
 */
 
+
 // Route::get('/', function () {
-//     return view('welcome');
+//     return view('index');
 // });
 
-Route::view('{path?}', 'welcome');
+
+Route::get('/{any}', function () {
+    return response()->file(public_path('/index.html'));
+})->where('any', '.*');
