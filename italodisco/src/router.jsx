@@ -22,6 +22,7 @@ import Subject from "./views/Admin/Subjects";
 import Profile from "./views/default/Profile";
 import RecruitmentG from "./views/guest/RecruitmentG";
 import RecruitmentShowG from "./views/guest/RecruitmentShowG";
+import RecruitmentDescription from "./views/RecruitmentDescription";
 
 const router = createBrowserRouter([
     {
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
             {
                 path: "/profile",
                 element: <Profile />
+            },
+            {
+                path: "/recruitments/:departament/:id",
+                element: <RecruitmentDescription key="recruitmentDes"/>
             }
 
         ],
@@ -103,7 +108,7 @@ const router = createBrowserRouter([
                 element: <Subject key="subject" />,
             },
             {
-                path: "/admin/recruitments/:departament/:id",
+                path: "/admin/recruitments/:departament/edit/:id",
                 element: <RecruitmentFormA key="recruitmentUpdate" />,
             },
             {
@@ -114,6 +119,10 @@ const router = createBrowserRouter([
                 path: "/admin/students",
                 element: <StudentsListA />,
             },
+            {
+                path: "/admin/recruitments/:departament/:id",
+                element: <RecruitmentDescription key="recruitmentDes"/>
+            }
 
         ],
     },
@@ -141,6 +150,10 @@ const router = createBrowserRouter([
                 path: "/guest/recruitments/:departament",
                 element: <RecruitmentShowG />,
             },
+            {
+                path: "/guest/recruitments/:departament/:id",
+                element: <RecruitmentDescription key="recruitmentDes"/>
+            }
         ],
     },
     {

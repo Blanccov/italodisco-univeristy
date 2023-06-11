@@ -34,20 +34,21 @@ export default function RecruitmentShowG() {
             <div className="my-sizing my-margin">
                 {errors && <h1 className="text-white">{errors}</h1>}
                 <div className="d-flex flex-row flex-wrap ">
-                    {recruitment.map((u) => (
+                {recruitment.map((u) => (
+                        <Link className="custom-card" to={`/guest/recruitments/${departament}/${u.id}`}>
                         <div
                             className="card border-dark m-3 my-card"
                             key={u.id}
                         >
                             <div className="card-header">Start date: {u.start_date}</div>
-                            <div className="card-header">End date: {u.end_date}</div>
                             <div className="card-body">
                                 <h4 className="card-title">{u.name}</h4>
-                                <p className="card-text">{u.description}</p>
+                                <p className="card-text">{u.departament}</p>
                             </div>
+                            <div className="card-header">End date: {u.end_date}</div>
 
-                            <Link to={"/applications/" + u.id}>Apply</Link>
                         </div>
+                        </Link>
                     ))}
                 </div>
             </div>

@@ -119,7 +119,8 @@ body,
 }
 
 .my-card {
-    max-width: 20rem;
+    width: 20rem;
+    height: 20rem;
 }
 .container {
     height: 80vh;
@@ -138,55 +139,66 @@ body,
     }
 }
 
-
-$navbar-bg-color-gray: linear-gradient(to top, #352716fb 0%, #5c543ef5 100%); // Kolor tła szarego
+$navbar-bg-color-gray: linear-gradient(
+    to top,
+    #352716fb 0%,
+    #5c543ef5 100%
+); // Kolor tła szarego
 
 .navbar-collapse {
-  position: relative;
-  z-index: 100;
+    position: relative;
+    z-index: 100;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: $navbar-bg-color-gray;
-    padding: 30rem 35rem;
-    padding-bottom: 1rem;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    border: 2px solid white;
-    margin-left: -5rem;
-  }
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: $navbar-bg-color-gray;
+        padding: 30rem 35rem;
+        padding-bottom: 1rem;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+        border: 2px solid white;
+        margin-left: -5rem;
+    }
 
-  &.show::before {
-    opacity: 1;
-    pointer-events: auto;
-  }
+    &.show::before {
+        opacity: 1;
+        pointer-events: auto;
+    }
 }
 
 .navbar-nav {
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
 }
 
-.backindex{
+.backindex {
     z-index: -5;
 }
 
-.table-responsive{
+.table-responsive {
     @media (max-width: 991px) {
         border: 2px solid white;
-        td{
+        td {
             display: flex;
             padding: 2rem;
-
         }
-        th{
+        th {
             display: none;
         }
     }
+}
+
+a.custom-card,
+a.custom-card:hover {
+    color: inherit;
+}
+
+.my-sizing-form{
+    min-height: 50vh;
 }

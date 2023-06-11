@@ -128,6 +128,7 @@ export default function RecruitmentFormA() {
                         )}
                         <div>
                             <input
+                                className="m-1"
                                 value={recruitment.name}
                                 onChange={(ev) =>
                                     setRecruitment({
@@ -138,6 +139,7 @@ export default function RecruitmentFormA() {
                                 placeholder="Name"
                             />
                             <select
+                                className="m-1"
                                 value={recruitment.departament}
                                 onChange={(ev) =>
                                     setRecruitment({
@@ -158,16 +160,7 @@ export default function RecruitmentFormA() {
                             </select>
 
                             <input
-                                value={recruitment.description}
-                                onChange={(ev) =>
-                                    setRecruitment({
-                                        ...recruitment,
-                                        description: ev.target.value,
-                                    })
-                                }
-                                placeholder="Description"
-                            />
-                            <input
+                                className="m-1"
                                 value={recruitment.places}
                                 onChange={(ev) =>
                                     setRecruitment({
@@ -178,6 +171,7 @@ export default function RecruitmentFormA() {
                                 placeholder="Places"
                             />
                             <input
+                                className="m-1"
                                 value={recruitment.amount}
                                 onChange={(ev) =>
                                     setRecruitment({
@@ -188,6 +182,7 @@ export default function RecruitmentFormA() {
                                 placeholder="Amount"
                             />
                             <input
+                                className="m-1"
                                 type="date"
                                 value={recruitment.start_date}
                                 onChange={(ev) =>
@@ -199,6 +194,7 @@ export default function RecruitmentFormA() {
                                 placeholder="Start Date (YYYY-MM-DD)"
                             />
                             <input
+                                className="m-1"
                                 type="date"
                                 value={recruitment.end_date}
                                 onChange={(ev) =>
@@ -208,6 +204,19 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="End Date (YYYY-MM-DD)"
+                            />
+                        </div>
+                        <div>
+                            <textarea
+                                className="w-50 m-1"
+                                value={recruitment.description}
+                                onChange={(ev) =>
+                                    setRecruitment({
+                                        ...recruitment,
+                                        description: ev.target.value,
+                                    })
+                                }
+                                placeholder="Description"
                             />
                         </div>
                         <div>
