@@ -31,7 +31,8 @@ class UpdateRecruitmentRequest extends FormRequest
                 'places' => ['required', 'numeric'],
                 'amount' => ['required', 'numeric'],
                 'start_date' => ['required', 'date'],
-                'end_date' => ['required', 'date']
+                'end_date' => ['required', 'date'],
+                'is_active' => ['required', 'boolean']
             ];
         }else{
             return [
@@ -41,7 +42,8 @@ class UpdateRecruitmentRequest extends FormRequest
                 'places' => ['sometimes', 'required', 'numeric'],
                 'amount' => ['sometimes', 'required', 'integer'],
                 'start_date' => ['sometimes', 'required', 'date'],
-                'end_date' => ['sometimes', 'required', 'date']
+                'end_date' => ['sometimes', 'required', 'date'],
+                'is_active' => ['sometimes', 'required', 'boolean']
             ];
         }
     }

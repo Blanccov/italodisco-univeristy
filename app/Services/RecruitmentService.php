@@ -12,7 +12,9 @@ class RecruitmentService
     {
         $departament = $request->input('departament');
 
-        $recruitments = Recruitment::where('departament', $departament)->get();
+        $recruitments = Recruitment::where('departament', $departament)
+            ->where('is_active', true)
+            ->get();
 
         if ($recruitments->isEmpty()) {
             return response()->json(['error' => 'No recruitments found for the specified department.'], 404);
@@ -31,6 +33,7 @@ class RecruitmentService
         $userApplications = Application::where('user_id', $userId)->pluck('recruitment_id')->toArray();
 
         $recruitments = Recruitment::where('departament', $departament)
+            ->where('is_active', true)
             ->where('start_date', '<=', $currentDate)
             ->where('end_date', '>', $currentDate)
             ->whereNotIn('id', $userApplications)
@@ -47,6 +50,7 @@ class RecruitmentService
 public function checkAndReopenRecruitment()
 {
     $recruitments = Recruitment::whereDate('end_date', '<', now()->subMonth())
+        ->where('is_active', true)
         ->get();
 
     foreach ($recruitments as $recruitment) {

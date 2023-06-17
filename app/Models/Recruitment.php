@@ -18,7 +18,8 @@ class Recruitment extends Model
         'places',
         'amount',
         'start_date',
-        'end_date'
+        'end_date',
+        'is_active'
     ];
 
     // public function users(){

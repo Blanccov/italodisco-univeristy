@@ -119,6 +119,8 @@ export default function Register() {
                                             placeholder="Enter pesel"
                                             id="Pesel"
                                             ref={peselRef}
+                                            minLength="11"
+                                            maxLength="11"
                                             required
                                         />
                                         <small
@@ -194,6 +196,7 @@ export default function Register() {
                                         placeholder="Password"
                                         ref={passwordRef}
                                         required
+                                        minLength="8"
                                     />
                                     <small
                                         id="emailHelp"

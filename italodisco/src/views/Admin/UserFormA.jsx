@@ -95,6 +95,7 @@ export default function UserFormA() {
                             setUser({ ...user, name: ev.target.value })
                         }
                         placeholder="Name"
+                        required
                     />
                     <input
                         value={user.surname}
@@ -102,13 +103,16 @@ export default function UserFormA() {
                             setUser({ ...user, surname: ev.target.value })
                         }
                         placeholder="Surname"
+                        required
                     />
                     <input
+                        type="email"
                         value={user.email}
                         onChange={(ev) =>
                             setUser({ ...user, email: ev.target.value })
                         }
                         placeholder="Email"
+                        required
                     />
                     <input
                         value={user.password}
@@ -116,6 +120,7 @@ export default function UserFormA() {
                             setUser({ ...user, password: ev.target.value })
                         }
                         placeholder="Password"
+                        required
                     />
                     <input
                         value={user.pesel}
@@ -123,6 +128,9 @@ export default function UserFormA() {
                             setUser({ ...user, pesel: ev.target.value })
                         }
                         placeholder="Pesel"
+                        minLength="11"
+                        maxLength="11"
+                        required
                     />
                     <input
                         value={user.phone}
@@ -130,6 +138,7 @@ export default function UserFormA() {
                             setUser({ ...user, phone: ev.target.value })
                         }
                         placeholder="Phone"
+                        required
                     />
                     <textarea
                         value={user.address}
@@ -137,6 +146,7 @@ export default function UserFormA() {
                             setUser({ ...user, address: ev.target.value })
                         }
                         placeholder="Address"
+                        required
                     />
                     <button className="btn btn-outline-primary">Save</button>
                 </form>

@@ -70,11 +70,12 @@ class RecruitmentController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Recruitment $recruitment)
-    {
-        $recruitment->delete();
+{
+    $recruitment->is_active = false;
+    $recruitment->save();
 
-        return response('', Response::HTTP_NO_CONTENT);
-    }
+    return response('', Response::HTTP_NO_CONTENT);
+}
 
     public function getRecruitmentsByDepartment(Request $request){
         return (new RecruitmentService())->getRecruitmentsByDepartment($request);

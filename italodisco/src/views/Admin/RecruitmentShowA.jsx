@@ -15,7 +15,7 @@ export default function RecruitmentShowA() {
 
     const getRecruitment = () => {
         axiosClient
-            .get(`/recruitments?filters[departament][$eq]=${departament}`)
+            .get(`/recruitments?filters[$and][recruitments][departament][$eq]=${departament}&filters[$and][recruitments][is_active][$eq]=1`)
             .then(({ data }) => {
                 setRecruitment(data.data);
             })

@@ -74,7 +74,7 @@ public function processRecruitmentResults()
             $userId = $application->user_id;
             $statusId = $application->status_id;
 
-            if ($statusId == 1 || $statusId == 2) {
+            if ($statusId == 2) {
                 $results = Result::where('recruitment_id', $recruitment->id)->get();
                 $totalScore = 0;
                 $userScores = [];

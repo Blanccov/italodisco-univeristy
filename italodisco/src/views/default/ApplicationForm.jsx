@@ -162,6 +162,7 @@ export default function ApplicationForm() {
                                 })
                             }
                             placeholder="Score"
+                            required
                         />
                     </div>
                     <div>

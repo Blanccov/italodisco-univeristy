@@ -117,16 +117,15 @@ export default function Profile() {
             <div className=" my-margin">
                 {!loading && (
                     <div className="">
-
                         <form
                             onSubmit={onSubmit}
                             className="my-form d-flex flex-column "
                         >
                             {user.id && (
-                            <h1 className="text-white">
-                                Update Profile: {user.name}
-                            </h1>
-                        )}
+                                <h1 className="text-white">
+                                    Update Profile: {user.name}
+                                </h1>
+                            )}
                             {errors && (
                                 <div className="text-danger">
                                     {Object.keys(errors).map((key) => (
@@ -156,6 +155,7 @@ export default function Profile() {
                                         placeholder="Name"
                                         id="name"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -176,6 +176,7 @@ export default function Profile() {
                                         placeholder="Surname"
                                         id="surname"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -186,6 +187,7 @@ export default function Profile() {
                                         Email
                                     </label>
                                     <input
+                                    type="email"
                                         value={user.email}
                                         onChange={(ev) =>
                                             setUser({
@@ -196,6 +198,7 @@ export default function Profile() {
                                         placeholder="Email"
                                         id="email"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -214,6 +217,7 @@ export default function Profile() {
                                         placeholder="Current Password"
                                         id="currentPassword"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -234,6 +238,8 @@ export default function Profile() {
                                         placeholder="New Password"
                                         id="newPassword"
                                         className="form-control mb-3"
+                                        minLength="8"
+                                        required
                                     />
                                 </div>
                                 {user.newPassword && (
@@ -256,6 +262,8 @@ export default function Profile() {
                                             placeholder="Confirm New Password"
                                             id="confirmPassword"
                                             className="form-control mb-3"
+                                            minLength="8"
+                                            required
                                         />
                                     </div>
                                 )}
@@ -277,6 +285,7 @@ export default function Profile() {
                                         placeholder="Pesel"
                                         id="pesel"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -297,6 +306,7 @@ export default function Profile() {
                                         placeholder="Phone"
                                         id="phone"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <div className="form-group">
@@ -317,6 +327,7 @@ export default function Profile() {
                                         placeholder="Address"
                                         id="address"
                                         className="form-control mb-3"
+                                        required
                                     />
                                 </div>
                                 <button

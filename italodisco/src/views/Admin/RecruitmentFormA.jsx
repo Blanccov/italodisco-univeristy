@@ -137,6 +137,7 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="Name"
+                                required
                             />
                             <select
                                 className="m-1"
@@ -147,6 +148,7 @@ export default function RecruitmentFormA() {
                                         departament: ev.target.value,
                                     })
                                 }
+                                required
                             >
                                 <option value="">Select Department</option>
                                 {departaments.map((department) => (
@@ -169,6 +171,7 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="Places"
+                                required
                             />
                             <input
                                 className="m-1"
@@ -180,6 +183,7 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="Amount"
+                                required
                             />
                             <input
                                 className="m-1"
@@ -192,6 +196,7 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="Start Date (YYYY-MM-DD)"
+                                required
                             />
                             <input
                                 className="m-1"
@@ -204,6 +209,7 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="End Date (YYYY-MM-DD)"
+                                required
                             />
                         </div>
                         <div>
@@ -217,6 +223,7 @@ export default function RecruitmentFormA() {
                                     })
                                 }
                                 placeholder="Description"
+                                required
                             />
                         </div>
                         <div>

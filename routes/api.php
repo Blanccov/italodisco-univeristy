@@ -24,8 +24,8 @@ use App\Http\Controllers\Api\V1\ScoreController;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
-Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
 Route::post('recruitments/getRecruitmentsByDepartment', [RecruitmentController::class, 'getRecruitmentsByDepartment']);
+Route::get('recruitments/getDepartments', [RecruitmentController::class, 'getDepartments']);
 
 
 

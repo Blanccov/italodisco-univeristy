@@ -90,6 +90,7 @@ export default function Payment() {
                                             application.recruitment_id,
                                     })
                                 }
+                                required
                             />
 
                             <button className="btn btn-outline-primary ms-1">
