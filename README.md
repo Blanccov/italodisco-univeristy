@@ -1,4 +1,7 @@
 ## How to run the App?
+
+## Start XAMPP, and then run the start.bat file.
+
 <p>To properly run the application, you need to have Composer downloaded, at least version 2.5.5, Node.js version 9.6.7, and XAMPP with PHP version 8.2.4 installed. To make the project work, you should have XAMPP enabled and run the start.bat batch file. The entire database and the rest will be created by executing the bat file located in the project folder.</p>
 
 ## Example login credentials:
